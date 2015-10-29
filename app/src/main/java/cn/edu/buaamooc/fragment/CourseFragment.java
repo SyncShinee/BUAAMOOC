@@ -41,6 +41,7 @@ public class CourseFragment extends Fragment {
 
         activity = (MoocMainActivity) getActivity();
 
+        //test git
         final View layout = inflater.inflate(R.layout.fragment_course, container, false);
         ArrayList<HashMap<String, Object>> dataList = new ArrayList<>();
         HashMap<String, Object> map = new HashMap<>();
