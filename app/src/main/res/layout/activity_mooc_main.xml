@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MoocMainActivity">
+
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:background="@color/colorMainBuaaBlue"
+        android:id="@+id/relativeLayout">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/button_main_back"
+            android:maxHeight="50dp"
+            android:maxWidth="50dp"
+            android:minHeight="50dp"
+            android:minWidth="50dp"
+            android:layout_alignParentLeft="true"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BUAA MOOC"
+            android:id="@+id/textView"
+            android:layout_toRightOf="@+id/button_main_back"
+            android:layout_toLeftOf="@+id/button_user_info"
+            android:gravity="center"
+            android:minHeight="50dp"
+            android:maxHeight="50dp"
+            android:textColor="#ffffff"
+            android:textSize="20sp"/>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/button_user_info"
+            android:minWidth="50dp"
+            android:minHeight="50dp"
+            android:maxWidth="50dp"
+            android:maxHeight="50dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/userinfo"
+            android:background="@null"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/relativeLayout"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/relativeLayout2">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/tab_title_layout">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:text="热门课程"
+                android:id="@+id/tab_title_hot"
+                android:maxHeight="40dp"
+                android:minHeight="40dp"
+                android:background="@color/colorMainbgGolden"
+                android:gravity="center"
+                android:textSize="15sp"/>
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorMainDivide"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:text="全部课程"
+                android:id="@+id/tab_title_all"
+                android:minHeight="40dp"
+                android:maxHeight="40dp"
+                android:background="@color/colorMainbgGolden"
+                android:gravity="center"
+                android:textSize="15sp"/>
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorMainDivide"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:text="我的课程"
+                android:id="@+id/tab_title_my"
+                android:maxHeight="40dp"
+                android:minHeight="40dp"
+                android:background="@color/colorMainbgGolden"
+                android:gravity="center"
+                android:textSize="15sp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/tab_title_underline"
+            android:layout_below="@+id/tab_title_layout">
+            <View
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="1dp"
+                android:background="@color/colorMainDivide"
+                android:id="@+id/tab_underline_hot"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="1dp"
+                android:background="@color/colorMainDivide"
+                android:id="@+id/tab_underline_all"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="1dp"
+                android:background="@color/colorMainDivide"
+                android:id="@+id/tab_underline_my"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/relativeLayout2"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentStart="false"
+        android:id="@+id/frame_main"
+        >
+    </FrameLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="false"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/buttom_login"
+        android:layout_alignParentBottom="true">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="登陆"
+            android:id="@+id/button_buttom_login"
+            android:layout_gravity="bottom"
+            android:minHeight="40dp"
+            android:maxHeight="40dp"
+            android:background="@color/colorMainbgGolden"
+            android:gravity="center"
+            android:textSize="15sp"/>
+    </LinearLayout>
+
+</RelativeLayout>

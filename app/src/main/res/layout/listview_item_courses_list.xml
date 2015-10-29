@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:descendantFocusability="blocksDescendants">
+
+    <ImageView
+        android:layout_width="112dp"
+        android:layout_height="63dp"
+        android:id="@+id/listview_item_course_pic"
+        android:maxHeight="63dp"
+        android:minHeight="63dp"
+        android:maxWidth="112dp"
+        android:minWidth="112dp"
+        android:background="#f28b8b"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="课程标题"
+            android:id="@+id/listview_item_course_title"
+            android:textSize="18sp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:singleLine="true"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingRight="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2015-10-28"
+                android:id="@+id/listview_item_course_date"
+                android:textSize="12sp"
+                android:textColor="@color/colorMainTextGray"
+                android:layout_centerVertical="true"
+                android:singleLine="true"/>
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageButton"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                />
+        </RelativeLayout>
+
+    </LinearLayout>
+</LinearLayout>

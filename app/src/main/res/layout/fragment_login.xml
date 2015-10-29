@@ -1,0 +1,95 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context="cn.edu.buaa.mooc.mooc.UI.LoginFragment"
+                android:paddingTop="20dp">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:background="@color/colorMainTextGray"
+        android:padding="1dp"
+        android:id="@+id/frame_login_username">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentStart="false"
+            android:layout_centerHorizontal="true"
+            android:background="@color/colorMainWhite"
+            android:paddingLeft="10dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView1"
+                android:src="@drawable/userinfo"
+                android:layout_centerVertical="true"/>
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:id="@+id/usernameText"
+                android:layout_alignParentTop="false"
+                android:minWidth="250dp"
+                android:background="@null"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/imageView1"
+                android:hint="用户名"
+                android:singleLine="true"
+                android:layout_marginLeft="10dp"/>
+
+        </RelativeLayout>
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/frame_login_password"
+        android:layout_below="@+id/frame_login_username"
+        android:layout_centerHorizontal="true"
+        android:background="@color/colorMainTextGray"
+        android:padding="1dp"
+        android:layout_marginTop="10dp">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentStart="false"
+            android:layout_centerHorizontal="true"
+            android:background="@color/colorMainWhite"
+            android:paddingLeft="10dp">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView2"
+                android:src="@drawable/userinfo"
+                android:layout_centerVertical="true"/>
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:id="@+id/passwordText"
+                android:layout_alignParentTop="false"
+                android:minWidth="250dp"
+                android:background="@null"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/imageView2"
+                android:hint="密码"
+                android:singleLine="true"
+                android:layout_marginLeft="10dp"/>
+        </RelativeLayout>
+    </FrameLayout>
+</RelativeLayout>
