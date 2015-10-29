@@ -78,7 +78,7 @@ public class MoocMainActivity extends Activity {
         hotUnderline.setVisibility(View.INVISIBLE);
         allUnderline.setVisibility(View.VISIBLE);
         myUnderline.setVisibility(View.VISIBLE);
-        hotTab.setBackgroundColor(getResources().getColor(R.color.colorMainWhite));
+        hotTab.setBackgroundColor(getResources().getColor(R.color.colorTransparent));
         allTab.setBackgroundColor(getResources().getColor(R.color.colorMainbgGolden));
         myTab.setBackgroundColor(getResources().getColor(R.color.colorMainbgGolden));
         FragmentTransaction ft = fm.beginTransaction();
@@ -97,7 +97,7 @@ public class MoocMainActivity extends Activity {
         allUnderline.setVisibility(View.INVISIBLE);
         myUnderline.setVisibility(View.VISIBLE);
         hotTab.setBackgroundColor(getResources().getColor(R.color.colorMainbgGolden));
-        allTab.setBackgroundColor(getResources().getColor(R.color.colorMainWhite));
+        allTab.setBackgroundColor(getResources().getColor(R.color.colorTransparent));
         myTab.setBackgroundColor(getResources().getColor(R.color.colorMainbgGolden));
         FragmentTransaction ft = fm.beginTransaction();
         Bundle bundle = new Bundle();
@@ -116,7 +116,7 @@ public class MoocMainActivity extends Activity {
         myUnderline.setVisibility(View.INVISIBLE);
         hotTab.setBackgroundColor(getResources().getColor(R.color.colorMainbgGolden));
         allTab.setBackgroundColor(getResources().getColor(R.color.colorMainbgGolden));
-        myTab.setBackgroundColor(getResources().getColor(R.color.colorMainWhite));
+        myTab.setBackgroundColor(getResources().getColor(R.color.colorTransparent));
         FragmentTransaction ft = fm.beginTransaction();
         LoginFragment loginFragment = new LoginFragment();
         ft.replace(R.id.frame_main, loginFragment);
