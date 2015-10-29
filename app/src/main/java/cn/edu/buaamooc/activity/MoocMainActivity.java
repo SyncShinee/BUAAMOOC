@@ -19,7 +19,7 @@ public class MoocMainActivity extends Activity {
      * @param allTab 所有课程tab标签实例
      * @param myTab 我的课程tab标签实例
      */
-
+    ////;///
     private FragmentManager fm;
     private TextView hotTab;
     private TextView allTab;
