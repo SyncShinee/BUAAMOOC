@@ -1,17 +1,24 @@
 package cn.edu.buaamooc.activity;
 
-import android.app.Activity;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.ViewFlipper;
+
+import java.util.ArrayList;
 
 import cn.edu.buaamooc.R;
-import cn.edu.buaamooc.fragment.CourseFragment;
+import cn.edu.buaamooc.fragment.CourseListFragment;
 import cn.edu.buaamooc.fragment.LoginFragment;
 
-public class MoocMainActivity extends Activity {
+public class MoocMainActivity extends FragmentActivity {
 
     /**
      * @param fm FragmentManager 实例;
@@ -19,7 +26,7 @@ public class MoocMainActivity extends Activity {
      * @param allTab 所有课程tab标签实例
      * @param myTab 我的课程tab标签实例
      */
-    ////;///
+
     private FragmentManager fm;
     private TextView hotTab;
     private TextView allTab;
@@ -28,6 +35,9 @@ public class MoocMainActivity extends Activity {
     private View allUnderline;
     private View myUnderline;
 
+    private ArrayList<Fragment> fragmentList;
+    private ViewPager viewPager;
+    private ViewFlipper viewFlipper;
     private boolean logged;
 
 
@@ -47,8 +57,14 @@ public class MoocMainActivity extends Activity {
         allUnderline = findViewById(R.id.tab_underline_all);
         myUnderline = findViewById(R.id.tab_underline_my);
 
-        fm = getFragmentManager();
-        setHotCourse();
+        fm = getSupportFragmentManager();
+//        setHotCourse();
+        //initialize fragmentList
+
+        fragmentList = new ArrayList<>(3);
+
+
+        initializeViewPager();
 
         //set onclickListener event
         hotTab.setOnClickListener(new View.OnClickListener() {
@@ -71,6 +87,82 @@ public class MoocMainActivity extends Activity {
         });
 
     }
+
+    private void initializeViewPager() {
+        ArrayList<View> listViews = new ArrayList<View>();
+        LayoutInflater mInflater = getLayoutInflater();
+        listViews.add(mInflater.inflate(R.layout.fragment_course_list, null));
+        listViews.add(mInflater.inflate(R.layout.fragment_course_list, null));
+
+        addFragments(listViews);
+
+        FragmentPagerAdapter fpAdapter = new FragmentPagerAdapter(fm) {
+            @Override
+            public Fragment getItem(int position) {
+                return fragmentList.get(position);
+            }
+
+            @Override
+            public int getCount() {
+                return 3;
+            }
+        };
+
+
+        viewPager = (ViewPager) findViewById(R.id.viewpager_course_list);
+        viewPager.setAdapter(fpAdapter);
+        viewPager.setCurrentItem(0);
+//        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+//            @Override
+//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+//            }
+//
+//            @Override
+//            public void onPageSelected(int position) {
+//            }
+//
+//            @Override
+//            public void onPageScrollStateChanged(int state) {
+//            }
+//        });
+    }
+
+    private void addFragments(ArrayList<View> listViews){
+        fragmentList = new ArrayList<>(3);
+
+        Bundle bundle;
+        CourseListFragment courseListFragment;
+
+        bundle = new Bundle();
+        courseListFragment = new CourseListFragment();
+        bundle.putInt("tabIndex", 0);
+        courseListFragment.setArguments(bundle);
+        fragmentList.add(courseListFragment);
+
+        bundle = new Bundle();
+        courseListFragment = new CourseListFragment();
+        bundle.putInt("tabIndex", 1);
+        courseListFragment.setArguments(bundle);
+        fragmentList.add(courseListFragment);
+
+        setMyCourseFragment(listViews);
+
+    }
+
+    private void setMyCourseFragment(ArrayList<View> listViews){
+        Bundle bundle = new Bundle();
+        bundle.putInt("tabIndex", 0);
+        if (logged) {
+            CourseListFragment courseListFragment = new CourseListFragment();
+            courseListFragment.setArguments(bundle);
+            fragmentList.add(courseListFragment);
+        }
+        else {
+            LoginFragment loginFragment = new LoginFragment();
+            loginFragment.setArguments(bundle);
+            fragmentList.add(loginFragment);
+        }
+    }
     /**
      * set the current tab to HotCourse tab.
      */
@@ -82,11 +174,9 @@ public class MoocMainActivity extends Activity {
         allTab.setBackgroundColor(getResources().getColor(R.color.colorMainbgGolden));
         myTab.setBackgroundColor(getResources().getColor(R.color.colorMainbgGolden));
         FragmentTransaction ft = fm.beginTransaction();
-        Bundle bundle = new Bundle();
-        bundle.putInt("tabIndex", 0);
-        CourseFragment courseFragment = new CourseFragment();
-        courseFragment.setArguments(bundle);
-        ft.replace(R.id.frame_main, courseFragment);
+        ft.show(fragmentList.get(0));
+        ft.hide(fragmentList.get(1));
+        ft.hide(fragmentList.get(2));
         ft.commit();
     }
     /**
@@ -100,11 +190,9 @@ public class MoocMainActivity extends Activity {
         allTab.setBackgroundColor(getResources().getColor(R.color.colorTransparent));
         myTab.setBackgroundColor(getResources().getColor(R.color.colorMainbgGolden));
         FragmentTransaction ft = fm.beginTransaction();
-        Bundle bundle = new Bundle();
-        bundle.putInt("tabIndex",1);
-        CourseFragment courseFragment = new CourseFragment();
-        courseFragment.setArguments(bundle);
-        ft.replace(R.id.frame_main, courseFragment);
+        ft.hide(fragmentList.get(0));
+        ft.show(fragmentList.get(1));
+        ft.hide(fragmentList.get(2));
         ft.commit();
     }
     /**
@@ -118,8 +206,9 @@ public class MoocMainActivity extends Activity {
         allTab.setBackgroundColor(getResources().getColor(R.color.colorMainbgGolden));
         myTab.setBackgroundColor(getResources().getColor(R.color.colorTransparent));
         FragmentTransaction ft = fm.beginTransaction();
-        LoginFragment loginFragment = new LoginFragment();
-        ft.replace(R.id.frame_main, loginFragment);
+        ft.hide(fragmentList.get(0));
+        ft.hide(fragmentList.get(1));
+        ft.show(fragmentList.get(2));
         ft.commit();
     }
 
