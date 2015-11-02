@@ -28,10 +28,10 @@
             android:paddingLeft="10dp">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:id="@+id/imageView1"
-                android:src="@drawable/login_pic"
+                android:src="@drawable/login_username"
                 android:layout_alignBottom="@+id/usernameText"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"/>
@@ -74,10 +74,10 @@
             android:background="@color/colorMainWhite"
             android:paddingLeft="10dp">
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:id="@+id/imageView2"
-                android:src="@drawable/login_pic"
+                android:src="@drawable/login_password"
                 android:layout_alignBottom="@+id/passwordText"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"/>
@@ -96,5 +96,52 @@
                 android:layout_marginLeft="10dp"/>
         </RelativeLayout>
     </FrameLayout>
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="记住我的登陆状态"
+        android:id="@+id/checkbox_login_rememberMe"
+        android:layout_below="@+id/frame_login_password"
+        android:layout_alignLeft="@+id/frame_login_password"
+        android:layout_alignStart="@+id/frame_login_password"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="登陆"
+        android:id="@+id/button_fragment_login"
+        android:layout_below="@+id/checkbox_login_rememberMe"
+        android:layout_alignLeft="@+id/checkbox_login_rememberMe"
+        android:layout_alignStart="@+id/checkbox_login_rememberMe"
+        android:layout_alignRight="@+id/frame_login_password"
+        android:layout_alignEnd="@+id/frame_login_password"
+        android:maxHeight="40dp"
+        android:minHeight="40dp"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorMainbgGolden"
+        android:textSize="20sp"
+        android:textColor="@color/colorBlack"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="注册"
+        android:id="@+id/button_register"
+        android:layout_below="@+id/button_fragment_login"
+        android:layout_alignLeft="@+id/button_fragment_login"
+        android:layout_alignStart="@+id/button_fragment_login"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="忘记密码"
+        android:id="@+id/button_forgetPassword"
+        android:layout_below="@+id/button_fragment_login"
+        android:layout_alignRight="@+id/button_fragment_login"
+        android:layout_alignEnd="@+id/button_fragment_login"
+        android:layout_marginTop="10dp"/>
 
 </RelativeLayout>

@@ -1,6 +1,10 @@
 package cn.edu.buaamooc.activity;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Matrix;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -14,6 +18,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import java.util.ArrayList;
@@ -21,6 +26,7 @@ import java.util.ArrayList;
 import cn.edu.buaamooc.R;
 import cn.edu.buaamooc.fragment.CourseListFragment;
 import cn.edu.buaamooc.fragment.LoginFragment;
+import cn.edu.buaamooc.tools.MOOCConnection;
 
 public class MoocMainActivity extends FragmentActivity {
 
@@ -61,6 +67,46 @@ public class MoocMainActivity extends FragmentActivity {
         hotUnderline = findViewById(R.id.tab_underline_hot);
         allUnderline = findViewById(R.id.tab_underline_all);
         myUnderline = findViewById(R.id.tab_underline_my);
+
+        final Handler mHandler = new Handler() {
+            //用来处理初始化函数的返回信息
+            @Override
+            public void handleMessage(Message msg) {
+                if (msg.what == 0x111) {
+                    //页面跳转到登陆界面
+                    SharedPreferences loginInfo = getSharedPreferences("loginInfo", MODE_PRIVATE);
+                    String username = loginInfo.getString("username", "");
+                    if(username.equals("")){
+                        logged = false;
+                    }
+                    else {
+                        String password = loginInfo.getString("password","");
+                        new MOOCConnection().MOOCLogin(username,password);
+                    }
+                }
+                else {
+                    Toast.makeText(MoocMainActivity.this, "无网络连接，请重试", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+        };
+
+        new Thread(new Runnable() {
+            public void run() {
+                boolean initInfo = new MOOCConnection().MOOCInit();
+                if (initInfo) {
+                    Message m = new Message();
+                    m.what = 0x111;
+                    mHandler.sendMessage(m);    //发送成功信息
+                }
+                else {
+                    Message m = new Message();
+                    m.what = 0x110;
+                    mHandler.sendMessage(m);    //发送信息showDialog("无网络连接，请检查后重试");
+                }
+            }
+        }).start();    //开启一个线程
+
 
         fm = getSupportFragmentManager();
 //        setHotCourse();
@@ -152,7 +198,7 @@ public class MoocMainActivity extends FragmentActivity {
 //        position_two = position_one * 2;
 //    }
 
-    private void setChecked(int tabIndex){
+    private void setChecked(int tabIndex) {
 
     }
 
@@ -199,7 +245,7 @@ public class MoocMainActivity extends FragmentActivity {
 //            }
             //记录当前的页面位置
             currIndex = index;
-            switch (currIndex){
+            switch (currIndex) {
                 case 0:
                     setHotCourse();
                     break;
@@ -230,7 +276,7 @@ public class MoocMainActivity extends FragmentActivity {
         }
     }
 
-    private void addFragments(ArrayList<View> listViews){
+    private void addFragments(ArrayList<View> listViews) {
         fragmentList = new ArrayList<>(3);
 
         Bundle bundle;
@@ -252,7 +298,7 @@ public class MoocMainActivity extends FragmentActivity {
 
     }
 
-    private void setMyCourseFragment(ArrayList<View> listViews){
+    private void setMyCourseFragment(ArrayList<View> listViews) {
         Bundle bundle = new Bundle();
         bundle.putInt("tabIndex", 0);
         if (logged) {
@@ -266,10 +312,11 @@ public class MoocMainActivity extends FragmentActivity {
             fragmentList.add(loginFragment);
         }
     }
+
     /**
      * set the current tab to HotCourse tab.
      */
-    private void setHotCourse(){
+    private void setHotCourse() {
         viewPager.setCurrentItem(0);
         hotUnderline.setVisibility(View.INVISIBLE);
         allUnderline.setVisibility(View.VISIBLE);
@@ -278,10 +325,11 @@ public class MoocMainActivity extends FragmentActivity {
         allTab.setBackgroundColor(getResources().getColor(R.color.colorMainbgGolden));
         myTab.setBackgroundColor(getResources().getColor(R.color.colorMainbgGolden));
     }
+
     /**
      * set the current tab to AllCourse tab.
      */
-    private void setALLCourse(){
+    private void setALLCourse() {
         viewPager.setCurrentItem(1);
         hotUnderline.setVisibility(View.VISIBLE);
         allUnderline.setVisibility(View.INVISIBLE);
@@ -295,10 +343,11 @@ public class MoocMainActivity extends FragmentActivity {
 //        ft.hide(fragmentList.get(2));
 //        ft.commit();
     }
+
     /**
      * set the current tab to MyCourse tab.
      */
-    private void setMyCourse(){
+    private void setMyCourse() {
         viewPager.setCurrentItem(2);
         hotUnderline.setVisibility(View.VISIBLE);
         allUnderline.setVisibility(View.VISIBLE);
@@ -318,7 +367,7 @@ public class MoocMainActivity extends FragmentActivity {
      *
      * @param logged boolean type. is user logged?
      */
-    public void setLogCondition(boolean logged){
+    public void setLogCondition(boolean logged) {
         this.logged = logged;
     }
 }
