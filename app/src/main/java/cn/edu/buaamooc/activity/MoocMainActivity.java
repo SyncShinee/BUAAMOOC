@@ -1,22 +1,16 @@
 package cn.edu.buaamooc.activity;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Matrix;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.DisplayMetrics;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
-import android.view.animation.TranslateAnimation;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
@@ -26,6 +20,7 @@ import java.util.ArrayList;
 import cn.edu.buaamooc.R;
 import cn.edu.buaamooc.fragment.CourseListFragment;
 import cn.edu.buaamooc.fragment.LoginFragment;
+import cn.edu.buaamooc.tools.Login;
 import cn.edu.buaamooc.tools.MOOCConnection;
 
 public class MoocMainActivity extends FragmentActivity {
@@ -47,9 +42,10 @@ public class MoocMainActivity extends FragmentActivity {
 
     private ArrayList<Fragment> fragmentList;
     private ViewPager viewPager;
+    private FragmentPagerAdapter fpAdapter;
     private int currIndex;
     private ViewFlipper viewFlipper;
-    private boolean logged;
+    private boolean loadLoginFragment;
 
 
     @Override
@@ -58,7 +54,7 @@ public class MoocMainActivity extends FragmentActivity {
         setContentView(R.layout.activity_mooc_main);
 
         //initialize variables
-        logged = false;
+        loadLoginFragment = false;
 
         //initialize tab controls
         hotTab = (TextView) findViewById(R.id.tab_title_hot);
@@ -68,20 +64,21 @@ public class MoocMainActivity extends FragmentActivity {
         allUnderline = findViewById(R.id.tab_underline_all);
         myUnderline = findViewById(R.id.tab_underline_my);
 
+
+        final SharedPreferences loginInfo = getSharedPreferences("loginInfo", MODE_PRIVATE);
+        final String username = loginInfo.getString("username", "");
+        if(!username.equals("")) {
+            loadLoginFragment = true;
+        }
         final Handler mHandler = new Handler() {
             //用来处理初始化函数的返回信息
             @Override
             public void handleMessage(Message msg) {
                 if (msg.what == 0x111) {
                     //页面跳转到登陆界面
-                    SharedPreferences loginInfo = getSharedPreferences("loginInfo", MODE_PRIVATE);
-                    String username = loginInfo.getString("username", "");
-                    if(username.equals("")){
-                        logged = false;
-                    }
-                    else {
+                    if(loadLoginFragment) {
                         String password = loginInfo.getString("password","");
-                        new MOOCConnection().MOOCLogin(username,password);
+                        new Login(username,password).setContext(MoocMainActivity.this).login();
                     }
                 }
                 else {
@@ -140,14 +137,14 @@ public class MoocMainActivity extends FragmentActivity {
     }
 
     private void initializeViewPager() {
-        ArrayList<View> listViews = new ArrayList<View>();
-        LayoutInflater mInflater = getLayoutInflater();
-        listViews.add(mInflater.inflate(R.layout.fragment_course_list, null));
-        listViews.add(mInflater.inflate(R.layout.fragment_course_list, null));
+//        ArrayList<View> listViews = new ArrayList<View>();
+//        LayoutInflater mInflater = getLayoutInflater();
+//        listViews.add(mInflater.inflate(R.layout.fragment_course_list, null));
+//        listViews.add(mInflater.inflate(R.layout.fragment_course_list, null));
 
-        addFragments(listViews);
+        addFragments();
 
-        FragmentPagerAdapter fpAdapter = new FragmentPagerAdapter(fm) {
+        fpAdapter = new FragmentPagerAdapter(fm) {
             @Override
             public Fragment getItem(int position) {
                 return fragmentList.get(position);
@@ -276,7 +273,7 @@ public class MoocMainActivity extends FragmentActivity {
         }
     }
 
-    private void addFragments(ArrayList<View> listViews) {
+    private void addFragments() {
         fragmentList = new ArrayList<>(3);
 
         Bundle bundle;
@@ -294,14 +291,14 @@ public class MoocMainActivity extends FragmentActivity {
         courseListFragment.setArguments(bundle);
         fragmentList.add(courseListFragment);
 
-        setMyCourseFragment(listViews);
+        addMyCourseFragment();
 
     }
 
-    private void setMyCourseFragment(ArrayList<View> listViews) {
+    private void addMyCourseFragment() {
         Bundle bundle = new Bundle();
-        bundle.putInt("tabIndex", 0);
-        if (logged) {
+        bundle.putInt("tabIndex", 2);
+        if (loadLoginFragment) {
             CourseListFragment courseListFragment = new CourseListFragment();
             courseListFragment.setArguments(bundle);
             fragmentList.add(courseListFragment);
@@ -313,6 +310,23 @@ public class MoocMainActivity extends FragmentActivity {
         }
     }
 
+    public void refreshLoginInfo(boolean logged){
+        loadLoginFragment = logged;
+        Bundle bundle = new Bundle();
+        bundle.putInt("tabIndex", 2);
+        if (logged) {
+            CourseListFragment courseListFragment = new CourseListFragment();
+            courseListFragment.setArguments(bundle);
+            fragmentList.set(2, courseListFragment);
+        }
+        else {
+            LoginFragment loginFragment = new LoginFragment();
+            loginFragment.setArguments(bundle);
+            fragmentList.set(2, loginFragment);
+        }
+        fpAdapter.notifyDataSetChanged();
+    }
+
     /**
      * set the current tab to HotCourse tab.
      */
@@ -322,8 +336,8 @@ public class MoocMainActivity extends FragmentActivity {
         allUnderline.setVisibility(View.VISIBLE);
         myUnderline.setVisibility(View.VISIBLE);
         hotTab.setBackgroundColor(getResources().getColor(R.color.colorTransparent));
-        allTab.setBackgroundColor(getResources().getColor(R.color.colorMainbgGolden));
-        myTab.setBackgroundColor(getResources().getColor(R.color.colorMainbgGolden));
+        allTab.setBackgroundColor(getResources().getColor(R.color.colorBgLightBlue));
+        myTab.setBackgroundColor(getResources().getColor(R.color.colorBgLightBlue));
     }
 
     /**
@@ -334,14 +348,9 @@ public class MoocMainActivity extends FragmentActivity {
         hotUnderline.setVisibility(View.VISIBLE);
         allUnderline.setVisibility(View.INVISIBLE);
         myUnderline.setVisibility(View.VISIBLE);
-        hotTab.setBackgroundColor(getResources().getColor(R.color.colorMainbgGolden));
+        hotTab.setBackgroundColor(getResources().getColor(R.color.colorBgLightBlue));
         allTab.setBackgroundColor(getResources().getColor(R.color.colorTransparent));
-        myTab.setBackgroundColor(getResources().getColor(R.color.colorMainbgGolden));
-//        FragmentTransaction ft = fm.beginTransaction();
-//        ft.hide(fragmentList.get(0));
-//        ft.show(fragmentList.get(1));
-//        ft.hide(fragmentList.get(2));
-//        ft.commit();
+        myTab.setBackgroundColor(getResources().getColor(R.color.colorBgLightBlue));
     }
 
     /**
@@ -352,22 +361,19 @@ public class MoocMainActivity extends FragmentActivity {
         hotUnderline.setVisibility(View.VISIBLE);
         allUnderline.setVisibility(View.VISIBLE);
         myUnderline.setVisibility(View.INVISIBLE);
-        hotTab.setBackgroundColor(getResources().getColor(R.color.colorMainbgGolden));
-        allTab.setBackgroundColor(getResources().getColor(R.color.colorMainbgGolden));
+        hotTab.setBackgroundColor(getResources().getColor(R.color.colorBgLightBlue));
+        allTab.setBackgroundColor(getResources().getColor(R.color.colorBgLightBlue));
         myTab.setBackgroundColor(getResources().getColor(R.color.colorTransparent));
-//        FragmentTransaction ft = fm.beginTransaction();
-//        ft.hide(fragmentList.get(0));
-//        ft.hide(fragmentList.get(1));
-//        ft.show(fragmentList.get(2));
-//        ft.commit();
     }
 
     /**
-     * set variable logged
+     * set variable loadLoginFragment
      *
-     * @param logged boolean type. is user logged?
+     * @param logged boolean type. is user loadLoginFragment?
      */
     public void setLogCondition(boolean logged) {
-        this.logged = logged;
+        this.loadLoginFragment = logged;
     }
+
+
 }

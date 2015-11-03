@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import cn.edu.buaamooc.R;
@@ -57,6 +58,11 @@ public class LoginFragment extends Fragment {
     public void login(){
         String username = ((TextView) layout.findViewById(R.id.usernameText)).getText().toString();
         String password = ((TextView) layout.findViewById(R.id.passwordText)).getText().toString();
-        new Login(username,password).setContext(activity).login();
+        Login login = new Login(username,password).setContext(activity);
+        CheckBox rememberMe = (CheckBox) layout.findViewById(R.id.checkbox_login_rememberMe);
+        if (rememberMe.isChecked()) {
+            login.setRememberMe();
+        }
+        login.login();
     }
 }

@@ -2,6 +2,7 @@ package cn.edu.buaamooc.tools;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Message;
 import android.widget.Toast;
@@ -10,12 +11,15 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import cn.edu.buaamooc.activity.MoocMainActivity;
+
 /**
  * Created by dt on 2015/11/2.
  */
 public class Login {
     private String username;
     private String password;
+    private boolean rememberMe;
 
     private JSONObject resultJsonObject;
     private Handler mHandler; //用于处理实现登陆函数的线程返回的数据
@@ -25,12 +29,17 @@ public class Login {
     private JSONArray allCourseArray;
     private JSONArray myCourseArray;
 
+
+    private JSONObject myCourse;
+
     private Context mContext;
 
-    public Login(String username, String password) {
+    public Login(final String username, final String password) {
         this.username = username;
         this.password = password;
+        rememberMe = false;
         resultJsonObject = new JSONObject();
+
 
         mHandler=new Handler(){
             @SuppressLint("HandlerLeak")
@@ -38,22 +47,20 @@ public class Login {
             public void handleMessage(Message msg) {
                 if(msg.what==0x111){
                     //登录成功，获取已选课程和全部课程
+                    Toast.makeText(mContext, "登陆成功",Toast.LENGTH_SHORT).show();
+                    //更新MoocMainActivity中的ViewPager中的第三个fragment，变为CourseListFragment
                     mHandler1=new Handler(){
                         @Override
                         public void handleMessage(Message msg) {
                             if(msg.what==0x111){
-                                MOOCConnection mooc = new MOOCConnection() ;
-                                allCourseArray = mooc.MOOCCourses();
-                                //获取全部课程
 
-                                JSONObject myCourse = mooc.MOOCGetCourseEnrollment();
                                 try {
                                     boolean status = !myCourse.isNull("status") && myCourse.getBoolean("status");
                                     if (status){
                                         myCourseArray = myCourse.getJSONArray("enrollment");
+                                        ((MoocMainActivity) mContext).refreshLoginInfo(true);
                                     }
                                     //获取已选课程
-                                    Toast.makeText(mContext, "登陆成功",Toast.LENGTH_SHORT).show();
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
@@ -75,6 +82,19 @@ public class Login {
                         new Thread(new Runnable() {
                             @SuppressLint("HandlerLeak")
                             public void run() {
+                                MOOCConnection mooc = new MOOCConnection() ;
+                                allCourseArray = mooc.MOOCCourses();
+                                //获取全部课程
+                                myCourse = mooc.MOOCGetCourseEnrollment();
+
+                                if (rememberMe){
+                                    SharedPreferences loginInfo = mContext.getSharedPreferences("loginInfo",Context.MODE_PRIVATE);
+                                    SharedPreferences.Editor loginEditor = loginInfo.edit();
+                                    loginEditor.putString("username", username);
+                                    loginEditor.putString("password", password);
+                                    loginEditor.apply();
+                                }
+
                                 Message m=new Message();
                                 m.what=0x111;
                                 mHandler1.sendMessage(m);   //发送成功信息
@@ -98,6 +118,11 @@ public class Login {
 
     public Login setContext(Context mContext){
         this.mContext = mContext;
+        return this;
+    }
+
+    public Login setRememberMe(){
+        rememberMe = true;
         return this;
     }
 
