@@ -25,23 +25,23 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".fragment.AboutUs"
+            android:name=".activity.AboutUs"
             android:label="@string/title_activity_about_us" >
         </activity>
         <activity
-            android:name=".fragment.AccountSetting"
+            android:name=".activity.AccountSetting"
             android:label="@string/title_activity_account_setting" >
         </activity>
         <activity
-            android:name=".fragment.AppSetting"
+            android:name=".activity.AppSetting"
             android:label="@string/title_activity_app_setting" >
         </activity>
         <activity
-            android:name=".fragment.MyDownloads"
+            android:name=".activity.MyDownloads"
             android:label="@string/title_activity_my_downloads" >
         </activity>
         <activity
-            android:name=".fragment.PassWordReset"
+            android:name=".activity.PassWordReset"
             android:label="@string/title_activity_pass_word_reaet" >
         </activity>
         <activity

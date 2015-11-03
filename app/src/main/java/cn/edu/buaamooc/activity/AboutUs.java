@@ -1,24 +1,38 @@
-package cn.edu.buaamooc.fragment;
+package cn.edu.buaamooc.activity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 
 import cn.edu.buaamooc.R;
 
-public class AccountSetting extends AppCompatActivity {
+public class AboutUs extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_account_setting);
+        setContentView(R.layout.activity_about_us);
+
+        //back to te xml MyInformation
+        ImageView aboutus_back = (ImageView) findViewById(R.id.AboutUs_Left_Return);
+        aboutus_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AboutUs.this.finish();
+            }
+        });
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_account_setting, menu);
+        getMenuInflater().inflate(R.menu.menu_about_us, menu);
         return true;
     }
 

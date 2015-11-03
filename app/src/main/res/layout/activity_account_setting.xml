@@ -82,14 +82,15 @@
 
             <TextView
                 android:layout_width="100dp"
-                android:layout_height="30dp"
+                android:layout_height="40dp"
                 android:text="用户名"
                 android:textSize="18sp"
-                android:id="@+id/UserName"/>
+                android:id="@+id/UserName"
+                />
 
             <EditText
                 android:layout_width="250dp"
-                android:layout_height="30dp"
+                android:layout_height="40dp"
                 android:hint="username"
                 android:id="@+id/UserNameEdit"
                 android:layout_toRightOf="@+id/UserName"
@@ -108,14 +109,14 @@
 
             <TextView
                 android:layout_width="100dp"
-                android:layout_height="30dp"
+                android:layout_height="40dp"
                 android:text="真实姓名"
                 android:textSize="18sp"
                 android:id="@+id/RealName"/>
 
             <EditText
                 android:layout_width="250dp"
-                android:layout_height="30dp"
+                android:layout_height="40dp"
                 android:hint="YuFisherman"
                 android:id="@+id/RealNameEdit"
                 android:layout_toRightOf="@+id/RealName"
@@ -134,14 +135,14 @@
 
             <TextView
                 android:layout_width="100dp"
-                android:layout_height="30dp"
+                android:layout_height="40dp"
                 android:text="电子邮箱"
                 android:textSize="18sp"
                 android:id="@+id/Email"/>
 
             <EditText
                 android:layout_width="250dp"
-                android:layout_height="30dp"
+                android:layout_height="40dp"
                 android:hint="mooocapp@sina.com"
                 android:id="@+id/EmailEdit"
                 android:layout_toRightOf="@+id/Email"
@@ -187,7 +188,7 @@
 
             <TextView
                 android:layout_width="100dp"
-                android:layout_height="30dp"
+                android:layout_height="40dp"
                 android:text="语言"
                 android:textSize="18sp"
                 android:id="@+id/language"/>
@@ -196,7 +197,8 @@
                 android:layout_width="250dp"
                 android:layout_height="30dp"
                 android:id="@+id/languageEdit"
-                android:layout_toRightOf="@+id/language"></Spinner>
+                android:layout_toRightOf="@+id/language"
+                android:scrollbarSize="20sp"></Spinner>
 
         </RelativeLayout>
 

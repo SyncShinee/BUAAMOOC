@@ -1,24 +1,36 @@
-package cn.edu.buaamooc.fragment;
+package cn.edu.buaamooc.activity;
 
+import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 
 import cn.edu.buaamooc.R;
 
-public class AboutUs extends AppCompatActivity {
+public class MyDownloads extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_about_us);
+        setContentView(R.layout.activity_my_downloads);
+
+        //back to te xml MyInformation
+        ImageView mydownloads_back = (ImageView)findViewById(R.id.MyDownloads_Left_Return);
+        mydownloads_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MyDownloads.this.finish();
+            }
+        });
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_about_us, menu);
+        getMenuInflater().inflate(R.menu.menu_my_downloads, menu);
         return true;
     }
 

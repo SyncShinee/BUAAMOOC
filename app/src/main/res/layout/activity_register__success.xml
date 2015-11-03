@@ -108,16 +108,16 @@
 
                 <TextView
                     android:layout_width="110dp"
-                    android:id="@+id/E-mail"
+                    android:id="@+id/Email"
                     android:layout_height="30dp"
-                    android:text="E-mail"
+                    android:text="Email"
                     android:textSize="20sp"/>
 
                 <TextView
                     android:layout_width="250dp"
                     android:layout_height="30dp"
-                    android:id="@+id/E-mailEdit"
-                    android:layout_toRightOf="@+id/E-mail"
+                    android:id="@+id/EmailEdit"
+                    android:layout_toRightOf="@+id/Email"
                     android:textSize="20sp"
                     android:singleLine="true"
                     android:text="username@domain.com"/>
