@@ -97,7 +97,7 @@
                 />
 
             <EditText
-                android:id="@+id/E-mailEdit"
+                android:id="@+id/reg_E_mailEdit"
                 android:layout_width="fill_parent"
                 android:layout_height="40dp"
                 android:singleLine="true"
