@@ -1,0 +1,61 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.administrator.moocapp.BuaaMooc_Service">
+
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:paddingRight="10dp"
+        android:background="@color/colorMainBuaaBlue"
+        android:id="@+id/moocService">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="10dp"
+            android:id="@+id/moocService_Left_Return"
+            android:maxHeight="40dp"
+            android:maxWidth="40dp"
+            android:minHeight="40dp"
+            android:minWidth="40dp"
+            android:background="@null"
+            android:src="@drawable/back"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="北航学堂服务条款"
+            android:id="@+id/moocServiceView"
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            android:maxWidth="50dp"
+            android:textColor="#ffffff"
+            android:textSize="25sp" />
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:id="@+id/Scorll_Service"
+        android:layout_below="@+id/moocService"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/service"
+            />
+    </ScrollView>
+
+</RelativeLayout>

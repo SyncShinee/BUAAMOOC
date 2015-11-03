@@ -24,6 +24,42 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".fragment.AboutUs"
+            android:label="@string/title_activity_about_us" >
+        </activity>
+        <activity
+            android:name=".fragment.AccountSetting"
+            android:label="@string/title_activity_account_setting" >
+        </activity>
+        <activity
+            android:name=".fragment.AppSetting"
+            android:label="@string/title_activity_app_setting" >
+        </activity>
+        <activity
+            android:name=".fragment.MyDownloads"
+            android:label="@string/title_activity_my_downloads" >
+        </activity>
+        <activity
+            android:name=".fragment.PassWordReset"
+            android:label="@string/title_activity_pass_word_reaet" >
+        </activity>
+        <activity
+            android:name=".fragment.register_Success"
+            android:label="@string/title_activity_register__success" >
+        </activity>
+        <activity
+            android:name=".fragment.registerActivity"
+            android:label="@string/title_activity_register" >
+        </activity>
+        <activity
+            android:name=".fragment.BuaaMooc_Honor"
+            android:label="@string/title_activity_buaa_mooc__honor" >
+        </activity>
+        <activity
+            android:name=".fragment.BuaaMooc_Service"
+            android:label="@string/title_activity_buaa_mooc__service" >
+        </activity>
     </application>
 
 </manifest>

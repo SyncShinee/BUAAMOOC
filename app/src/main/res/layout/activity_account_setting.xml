@@ -1,0 +1,312 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.administrator.moocapp.AccountSetting">
+
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:paddingRight="10dp"
+        android:background="@color/colorMainBuaaBlue"
+        android:id="@+id/AccountSetting">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="10dp"
+            android:id="@+id/AccountSetting_Left_Return"
+            android:maxHeight="40dp"
+            android:maxWidth="40dp"
+            android:minHeight="40dp"
+            android:minWidth="40dp"
+            android:background="@null"
+            android:src="@drawable/back"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="账户设置"
+            android:id="@+id/InformationView"
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            android:maxWidth="50dp"
+            android:textColor="#ffffff"
+            android:textSize="25sp"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/MustInformation"
+        android:orientation="vertical"
+        android:layout_below="@+id/AccountSetting"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"
+        >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_gravity="center"
+            android:text="账户信息（必填）"
+            android:textSize="20sp"/>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@color/colorMainDivide"/>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            >
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:text="用户名"
+                android:textSize="18sp"
+                android:id="@+id/UserName"/>
+
+            <EditText
+                android:layout_width="250dp"
+                android:layout_height="30dp"
+                android:hint="username"
+                android:id="@+id/UserNameEdit"
+                android:layout_toRightOf="@+id/UserName"
+                android:singleLine="true"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            >
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:text="真实姓名"
+                android:textSize="18sp"
+                android:id="@+id/RealName"/>
+
+            <EditText
+                android:layout_width="250dp"
+                android:layout_height="30dp"
+                android:hint="YuFisherman"
+                android:id="@+id/RealNameEdit"
+                android:layout_toRightOf="@+id/RealName"
+                android:singleLine="true"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            >
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:text="电子邮箱"
+                android:textSize="18sp"
+                android:id="@+id/Email"/>
+
+            <EditText
+                android:layout_width="250dp"
+                android:layout_height="30dp"
+                android:hint="mooocapp@sina.com"
+                android:id="@+id/EmailEdit"
+                android:layout_toRightOf="@+id/Email"
+                android:singleLine="true"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            >
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:text="密码"
+                android:textSize="18sp"
+                android:id="@+id/Password"/>
+
+            <TextView
+                android:layout_width="250dp"
+                android:layout_height="30dp"
+                android:textSize="18sp"
+                android:text="重设密码"
+                android:textColor="@color/colorMainBuaaBlue"
+                android:id="@+id/PasswordEdit"
+                android:layout_toRightOf="@+id/Password"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            >
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:text="语言"
+                android:textSize="18sp"
+                android:id="@+id/language"/>
+
+            <Spinner
+                android:layout_width="250dp"
+                android:layout_height="30dp"
+                android:id="@+id/languageEdit"
+                android:layout_toRightOf="@+id/language"></Spinner>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/SomeInformation"
+        android:orientation="vertical"
+        android:layout_below="@+id/MustInformation"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"
+        >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_gravity="center"
+            android:text="其他信息（可选）"
+            android:textSize="20sp"/>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@color/colorMainDivide"/>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            >
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:text="教育程度"
+                android:textSize="18sp"
+                android:id="@+id/Education"/>
+
+            <Spinner
+                android:layout_width="250dp"
+                android:layout_height="30dp"
+                android:hint="username"
+                android:id="@+id/EducationEdit"
+                android:layout_toRightOf="@+id/Education"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            >
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:text="性别"
+                android:textSize="18sp"
+                android:id="@+id/Sex"/>
+
+            <Spinner
+                android:layout_width="250dp"
+                android:layout_height="30dp"
+                android:hint="username"
+                android:id="@+id/SexEdit"
+                android:layout_toRightOf="@+id/Sex"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            >
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:text="出生年份"
+                android:textSize="18sp"
+                android:id="@+id/Year"/>
+
+            <Spinner
+                android:layout_width="250dp"
+                android:layout_height="30dp"
+                android:hint="username"
+                android:id="@+id/YearEdit"
+                android:layout_toRightOf="@+id/Year"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

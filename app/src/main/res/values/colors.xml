@@ -8,5 +8,8 @@
     <color name="colorDefaultBg">#90E8E8E7</color>
     <color name="colorTransparent">#00000000</color>
     <color name="colorBlack">#ff000000</color>
-
+    <color name="colorRed">#ff0000</color>
+    <color name="colorTab">#FAE682</color>
+    <color name="colorSkybule">#87CEFF</color>
+    <color name="colorLightblue">#B0E2FF</color>
 </resources>

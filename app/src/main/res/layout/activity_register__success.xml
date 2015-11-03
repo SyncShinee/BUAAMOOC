@@ -1,0 +1,181 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.administrator.moocapp.register_Success">
+
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:paddingRight="10dp"
+        android:background="@color/colorMainBuaaBlue"
+        android:id="@+id/register_success">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/register_success_Left_Return"
+            android:maxHeight="40dp"
+            android:maxWidth="40dp"
+            android:minHeight="40dp"
+            android:minWidth="40dp"
+            android:background="@null"
+            android:src="@drawable/homepage"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="注册"
+            android:id="@+id/register_successView"
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            android:maxWidth="50dp"
+            android:textColor="#ffffff"
+            android:textSize="25sp" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/register_success_Edit"
+        android:layout_below="@+id/register_success"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/success_Image"
+                android:src="@drawable/success"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:id="@+id/success"
+                android:layout_toRightOf="@+id/success_Image"
+                android:text="注册成功"
+                android:textSize="30sp"
+                android:gravity="center"/>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical"
+            >
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorMainDivide"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:text="用户信息"
+                android:textSize="25sp"
+                android:gravity="center"/>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorMainDivide"
+                />
+
+            <RelativeLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="110dp"
+                    android:id="@+id/E-mail"
+                    android:layout_height="30dp"
+                    android:text="E-mail"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:layout_width="250dp"
+                    android:layout_height="30dp"
+                    android:id="@+id/E-mailEdit"
+                    android:layout_toRightOf="@+id/E-mail"
+                    android:textSize="20sp"
+                    android:singleLine="true"
+                    android:text="username@domain.com"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="110dp"
+                    android:id="@+id/RealName"
+                    android:layout_height="30dp"
+                    android:text="Real Name"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:layout_width="250dp"
+                    android:layout_height="30dp"
+                    android:id="@+id/RealNameEdit"
+                    android:layout_toRightOf="@+id/RealName"
+                    android:textSize="20sp"
+                    android:singleLine="true"
+                    android:text="Jane Doe"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="110dp"
+                    android:id="@+id/UserName"
+                    android:layout_height="30dp"
+                    android:text="E-mail"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:layout_width="250dp"
+                    android:layout_height="30dp"
+                    android:id="@+id/UserNameEdit"
+                    android:layout_toRightOf="@+id/UserName"
+                    android:textSize="20sp"
+                    android:singleLine="true"
+                    android:text="Jane Doe"/>
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorMainDivide"
+            />
+
+    </LinearLayout>
+
+</RelativeLayout>
