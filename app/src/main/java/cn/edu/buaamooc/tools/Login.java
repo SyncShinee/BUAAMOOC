@@ -26,9 +26,6 @@ public class Login {
     private Handler mHandler1; //用于处理登陆之后获取已选课程和全部课程的线程返回的数据
     private Handler mHandler2; //用于处理浏览课程功能获取全部课程的线程返回的数据
 
-    private JSONArray allCourseArray;
-    private JSONArray myCourseArray;
-
 
     private JSONObject myCourse;
 
@@ -46,25 +43,14 @@ public class Login {
             @Override
             public void handleMessage(Message msg) {
                 if(msg.what==0x111){
-                    //登录成功，获取已选课程和全部课程
                     Toast.makeText(mContext, "登陆成功",Toast.LENGTH_SHORT).show();
                     //更新MoocMainActivity中的ViewPager中的第三个fragment，变为CourseListFragment
                     mHandler1=new Handler(){
                         @Override
                         public void handleMessage(Message msg) {
                             if(msg.what==0x111){
-
-                                try {
-                                    boolean status = !myCourse.isNull("status") && myCourse.getBoolean("status");
-                                    if (status){
-                                        myCourseArray = myCourse.getJSONArray("enrollment");
-                                        ((MoocMainActivity) mContext).refreshLoginInfo(true);
-                                    }
-                                    //获取已选课程
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                                //页面跳转
+                                ((MoocMainActivity) mContext).refreshLoginInfo(true);
+                                //获取已选课程
                             }
                             else if(msg.what==0x010){
                                 Toast.makeText(mContext, "网络连接失败，请重试。",Toast.LENGTH_SHORT).show();
@@ -82,11 +68,6 @@ public class Login {
                         new Thread(new Runnable() {
                             @SuppressLint("HandlerLeak")
                             public void run() {
-                                MOOCConnection mooc = new MOOCConnection() ;
-                                allCourseArray = mooc.MOOCCourses();
-                                //获取全部课程
-                                myCourse = mooc.MOOCGetCourseEnrollment();
-
                                 if (rememberMe){
                                     SharedPreferences loginInfo = mContext.getSharedPreferences("loginInfo",Context.MODE_PRIVATE);
                                     SharedPreferences.Editor loginEditor = loginInfo.edit();
