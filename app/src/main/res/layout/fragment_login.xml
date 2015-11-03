@@ -47,7 +47,8 @@
                 android:layout_toRightOf="@+id/imageView1"
                 android:hint="用户名"
                 android:singleLine="true"
-                android:layout_marginLeft="10dp"/>
+                android:layout_marginLeft="10dp"
+                android:text="dthomas@qq.com"/>
 
         </RelativeLayout>
     </FrameLayout>
@@ -93,7 +94,8 @@
                 android:layout_toRightOf="@+id/imageView2"
                 android:hint="密码"
                 android:singleLine="true"
-                android:layout_marginLeft="10dp"/>
+                android:layout_marginLeft="10dp"
+                android:inputType="textPassword"/>
         </RelativeLayout>
     </FrameLayout>
 
@@ -104,7 +106,8 @@
         android:id="@+id/checkbox_login_rememberMe"
         android:layout_below="@+id/frame_login_password"
         android:layout_alignLeft="@+id/frame_login_password"
-        android:layout_alignStart="@+id/frame_login_password"/>
+        android:layout_alignStart="@+id/frame_login_password"
+        android:checked="true"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -120,7 +123,7 @@
         android:minHeight="40dp"
         android:gravity="center"
         android:layout_marginTop="20dp"
-        android:background="@color/colorMainbgGolden"
+        android:background="@color/colorBgLightBlue"
         android:textSize="20sp"
         android:textColor="@color/colorBlack"/>
 

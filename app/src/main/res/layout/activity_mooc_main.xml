@@ -78,7 +78,7 @@
                 android:id="@+id/tab_title_hot"
                 android:maxHeight="40dp"
                 android:minHeight="40dp"
-                android:background="@color/colorMainbgGolden"
+                android:background="@color/colorBgLightBlue"
                 android:gravity="center"
                 android:textSize="15sp"/>
             <View
@@ -93,7 +93,7 @@
                 android:id="@+id/tab_title_all"
                 android:minHeight="40dp"
                 android:maxHeight="40dp"
-                android:background="@color/colorMainbgGolden"
+                android:background="@color/colorBgLightBlue"
                 android:gravity="center"
                 android:textSize="15sp"/>
             <View
@@ -109,7 +109,7 @@
                 android:id="@+id/tab_title_my"
                 android:maxHeight="40dp"
                 android:minHeight="40dp"
-                android:background="@color/colorMainbgGolden"
+                android:background="@color/colorBgLightBlue"
                 android:gravity="center"
                 android:textSize="15sp"/>
         </LinearLayout>
@@ -169,7 +169,8 @@
         android:layout_alignParentTop="false"
         android:layout_centerHorizontal="true"
         android:id="@+id/buttom_login"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:visibility="gone">
 
         <TextView
             android:layout_width="match_parent"
@@ -179,7 +180,7 @@
             android:layout_gravity="bottom"
             android:minHeight="40dp"
             android:maxHeight="40dp"
-            android:background="@color/colorMainbgGolden"
+            android:background="@color/colorBgLightBlue"
             android:gravity="center"
             android:textSize="15sp"/>
     </LinearLayout>

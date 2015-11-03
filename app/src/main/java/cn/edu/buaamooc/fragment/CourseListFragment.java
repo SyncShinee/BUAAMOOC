@@ -10,11 +10,15 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import cn.edu.buaamooc.R;
 import cn.edu.buaamooc.activity.MoocMainActivity;
+import cn.edu.buaamooc.tools.MOOCConnection;
 
 
 /**
@@ -32,6 +36,7 @@ public class CourseListFragment extends Fragment {
     private View layout;
 
     private ListView list;
+
     public CourseListFragment() {
         // Required empty public constructor
     }
@@ -51,13 +56,13 @@ public class CourseListFragment extends Fragment {
         layout = inflater.inflate(R.layout.fragment_course_list, container, false);
         ArrayList<HashMap<String, Object>> dataList = new ArrayList<>();
         HashMap<String, Object> map = new HashMap<>();
-        map.put("img",R.drawable.icon1);
+        map.put("img", R.drawable.icon1);
         map.put("title", "Course Title " + String.valueOf(tabIndex));
         map.put("date", "2015-10-27");
         dataList.add(map);
         map.clear();
 
-        map.put("img",R.drawable.icon2);
+        map.put("img", R.drawable.icon2);
         map.put("title", "Course Title " + String.valueOf(tabIndex));
         map.put("date", "2015-10-28");
         dataList.add(map);
@@ -67,19 +72,42 @@ public class CourseListFragment extends Fragment {
                 activity,
                 dataList,
                 R.layout.listview_item_courses_list,
-                new String[]{"img","title","date"},
-                new int[]{R.id.listview_item_course_pic,R.id.listview_item_course_title,R.id.listview_item_course_date});
+                new String[]{"img", "title", "date"},
+                new int[]{R.id.listview_item_course_pic, R.id.listview_item_course_title, R.id.listview_item_course_date});
         list.setAdapter(simpleAdapter);
 
+        refreshList();
 
         return layout;
     }
 
     @Override
-    public void onDestroyView(){
+    public void onDestroyView() {
         Log.e("CourseListFragment", "onDestroyView.");
         super.onDestroyView();
     }
 
+    public void refreshList() {
 
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                MOOCConnection mooc = new MOOCConnection();
+                JSONArray courseArray;
+                switch (tabIndex) {
+                    case 0:
+                    case 1:
+                        courseArray = mooc.MOOCCourses();
+                        Log.e("mooc.MOOCCourses()",courseArray.toString());
+                        break;
+                    case 2:
+                        JSONObject JsonObject = mooc.MOOCGetCourseEnrollment();
+                        Log.e("GetCourseEnrollment()",JsonObject.toString());
+                        break;
+                }
+            }
+        }).start();
+
+
+    }
 }
