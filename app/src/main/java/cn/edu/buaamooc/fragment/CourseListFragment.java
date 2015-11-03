@@ -10,11 +10,14 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
+import org.json.JSONArray;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import cn.edu.buaamooc.R;
 import cn.edu.buaamooc.activity.MoocMainActivity;
+import cn.edu.buaamooc.tools.MOOCConnection;
 
 
 /**
@@ -81,5 +84,8 @@ public class CourseListFragment extends Fragment {
         super.onDestroyView();
     }
 
-
+    public void refreshList(){
+        MOOCConnection mooc = new MOOCConnection() ;
+        JSONArray courseArray = mooc.MOOCCourses();
+    }
 }

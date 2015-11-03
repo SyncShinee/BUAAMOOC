@@ -59,6 +59,7 @@ public class MOOCConnection {
 			}
 		        
 		}catch(Exception e){
+			e.printStackTrace();
 			return false; //Todo
 		}finally{
 			//Todo         

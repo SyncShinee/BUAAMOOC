@@ -47,7 +47,8 @@
                 android:layout_toRightOf="@+id/imageView1"
                 android:hint="用户名"
                 android:singleLine="true"
-                android:layout_marginLeft="10dp"/>
+                android:layout_marginLeft="10dp"
+                android:text="dthomas@qq.com"/>
 
         </RelativeLayout>
     </FrameLayout>
@@ -93,7 +94,8 @@
                 android:layout_toRightOf="@+id/imageView2"
                 android:hint="密码"
                 android:singleLine="true"
-                android:layout_marginLeft="10dp"/>
+                android:layout_marginLeft="10dp"
+                android:inputType="textPassword"/>
         </RelativeLayout>
     </FrameLayout>
 

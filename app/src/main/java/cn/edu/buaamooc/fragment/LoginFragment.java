@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import cn.edu.buaamooc.R;
 import cn.edu.buaamooc.activity.MoocMainActivity;
+import cn.edu.buaamooc.tools.Login;
 
 
 /**
@@ -56,6 +57,6 @@ public class LoginFragment extends Fragment {
     public void login(){
         String username = ((TextView) layout.findViewById(R.id.usernameText)).getText().toString();
         String password = ((TextView) layout.findViewById(R.id.passwordText)).getText().toString();
-
+        new Login(username,password).setContext(activity).login();
     }
 }
