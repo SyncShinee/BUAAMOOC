@@ -26,7 +26,8 @@ public class MyInformationActivity extends Activity {
         information_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ///
+                MyInformationActivity.this.setResult(0);
+                MyInformationActivity.this.finish();
             }
         });
         //skip to the xml MoocMainActivity
@@ -34,7 +35,8 @@ public class MyInformationActivity extends Activity {
         mycourse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ////
+                MyInformationActivity.this.setResult(1);
+                MyInformationActivity.this.finish();
             }
         });
         //skip to the xml MyDownloads
@@ -78,7 +80,8 @@ public class MyInformationActivity extends Activity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ////
+                MyInformationActivity.this.setResult(2);
+                MyInformationActivity.this.finish();
             }
         });
 
