@@ -7,7 +7,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.widget.Toast;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -26,17 +25,21 @@ public class Login {
     private Handler mHandler1; //用于处理登陆之后获取已选课程和全部课程的线程返回的数据
     private Handler mHandler2; //用于处理浏览课程功能获取全部课程的线程返回的数据
 
+    private boolean autoLogin;
 
     private JSONObject myCourse;
 
     private Context mContext;
+
+    public Login(){
+
+    }
 
     public Login(final String username, final String password) {
         this.username = username;
         this.password = password;
         rememberMe = false;
         resultJsonObject = new JSONObject();
-
 
         mHandler=new Handler(){
             @SuppressLint("HandlerLeak")
@@ -49,7 +52,13 @@ public class Login {
                         @Override
                         public void handleMessage(Message msg) {
                             if(msg.what==0x111){
-                                ((MoocMainActivity) mContext).refreshLoginInfo(true);
+                                if (autoLogin) {
+                                    ((MoocMainActivity) mContext).initializeViewPager();
+                                }
+                                else {
+                                    ((MoocMainActivity) mContext).refreshLoginInfo(true);
+                                }
+//                                ((MoocMainActivity) mContext).setLogCondition(true).initializeViewPager();
                                 //获取已选课程
                             }
                             else if(msg.what==0x010){
@@ -107,6 +116,17 @@ public class Login {
         return this;
     }
 
+    public Login setAuto(boolean autoLogin) {
+        this.autoLogin = autoLogin;
+        return this;
+    }
+
+    public Login setUserInfo(String username, String password) {
+        this.username = username;
+        this.password = password;
+        return this;
+    }
+
     public void login(){
         try{
             new Thread(new Runnable() {
@@ -143,4 +163,12 @@ public class Login {
         }
     }
 
+    public void logout(){
+        SharedPreferences loginInfo = mContext.getSharedPreferences("loginInfo", Context.MODE_PRIVATE);
+        SharedPreferences.Editor loginEditor = loginInfo.edit();
+        loginEditor.clear();
+        loginEditor.commit();
+        new MOOCConnection().refreshDataAndReInit();
+        ((MoocMainActivity) mContext).refreshLoginInfo(false);
+    }
 }

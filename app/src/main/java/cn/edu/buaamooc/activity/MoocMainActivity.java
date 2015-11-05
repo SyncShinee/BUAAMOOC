@@ -1,5 +1,6 @@
 package cn.edu.buaamooc.activity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Message;
@@ -8,9 +9,12 @@ import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.animation.Animation;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
@@ -42,7 +46,7 @@ public class MoocMainActivity extends FragmentActivity {
 
     private ArrayList<Fragment> fragmentList;
     private ViewPager viewPager;
-    private FragmentPagerAdapter fpAdapter;
+    private FragmentStatePagerAdapter fpAdapter;
     private int currIndex;
     private ViewFlipper viewFlipper;
     private boolean loadLoginFragment;
@@ -78,7 +82,11 @@ public class MoocMainActivity extends FragmentActivity {
                     //页面跳转到登陆界面
                     if(loadLoginFragment) {
                         String password = loginInfo.getString("password","");
-                        new Login(username,password).setContext(MoocMainActivity.this).login();
+                        new Login(username,password).setContext(MoocMainActivity.this).setAuto(true).login();
+                    }
+                    else {
+                        initializeViewPager();
+                        setMyCourse();
                     }
                 }
                 else {
@@ -106,13 +114,8 @@ public class MoocMainActivity extends FragmentActivity {
 
 
         fm = getSupportFragmentManager();
-//        setHotCourse();
         //initialize fragmentList
-
         fragmentList = new ArrayList<>(3);
-
-
-        initializeViewPager();
 
         //set onclickListener event
         hotTab.setOnClickListener(new View.OnClickListener() {
@@ -134,17 +137,44 @@ public class MoocMainActivity extends FragmentActivity {
             }
         });
 
+//        initializeViewPager();
+//        setMyCourse();
+
+
+        ImageButton userInfo = (ImageButton) findViewById(R.id.button_user_info);
+        userInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MoocMainActivity.this, MyInformationActivity.class);
+                startActivityForResult(intent,0);
+            }
+        });
+
+
     }
 
-    private void initializeViewPager() {
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        switch (resultCode) {
+            case 1:
+                setMyCourse();
+                break;
+            case 2:
+                new Login().setContext(this).logout();
+                setHotCourse();
+                break;
+        }
+    }
+
+    public void initializeViewPager() {
 //        ArrayList<View> listViews = new ArrayList<View>();
 //        LayoutInflater mInflater = getLayoutInflater();
 //        listViews.add(mInflater.inflate(R.layout.fragment_course_list, null));
 //        listViews.add(mInflater.inflate(R.layout.fragment_course_list, null));
-
+        fragmentList.clear();
         addFragments();
 
-        fpAdapter = new FragmentPagerAdapter(fm) {
+        fpAdapter = new FragmentStatePagerAdapter(fm) {
             @Override
             public Fragment getItem(int position) {
                 return fragmentList.get(position);
@@ -159,21 +189,8 @@ public class MoocMainActivity extends FragmentActivity {
 
         viewPager = (ViewPager) findViewById(R.id.viewpager_course_list);
         viewPager.setAdapter(fpAdapter);
-        setHotCourse();
+//        setHotCourse();
         viewPager.addOnPageChangeListener(new MyOnPageChangeListener());
-//        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-//            @Override
-//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-//            }
-//
-//            @Override
-//            public void onPageSelected(int position) {
-//            }
-//
-//            @Override
-//            public void onPageScrollStateChanged(int state) {
-//            }
-//        });
 
     }
 
@@ -274,7 +291,7 @@ public class MoocMainActivity extends FragmentActivity {
     }
 
     private void addFragments() {
-        fragmentList = new ArrayList<>(3);
+//        fragmentList = new ArrayList<>(3);
 
         Bundle bundle;
         CourseListFragment courseListFragment;
@@ -324,13 +341,14 @@ public class MoocMainActivity extends FragmentActivity {
             loginFragment.setArguments(bundle);
             fragmentList.set(2, loginFragment);
         }
+        setHotCourse();
         fpAdapter.notifyDataSetChanged();
     }
 
     /**
      * set the current tab to HotCourse tab.
      */
-    private void setHotCourse() {
+    public void setHotCourse() {
         viewPager.setCurrentItem(0);
         hotUnderline.setVisibility(View.INVISIBLE);
         allUnderline.setVisibility(View.VISIBLE);
@@ -343,7 +361,7 @@ public class MoocMainActivity extends FragmentActivity {
     /**
      * set the current tab to AllCourse tab.
      */
-    private void setALLCourse() {
+    public void setALLCourse() {
         viewPager.setCurrentItem(1);
         hotUnderline.setVisibility(View.VISIBLE);
         allUnderline.setVisibility(View.INVISIBLE);
@@ -356,7 +374,7 @@ public class MoocMainActivity extends FragmentActivity {
     /**
      * set the current tab to MyCourse tab.
      */
-    private void setMyCourse() {
+    public void setMyCourse() {
         viewPager.setCurrentItem(2);
         hotUnderline.setVisibility(View.VISIBLE);
         allUnderline.setVisibility(View.VISIBLE);
@@ -371,8 +389,9 @@ public class MoocMainActivity extends FragmentActivity {
      *
      * @param logged boolean type. is user loadLoginFragment?
      */
-    public void setLogCondition(boolean logged) {
+    public MoocMainActivity setLogCondition(boolean logged) {
         this.loadLoginFragment = logged;
+        return this;
     }
 
 

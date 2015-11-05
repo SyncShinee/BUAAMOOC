@@ -3,17 +3,19 @@
               android:orientation="horizontal"
               android:layout_width="fill_parent"
               android:layout_height="wrap_content"
-              android:descendantFocusability="blocksDescendants">
+              android:descendantFocusability="blocksDescendants"
+              android:paddingTop="5dp"
+              android:paddingBottom="5dp">
 
     <ImageView
-        android:layout_width="112dp"
-        android:layout_height="63dp"
+        android:layout_width="96dp"
+        android:layout_height="54dp"
         android:id="@+id/listview_item_course_pic"
         android:maxHeight="63dp"
         android:minHeight="63dp"
         android:maxWidth="112dp"
         android:minWidth="112dp"
-        android:background="#f28b8b"/>
+        android:background="@color/colorTransparent"/>
 
     <LinearLayout
         android:orientation="vertical"

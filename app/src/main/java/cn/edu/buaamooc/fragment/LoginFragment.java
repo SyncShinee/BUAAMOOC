@@ -58,7 +58,7 @@ public class LoginFragment extends Fragment {
     public void login(){
         String username = ((TextView) layout.findViewById(R.id.usernameText)).getText().toString();
         String password = ((TextView) layout.findViewById(R.id.passwordText)).getText().toString();
-        Login login = new Login(username,password).setContext(activity);
+        Login login = new Login(username,password).setContext(activity).setAuto(false);
         CheckBox rememberMe = (CheckBox) layout.findViewById(R.id.checkbox_login_rememberMe);
         if (rememberMe.isChecked()) {
             login.setRememberMe();
