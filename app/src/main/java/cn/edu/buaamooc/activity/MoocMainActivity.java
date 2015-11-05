@@ -154,12 +154,20 @@ public class MoocMainActivity extends FragmentActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         switch (resultCode) {
             case 1:
+                // see my enrolled course, from myInformationActivity.
                 setMyCourse();
                 break;
             case 2:
+                //log out, from myInformationActivity.
                 new Login().setContext(this).logout();
                 setHotCourse();
                 break;
+            case 3:
+                //refresh my course list, from course detail activity.
+                Fragment fragment = fragmentList.get(2);
+                if (fragment instanceof CourseListFragment) {
+                    ((CourseListFragment) fragment).refreshList();
+                }
         }
     }
 
