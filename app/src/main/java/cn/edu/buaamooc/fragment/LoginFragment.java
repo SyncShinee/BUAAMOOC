@@ -37,9 +37,10 @@ public class LoginFragment extends Fragment {
         layout = inflater.inflate(R.layout.fragment_login, container, false);
         activity = (MoocMainActivity) getActivity();
         int tabIndex = getArguments().getInt("tabIndex");
-
-        TextView login = (TextView) layout.findViewById(R.id.button_fragment_login);
-        login.setOnClickListener(new View.OnClickListener() {
+        String nameArgu = getArguments().getString("username");
+        ((TextView) layout.findViewById(R.id.usernameText)).setText(nameArgu);
+        TextView loginButton = (TextView) layout.findViewById(R.id.button_fragment_login);
+        loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 LoginFragment.this.login();
@@ -65,6 +66,7 @@ public class LoginFragment extends Fragment {
         if (rememberMe.isChecked()) {
             login.setRememberMe();
         }
+        activity.setUsername(username);
         login.login();
     }
 }

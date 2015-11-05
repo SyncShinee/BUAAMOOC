@@ -42,7 +42,7 @@ public class MoocMainActivity extends FragmentActivity {
     private int currIndex;
     private boolean loadLoginFragment;
 
-
+    private String username;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,8 +62,9 @@ public class MoocMainActivity extends FragmentActivity {
 
 
         final SharedPreferences loginInfo = getSharedPreferences("loginInfo", MODE_PRIVATE);
-        final String username = loginInfo.getString("username", "");
-        if(!username.equals("")) {
+        username = loginInfo.getString("username", "");
+        final String password = loginInfo.getString("password","");
+        if(!password.equals("")) {
             loadLoginFragment = true;
         }
         final Handler mHandler = new Handler() {
@@ -73,7 +74,6 @@ public class MoocMainActivity extends FragmentActivity {
                 if (msg.what == 0x111) {
                     //页面跳转到登陆界面
                     if(loadLoginFragment) {
-                        String password = loginInfo.getString("password","");
                         new Login(username,password).setContext(MoocMainActivity.this).setAuto(true).login();
                     }
                     else {
@@ -325,11 +325,18 @@ public class MoocMainActivity extends FragmentActivity {
         }
         else {
             LoginFragment loginFragment = new LoginFragment();
+            bundle.putString("username", username);
             loginFragment.setArguments(bundle);
             fragmentList.add(loginFragment);
         }
     }
 
+    public void refreshLoginInfo(boolean logged, boolean autoLogin) {
+        refreshLoginInfo(logged);
+        if (!autoLogin) {
+            setHotCourse();
+        }
+    }
     /**
      * Change between login fragment and my course fragment.
      * @param logged record the login information.
@@ -345,6 +352,7 @@ public class MoocMainActivity extends FragmentActivity {
         }
         else {
             LoginFragment loginFragment = new LoginFragment();
+            bundle.putString("username", username);
             loginFragment.setArguments(bundle);
             fragmentList.set(2, loginFragment);
         }
@@ -395,5 +403,12 @@ public class MoocMainActivity extends FragmentActivity {
         myTab.setBackgroundColor(getResources().getColor(R.color.colorTransparent));
     }
 
+    /**
+     * Record the last username.
+     * @param username the last username after log in.
+     */
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
 }

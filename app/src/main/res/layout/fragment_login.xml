@@ -95,7 +95,8 @@
                 android:hint="密码"
                 android:singleLine="true"
                 android:layout_marginLeft="10dp"
-                android:inputType="textPassword"/>
+                android:inputType="textPassword"
+                android:text="1232123"/>
         </RelativeLayout>
     </FrameLayout>
 

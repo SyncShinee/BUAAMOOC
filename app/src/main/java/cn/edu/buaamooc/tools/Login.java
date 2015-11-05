@@ -55,7 +55,7 @@ public class Login {
                                     ((MoocMainActivity) mContext).initializeViewPager();
                                 }
                                 else {
-                                    ((MoocMainActivity) mContext).refreshLoginInfo(true);
+                                    ((MoocMainActivity) mContext).refreshLoginInfo(true, autoLogin);
                                 }
 //                                ((MoocMainActivity) mContext).setLogCondition(true).initializeViewPager();
                                 //获取已选课程
@@ -156,7 +156,7 @@ public class Login {
                     MOOCConnection mooc = new MOOCConnection() ;
                     resultJsonObject = mooc.MOOCLogin(username,password);
                     try {
-                        if(resultJsonObject.getBoolean("success")){
+                        if(resultJsonObject!= null && !resultJsonObject.isNull("success") && resultJsonObject.getBoolean("success")){
                             //登陆成功
                             Message m=new Message();
                             m.what=0x111;
@@ -193,7 +193,12 @@ public class Login {
         SharedPreferences.Editor loginEditor = loginInfo.edit();
         loginEditor.clear();
         loginEditor.apply();
-        new MOOCConnection().refreshDataAndReInit();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                new MOOCConnection().refreshDataAndReInit();
+            }
+        });
         ((MoocMainActivity) mContext).refreshLoginInfo(false);
     }
 }

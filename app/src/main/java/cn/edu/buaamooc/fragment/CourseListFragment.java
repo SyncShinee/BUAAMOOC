@@ -92,6 +92,8 @@ public class CourseListFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //todo : click to course detail.
+                //todo : 课程编号：courseId
+                String courseId = String.valueOf(sourceList.get(position).get("courseId"));
             }
         });
         list.setAdapter(simpleAdapter);
@@ -158,12 +160,29 @@ public class CourseListFragment extends Fragment {
                         map.put("title",json.isNull(name)?"无":json.getString(name));
                         map.put("start",json.isNull("course_start")?"无":json.getString("course_start").substring(0,10));
                         map.put("image",R.drawable.buaa_logo);
-                        map.put("image_url",json.isNull("course_image_url")?"":json.getString("course_image_url"));
-                        sourceList.add(map);
+                        map.put("image_url", json.isNull("course_image_url") ? "" : json.getString("course_image_url"));
+                        String display = json.isNull("display_number")?"":json.getString("display_number");
+                        map.put("courseId", display);
+                        if (tabIndex == 0) {
+                            if (display.equals("M_G06B2830")
+                                    || display.equals("M_E06B2150")
+                                    || display.equals("M_E06B3150")){
+                                sourceList.add(0,map);
+                            }
+                            else {
+                                sourceList.add(map);
+                            }
+                        }
+                        else {
+                            sourceList.add(map);
+                        }
                     }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
+                }
+                while (sourceList.size()>10) {
+                    sourceList.remove(10);
                 }
                 simpleAdapter.notifyDataSetChanged();
                 refreshImage();
@@ -211,6 +230,7 @@ public class CourseListFragment extends Fragment {
                     Bitmap bitmap = msg.getData().getParcelable("bitmap");
                     newmap.put("title", oldmap.get("title"));
                     newmap.put("start", oldmap.get("start"));
+                    newmap.put("courseId", oldmap.get("courseId"));
                     newmap.put("image", bitmap);
                     sourceList.set(msg.what,newmap);
                     //将获取的图片放到map中，以改变listItems中对应位置的图片
