@@ -23,17 +23,16 @@ public class Login {
     private JSONObject resultJsonObject;
     private Handler mHandler; //用于处理实现登陆函数的线程返回的数据
     private Handler mHandler1; //用于处理登陆之后获取已选课程和全部课程的线程返回的数据
-    private Handler mHandler2; //用于处理浏览课程功能获取全部课程的线程返回的数据
 
     private boolean autoLogin;
 
-    private JSONObject myCourse;
 
     private Context mContext;
 
     public Login(){
 
     }
+
 
     public Login(final String username, final String password) {
         this.username = username;
@@ -106,27 +105,50 @@ public class Login {
         };
     }
 
+    /**
+     * Set argument needed.
+     * @param mContext Context : MoocMainActivity.
+     * @return this object.
+     */
     public Login setContext(Context mContext){
         this.mContext = mContext;
         return this;
     }
 
+    /**
+     * Store username & password & auto log in information.
+     * @return this object.
+     */
     public Login setRememberMe(){
         rememberMe = true;
         return this;
     }
 
+    /**
+     * set autoLogin info.
+     * @param autoLogin if true, that means it's auto log in. Default false.
+     * @return this object.
+     */
     public Login setAuto(boolean autoLogin) {
         this.autoLogin = autoLogin;
         return this;
     }
 
+    /**
+     * Set username and password.
+     * @param username username of account.
+     * @param password password of account.
+     * @return this object.
+     */
     public Login setUserInfo(String username, String password) {
         this.username = username;
         this.password = password;
         return this;
     }
 
+    /**
+     * Log in...
+     */
     public void login(){
         try{
             new Thread(new Runnable() {
@@ -134,7 +156,7 @@ public class Login {
                     MOOCConnection mooc = new MOOCConnection() ;
                     resultJsonObject = mooc.MOOCLogin(username,password);
                     try {
-                        if(resultJsonObject.getBoolean("success")==true){
+                        if(resultJsonObject.getBoolean("success")){
                             //登陆成功
                             Message m=new Message();
                             m.what=0x111;
@@ -148,7 +170,7 @@ public class Login {
                             mHandler.sendMessage(m);	//发送信息
                         }
                     } catch (JSONException e) {
-                        // TODO 自动生成的 catch 块
+                        // 自动生成的 catch 块
                         //登陆出现异常，网络有问题
                         Message m=new Message();
                         m.what=0x010;
@@ -163,11 +185,14 @@ public class Login {
         }
     }
 
+    /**
+     * Log out...
+     */
     public void logout(){
         SharedPreferences loginInfo = mContext.getSharedPreferences("loginInfo", Context.MODE_PRIVATE);
         SharedPreferences.Editor loginEditor = loginInfo.edit();
         loginEditor.clear();
-        loginEditor.commit();
+        loginEditor.apply();
         new MOOCConnection().refreshDataAndReInit();
         ((MoocMainActivity) mContext).refreshLoginInfo(false);
     }

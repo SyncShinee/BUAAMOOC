@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -36,15 +37,12 @@ import cn.edu.buaamooc.tools.MOOCConnection;
  */
 public class CourseListFragment extends Fragment {
 
-    /**
-     */
-
     private MoocMainActivity activity;
 
     private int tabIndex;
 
     private JSONArray courseArray;
-    private JSONObject myCouserObject;
+    private JSONObject myCourseObject;
     private ArrayList<HashMap<String, Object>> sourceList;
     private SimpleAdapter simpleAdapter;
 
@@ -75,21 +73,32 @@ public class CourseListFragment extends Fragment {
                 R.layout.listview_item_courses_list,
                 new String[]{"image", "title", "start"},
                 new int[]{R.id.listview_item_course_pic, R.id.listview_item_course_title, R.id.listview_item_course_date});
-        simpleAdapter.setViewBinder(new SimpleAdapter.ViewBinder(){
+        simpleAdapter.setViewBinder(new SimpleAdapter.ViewBinder() {
             public boolean setViewValue(View view, Object data,
                                         String textRepresentation) {
                 //判断是否为我们要处理的对象
-                if(view instanceof ImageView && data instanceof Bitmap){
+                if (view instanceof ImageView && data instanceof Bitmap) {
                     ImageView iv = (ImageView) view;
                     iv.setImageBitmap((Bitmap) data);
                     return true;
-                }else
+                }
+                else {
                     return false;
+                }
             }
 
-
+        });
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //todo : click to course detail.
+            }
         });
         list.setAdapter(simpleAdapter);
+
+
+//        CourseListAdapter courseListAdapter = new CourseListAdapter(activity, sourceList);
+//        list.setAdapter(courseListAdapter);
 
         refreshList();
 
@@ -102,29 +111,32 @@ public class CourseListFragment extends Fragment {
         super.onDestroyView();
     }
 
+    /**
+     * Get courses form server and update listView.
+     */
     public void refreshList() {
         final String name = tabIndex==2?"display_name":"course_title";
 
 
         final Handler handler = new Handler(){
-            @SuppressLint("HandlerLeak")
             @Override
+            @SuppressLint("HandlerLeak")
             public void handleMessage(Message msg){
                 Log.e("Handle", "handle Message.");
-                if (myCouserObject == null && courseArray==null){
+                if (myCourseObject == null && courseArray==null){
                     Toast.makeText(activity, "获取课程失败，请重试。",Toast.LENGTH_SHORT).show();
-                    Log.e("myCouserObject", "null");
+                    Log.e("myCourseObject", "null");
                     Log.e("courseArray", "null");
                     return;
                 }
                 if (tabIndex == 2){
                     try {
                         boolean status = false;
-                        if (myCouserObject != null) {
-                            status = !myCouserObject.isNull("status") && myCouserObject.getBoolean("status");
+                        if (myCourseObject != null) {
+                            status = !myCourseObject.isNull("status") && myCourseObject.getBoolean("status");
                         }
                         if (status){
-                            courseArray = myCouserObject.getJSONArray("enrollment");
+                            courseArray = myCourseObject.getJSONArray("enrollment");
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -170,7 +182,7 @@ public class CourseListFragment extends Fragment {
                         courseArray = mooc.MOOCCourses();
                         break;
                     case 2:
-                        myCouserObject = mooc.MOOCGetCourseEnrollment();
+                        myCourseObject = mooc.MOOCGetCourseEnrollment();
                         break;
                 }
                 try {
@@ -184,6 +196,9 @@ public class CourseListFragment extends Fragment {
 
     }
 
+    /**
+     * Load course images.
+     */
     public void refreshImage(){
 
         final Handler mHandler = new Handler(){
@@ -250,27 +265,28 @@ public class CourseListFragment extends Fragment {
         }).start();
     }
 
-    @Override
-    public void onStart(){
-        Log.e("CourseListFragment", "onStart" + tabIndex);
-        super.onStart();
-    }
+//    @Override
+//    public void onStart(){
+//        Log.e("CourseListFragment", "onStart" + tabIndex);
+//        super.onStart();
+//    }
+//
+//    @Override
+//    public void onResume(){
+//        Log.e("CourseListFragment", "onResume" + tabIndex);
+//        super.onResume();
+//    }
+//
+//    @Override
+//    public void onPause(){
+//        Log.e("CourseListFragment", "onPause" + tabIndex);
+//        super.onPause();
+//    }
+//
+//    @Override
+//    public void onStop(){
+//        Log.e("CourseListFragment", "onStop" + tabIndex);
+//        super.onStop();
+//    }
 
-    @Override
-    public void onResume(){
-        Log.e("CourseListFragment", "onResume" + tabIndex);
-        super.onResume();
-    }
-
-    @Override
-    public void onPause(){
-        Log.e("CourseListFragment", "onPause" + tabIndex);
-        super.onPause();
-    }
-
-    @Override
-    public void onStop(){
-        Log.e("CourseListFragment", "onStop" + tabIndex);
-        super.onStop();
-    }
 }

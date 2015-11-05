@@ -22,7 +22,6 @@ public class LoginFragment extends Fragment {
 
     private View layout;
     private MoocMainActivity activity;
-    private int tabIndex;
 
 
     public LoginFragment() {
@@ -37,7 +36,7 @@ public class LoginFragment extends Fragment {
         Log.e("LoginFragment", "onCreateView.");
         layout = inflater.inflate(R.layout.fragment_login, container, false);
         activity = (MoocMainActivity) getActivity();
-        tabIndex = getArguments().getInt("tabIndex");
+        int tabIndex = getArguments().getInt("tabIndex");
 
         TextView login = (TextView) layout.findViewById(R.id.button_fragment_login);
         login.setOnClickListener(new View.OnClickListener() {
@@ -55,6 +54,9 @@ public class LoginFragment extends Fragment {
         super.onDestroyView();
     }
 
+    /**
+     * Get information from controls and call Login.login()
+     */
     public void login(){
         String username = ((TextView) layout.findViewById(R.id.usernameText)).getText().toString();
         String password = ((TextView) layout.findViewById(R.id.passwordText)).getText().toString();

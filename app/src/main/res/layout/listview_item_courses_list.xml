@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="horizontal"
               android:layout_width="fill_parent"
               android:layout_height="wrap_content"
               android:descendantFocusability="blocksDescendants"
               android:paddingTop="5dp"
-              android:paddingBottom="5dp">
+              android:paddingBottom="5dp"
+                android:gravity="center_vertical">
 
     <ImageView
         android:layout_width="96dp"
@@ -20,8 +21,12 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
-        android:layout_height="match_parent"
-        android:paddingLeft="10dp">
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:id="@+id/listview_body"
+        android:layout_toRightOf="@+id/listview_item_course_pic"
+        android:layout_centerVertical="true">
+        <!--android:layout_toLeftOf="@+id/listview_item_right_button"-->
 
         <TextView
             android:layout_width="wrap_content"
@@ -48,15 +53,25 @@
                 android:layout_centerVertical="true"
                 android:singleLine="true"/>
 
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageButton"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                />
         </RelativeLayout>
 
     </LinearLayout>
-</LinearLayout>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listview_item_course_enroll"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/add2"
+        android:maxHeight="30dp"
+        android:minHeight="30dp"
+        android:maxWidth="30dp"
+        android:minWidth="30dp"
+        android:background="@null"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:focusable="true"
+        android:visibility="gone"/>
+</RelativeLayout>

@@ -8,16 +8,13 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.view.animation.Animation;
 import android.widget.ImageButton;
-import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ViewFlipper;
 
 import java.util.ArrayList;
 
@@ -29,26 +26,20 @@ import cn.edu.buaamooc.tools.MOOCConnection;
 
 public class MoocMainActivity extends FragmentActivity {
 
-    /**
-     * @param fm FragmentManager 实例;
-     * @param hotTab 热门课程tab标签实例
-     * @param allTab 所有课程tab标签实例
-     * @param myTab 我的课程tab标签实例
-     */
-
     private FragmentManager fm;
-    private TextView hotTab;
+//    private TextView hotTab;
+    private RelativeLayout hotTabLayout;
     private TextView allTab;
     private TextView myTab;
     private View hotUnderline;
     private View allUnderline;
     private View myUnderline;
 
+    //fragment list in viewPager
     private ArrayList<Fragment> fragmentList;
     private ViewPager viewPager;
     private FragmentStatePagerAdapter fpAdapter;
     private int currIndex;
-    private ViewFlipper viewFlipper;
     private boolean loadLoginFragment;
 
 
@@ -61,7 +52,8 @@ public class MoocMainActivity extends FragmentActivity {
         loadLoginFragment = false;
 
         //initialize tab controls
-        hotTab = (TextView) findViewById(R.id.tab_title_hot);
+//        hotTab = (TextView) findViewById(R.id.tab_title_hot);
+        hotTabLayout = (RelativeLayout) findViewById(R.id.tab_title_hot_layout);
         allTab = (TextView) findViewById(R.id.tab_title_all);
         myTab = (TextView) findViewById(R.id.tab_title_my);
         hotUnderline = findViewById(R.id.tab_underline_hot);
@@ -86,7 +78,6 @@ public class MoocMainActivity extends FragmentActivity {
                     }
                     else {
                         initializeViewPager();
-                        setMyCourse();
                     }
                 }
                 else {
@@ -118,7 +109,13 @@ public class MoocMainActivity extends FragmentActivity {
         fragmentList = new ArrayList<>(3);
 
         //set onclickListener event
-        hotTab.setOnClickListener(new View.OnClickListener() {
+//        hotTab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                MoocMainActivity.this.setHotCourse();
+//            }
+//        });
+        hotTabLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 MoocMainActivity.this.setHotCourse();
@@ -166,6 +163,9 @@ public class MoocMainActivity extends FragmentActivity {
         }
     }
 
+    /**
+     * Initialize ViewPager.
+     */
     public void initializeViewPager() {
 //        ArrayList<View> listViews = new ArrayList<View>();
 //        LayoutInflater mInflater = getLayoutInflater();
@@ -189,8 +189,9 @@ public class MoocMainActivity extends FragmentActivity {
 
         viewPager = (ViewPager) findViewById(R.id.viewpager_course_list);
         viewPager.setAdapter(fpAdapter);
-//        setHotCourse();
         viewPager.addOnPageChangeListener(new MyOnPageChangeListener());
+//        setHotCourse();
+        setMyCourse();
 
     }
 
@@ -212,16 +213,12 @@ public class MoocMainActivity extends FragmentActivity {
 //        position_two = position_one * 2;
 //    }
 
-    private void setChecked(int tabIndex) {
-
-    }
-
     public class MyOnPageChangeListener implements ViewPager.OnPageChangeListener {
 
         @Override
         public void onPageSelected(int index) {
             //动画
-            Animation animation = null;
+//            Animation animation = null;
 //            switch (index) {
 //                case 0:
 //                    if (currIndex == 1) {
@@ -290,6 +287,9 @@ public class MoocMainActivity extends FragmentActivity {
         }
     }
 
+    /**
+     * Add fragments to ViewPager.
+     */
     private void addFragments() {
 //        fragmentList = new ArrayList<>(3);
 
@@ -312,6 +312,9 @@ public class MoocMainActivity extends FragmentActivity {
 
     }
 
+    /**
+     * Initializing the third fragment. Login fragment or my course fragment.
+     */
     private void addMyCourseFragment() {
         Bundle bundle = new Bundle();
         bundle.putInt("tabIndex", 2);
@@ -327,6 +330,10 @@ public class MoocMainActivity extends FragmentActivity {
         }
     }
 
+    /**
+     * Change between login fragment and my course fragment.
+     * @param logged record the login information.
+     */
     public void refreshLoginInfo(boolean logged){
         loadLoginFragment = logged;
         Bundle bundle = new Bundle();
@@ -341,8 +348,9 @@ public class MoocMainActivity extends FragmentActivity {
             loginFragment.setArguments(bundle);
             fragmentList.set(2, loginFragment);
         }
-        setHotCourse();
+//        setHotCourse();
         fpAdapter.notifyDataSetChanged();
+
     }
 
     /**
@@ -353,7 +361,8 @@ public class MoocMainActivity extends FragmentActivity {
         hotUnderline.setVisibility(View.INVISIBLE);
         allUnderline.setVisibility(View.VISIBLE);
         myUnderline.setVisibility(View.VISIBLE);
-        hotTab.setBackgroundColor(getResources().getColor(R.color.colorTransparent));
+//        hotTab.setBackgroundColor(getResources().getColor(R.color.colorTransparent));
+        hotTabLayout.setBackgroundColor(getResources().getColor(R.color.colorTransparent));
         allTab.setBackgroundColor(getResources().getColor(R.color.colorBgLightBlue));
         myTab.setBackgroundColor(getResources().getColor(R.color.colorBgLightBlue));
     }
@@ -366,7 +375,8 @@ public class MoocMainActivity extends FragmentActivity {
         hotUnderline.setVisibility(View.VISIBLE);
         allUnderline.setVisibility(View.INVISIBLE);
         myUnderline.setVisibility(View.VISIBLE);
-        hotTab.setBackgroundColor(getResources().getColor(R.color.colorBgLightBlue));
+//        hotTab.setBackgroundColor(getResources().getColor(R.color.colorBgLightBlue));
+        hotTabLayout.setBackgroundColor(getResources().getColor(R.color.colorBgLightBlue));
         allTab.setBackgroundColor(getResources().getColor(R.color.colorTransparent));
         myTab.setBackgroundColor(getResources().getColor(R.color.colorBgLightBlue));
     }
@@ -379,19 +389,10 @@ public class MoocMainActivity extends FragmentActivity {
         hotUnderline.setVisibility(View.VISIBLE);
         allUnderline.setVisibility(View.VISIBLE);
         myUnderline.setVisibility(View.INVISIBLE);
-        hotTab.setBackgroundColor(getResources().getColor(R.color.colorBgLightBlue));
+//        hotTab.setBackgroundColor(getResources().getColor(R.color.colorBgLightBlue));
+        hotTabLayout.setBackgroundColor(getResources().getColor(R.color.colorBgLightBlue));
         allTab.setBackgroundColor(getResources().getColor(R.color.colorBgLightBlue));
         myTab.setBackgroundColor(getResources().getColor(R.color.colorTransparent));
-    }
-
-    /**
-     * set variable loadLoginFragment
-     *
-     * @param logged boolean type. is user loadLoginFragment?
-     */
-    public MoocMainActivity setLogCondition(boolean logged) {
-        this.loadLoginFragment = logged;
-        return this;
     }
 
 
