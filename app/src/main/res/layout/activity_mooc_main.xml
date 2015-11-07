@@ -51,7 +51,7 @@
             android:maxWidth="50dp"
             android:maxHeight="50dp"
             android:layout_alignParentRight="true"
-            android:src="@drawable/userinfo"
+            android:src="@drawable/f1_40px"
             android:background="@null"/>
     </RelativeLayout>
 
