@@ -430,47 +430,5 @@ public class MOOCConnection {
 
         return bitmap;
     }
-
-    private class ImageDownloader implements Runnable {
-
-        private BufferedInputStream inputStream;
-        private String path;
-
-        public ImageDownloader(BufferedInputStream inputStream) {
-            this.inputStream = inputStream;
-        }
-
-        public ImageDownloader setPath(String path) {
-            this.path = path;
-            return this;
-        }
-
-        public void run(){
-            try{
-                String fpath = CONST.COURSEPIC + path;
-                int index = fpath.lastIndexOf(File.separatorChar);
-                File dir = new File(fpath.substring(0, index));
-                if(!dir.exists()){
-                    if (!dir.mkdirs())
-                        return;
-                }
-                File file = new File(fpath);
-                OutputStream output = new FileOutputStream(file);
-                int b;
-                while ((b = inputStream.read()) != -1) {
-                    output.write(b);
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            finally {
-                try {
-                    inputStream.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
     
 }
