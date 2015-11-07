@@ -13,4 +13,18 @@
     <color name="colorSkybule">#87CEFF</color>
     <color name="colorLightblue">#B0E2FF</color>
     <color name="colorBgLightBlue">#D1E3F3</color>
+
+    <color name="course_transparent">#00000000</color>
+    <color name="course_black">#000000</color>
+    <color name="course_gray">#929292</color>
+    <color name="course_blue">#3F51B5</color>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="black">#000000</color>
+    <color name="transparent_black_50">#80000000</color>
+    <color name="cyan_loader">#99299ED7</color>
+    <color name="transparent_white_50">#80FFFFFF</color>
+
+    <color name="cyan_circle">#1F9FD9</color>
 </resources>

@@ -2,6 +2,7 @@ package cn.edu.buaamooc.fragment;
 
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -28,6 +29,7 @@ import java.util.HashMap;
 
 import cn.edu.buaamooc.CONST;
 import cn.edu.buaamooc.R;
+import cn.edu.buaamooc.activity.CourseDetailActivity;
 import cn.edu.buaamooc.activity.MoocMainActivity;
 import cn.edu.buaamooc.tools.MOOCConnection;
 
@@ -91,9 +93,12 @@ public class CourseListFragment extends Fragment {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //todo : click to course detail.
-                //todo : 课程编号：courseId
-                String courseId = String.valueOf(sourceList.get(position).get("courseId"));
+                String courseId = String.valueOf(sourceList.get(position).get("course_id"));
+                String name = String.valueOf(sourceList.get(position).get("title"));
+                Intent intent =new Intent(getActivity(), CourseDetailActivity.class);
+                intent.putExtra("course_id",courseId);
+                intent.putExtra("course_name",name);
+                startActivity(intent);
             }
         });
         list.setAdapter(simpleAdapter);
@@ -158,8 +163,9 @@ public class CourseListFragment extends Fragment {
                         json = courseArray.getJSONObject(i);
                         map = new HashMap<String, Object>();
                         map.put("title",json.isNull(name)?"无":json.getString(name));
-                        map.put("start",json.isNull("course_start")?"无":json.getString("course_start").substring(0,10));
+                        map.put("start",json.isNull("course_start")?"无":json.getString("course_start").substring(0, 10));
                         map.put("image",R.drawable.buaa_logo);
+                        map.put("course_id",json.isNull("course_id")?"":json.getString("course_id"));
                         map.put("image_url", json.isNull("course_image_url") ? "" : json.getString("course_image_url"));
                         String display = json.isNull("display_number")?"":json.getString("display_number");
                         map.put("courseId", display);
@@ -193,7 +199,6 @@ public class CourseListFragment extends Fragment {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                Log.e("Thread", "start.");
                 MOOCConnection mooc = new MOOCConnection();
                 switch (tabIndex) {
                     case 0:
@@ -230,6 +235,7 @@ public class CourseListFragment extends Fragment {
                     Bitmap bitmap = msg.getData().getParcelable("bitmap");
                     newmap.put("title", oldmap.get("title"));
                     newmap.put("start", oldmap.get("start"));
+                    newmap.put("course_id",oldmap.get("course_id"));
                     newmap.put("courseId", oldmap.get("courseId"));
                     newmap.put("image", bitmap);
                     sourceList.set(msg.what,newmap);

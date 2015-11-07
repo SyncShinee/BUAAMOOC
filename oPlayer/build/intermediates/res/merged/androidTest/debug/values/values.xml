@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From: file:/D:/SE/BUAAMOOC/oPlayer/build/intermediates/bundles/debug/res/values/values.xml -->
+    <eat-comment/>
+    <color name="background">#ffc3ddea</color>
+    <color name="background_dark">#f4f4f4</color>
+    <color name="black">#ff000000</color>
+    <color name="blue">#ff0000ff</color>
+    <color name="durationtext">#ff7d7d7d</color>
+    <color name="gray">#808080ff</color>
+    <color name="green">#ff00ff00</color>
+    <color name="higtlight">#ff0078f0</color>
+    <color name="mediacontroller_bg">#99000000</color>
+    <color name="mediacontroller_bg_pressed">#ff53c1bd</color>
+    <color name="red">#ffff0000</color>
+    <color name="title">#ff274462</color>
+    <color name="transparent">#00000000</color>
+    <color name="white">#ffffffff</color>
+    <color name="yellow">#ffffcc00</color>
+    <dimen name="BasicTextSize">15.0dip</dimen>
+    <dimen name="ChattingContentMinHeight">49.0dip</dimen>
+    <dimen name="ChuZhuangWH">40.0dip</dimen>
+    <dimen name="LargeTextSize">16.0dip</dimen>
+    <dimen name="LargestTextSize">30.0dip</dimen>
+    <dimen name="SmallTextSize">14.0dip</dimen>
+    <dimen name="SmallerTextSize">13.0dip</dimen>
+    <dimen name="TitleTextSize">18.0dip</dimen>
+    <dimen name="action_bar_default_height">48dp</dimen>
+    <dimen name="mediacontroller_button_space">32dp</dimen>
+    <dimen name="mediacontroller_buttons_bottom_margin">0dp</dimen>
+    <dimen name="mediacontroller_buttons_top_margin">2dp</dimen>
+    <string name="VideoView_error_button">OK</string>
+    <string name="VideoView_error_text_invalid_progressive_playback">Sorry, this video is not valid for streaming to
+		this device.</string>
+    <string name="VideoView_error_text_unknown">对不起,这个视频不能播放。</string>
+    <string name="VideoView_error_title">Cannot play video</string>
+    <string name="app_name">开播视频</string>
+    <string name="closing_file">正在退出…</string>
+    <string name="content_desc_lock">锁定</string>
+    <string name="file_delete">删除</string>
+    <string name="file_delete_confirm">确定删除 (%s) ？</string>
+    <string name="file_explorer_sdcard_not_available">SD卡无法读取</string>
+    <string name="file_oper">文件操作</string>
+    <string name="file_rename">重命名</string>
+    <string name="file_rename_exists">文件已存在</string>
+    <string name="file_rename_failed">重命名失败</string>
+    <string name="imageview_content_description"/>
+    <string name="init_decoders">初始化播放器...</string>
+    <string name="loadinfo">载入中，请稍后...</string>
+    <string name="mediacontroller_play_pause">Play/Pause</string>
+    <!-- From: file:/D:/SE/BUAAMOOC/oPlayer/build/intermediates/exploded-aar/BUAAMOOC/VitamioBundle/unspecified/res/values/values.xml -->
+    <eat-comment/>
+    <string name="permission_group_tools_description">Access Vitamio package and resources.</string>
+    <string name="permission_group_tools_label">Vitamio tools</string>
+    <string name="permission_receive_messages_description">Receive all broadcasts from Vitamio service.</string>
+    <string name="permission_receive_messages_label">Receive Vitamio messages</string>
+    <string name="permission_write_providers_description">Delete, update or create new items in Vitamio providers.
+    </string>
+    <string name="permission_write_providers_label">Write Vitamio providers</string>
+    <!-- From: file:/D:/SE/BUAAMOOC/oPlayer/build/intermediates/bundles/debug/res/values/values.xml -->
+    <eat-comment/>
+    <string name="title_file">本地视频</string>
+    <string name="title_online">在线视频</string>
+    <string name="version_name">1.0</string>
+    <string name="video_cannot_play">对不起,这个视频不能播放。</string>
+    <string name="video_crop">裁剪</string>
+    <string name="video_fit_screen">全屏</string>
+    <string name="video_layout_buffering_progress">缓冲: %.2f%%</string>
+    <string name="video_layout_loading">正在缓冲...</string>
+    <string name="video_original">100%</string>
+    <string name="video_screen_locked">屏幕已锁定</string>
+    <string name="video_screen_unlocked">屏幕锁定已解除</string>
+    <string name="video_screenshot_failed">截图失败</string>
+    <string name="video_screenshot_save_in">截图存放在 %s.</string>
+    <string name="video_stretch">拉伸</string>
+    <!-- From: file:/D:/SE/BUAAMOOC/oPlayer/build/intermediates/exploded-aar/BUAAMOOC/VitamioBundle/unspecified/res/values/values.xml -->
+    <eat-comment/>
+    <string name="vitamio_init_decoders">Initializing decoders…</string>
+    <string name="vitamio_library_app_name">VitamioLibrary</string>
+    <!-- From: file:/D:/SE/BUAAMOOC/oPlayer/build/intermediates/bundles/debug/res/values/values.xml -->
+    <eat-comment/>
+    <string name="vitamio_theme_app_name">VPlayer codec</string>
+    <style name="AppBaseTheme" parent="android:Theme.Light">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+
+
+        -->
+    </style>
+    <style name="AppTheme" parent="AppBaseTheme">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@color/background_dark</item>
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    </style>
+    <style name="InfoPanel_Container">
+        <item name="android:background">@color/mediacontroller_bg</item>
+    </style>
+    <style name="MediaController_Button">
+        <item name="android:background">@drawable/mediacontroller_btn_bg</item>
+    </style>
+    <style name="MediaController_Container">
+        <item name="android:background">@color/mediacontroller_bg</item>
+        <item name="android:paddingTop">4dip</item>
+        <item name="android:paddingBottom">8dip</item>
+        <item name="android:paddingLeft">8dip</item>
+        <item name="android:paddingRight">8dip</item>
+    </style>
+    <style name="MediaController_SeekBar">
+        <item name="android:minHeight">16dip</item>
+        <item name="android:maxHeight">16dip</item>
+        <item name="android:progressDrawable">@drawable/mediacontroller_seekbar</item>
+        <item name="android:thumb">@drawable/mediacontroller_seekbar_thumb</item>
+    </style>
+    <style name="MediaController_Text">
+        <item name="android:textColor">#ffffffff</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="Widget.ZI.SeekBar" parent="android:Widget.SeekBar">
+        <item name="android:progressDrawable">@drawable/scrubber_progress_horizontal_holo_dark</item>
+        <item name="android:indeterminateDrawable">@drawable/scrubber_progress_horizontal_holo_dark</item>
+        <item name="android:minHeight">13dip</item>
+        <item name="android:maxHeight">13dip</item>
+        <item name="android:thumb">@drawable/scrubber_control_selector_holo</item>
+        <item name="android:thumbOffset">16dip</item>
+        <item name="android:paddingLeft">16dip</item>
+        <item name="android:paddingRight">16dip</item>
+    </style>
+    <style name="main_tab_bottom">
+        <item name="android:textSize">12.0sp</item>
+        <item name="android:textColor">#ffffffff</item>
+        <item name="android:ellipsize">marquee</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:paddingTop">2.0dip</item>
+        <!-- <item name="android:paddingTop">5.0dip</item> -->
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:button">@null</item>
+        <item name="android:singleLine">true</item>
+        <!-- <item name="android:drawablePadding">3.0dip</item> -->
+        <item name="android:layout_weight">1.0</item>
+        <item name="android:background">@drawable/home_btn_bg</item>
+    </style>
+</resources>

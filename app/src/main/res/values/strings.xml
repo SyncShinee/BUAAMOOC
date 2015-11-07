@@ -131,4 +131,13 @@
 
 生效日期：2014年4月1日
 </string>
+
+    <string name="course_introduce">课程介绍</string>
+    <string name="course_directory">课程目录</string>
+    <string name="course_discussion">讨论区</string>
+    <string name="course_enroll">添加课程</string>
+    <string name="course_quit">退出课程</string>
+
+    <drawable name="clr_background">#3F51B5</drawable>
+    <drawable name="clr_pressed">#01bad4</drawable>
 </resources>

@@ -65,6 +65,7 @@
             android:name=".fragment.BuaaMooc_Service"
             android:label="@string/title_activity_buaa_mooc__service" >
         </activity>
+        <activity android:name=".activity.CourseDetailActivity"/>
     </application>
 
 </manifest>
