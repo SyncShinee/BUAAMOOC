@@ -187,8 +187,10 @@ public class CourseListFragment extends Fragment {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                while (sourceList.size()>10) {
-                    sourceList.remove(10);
+                if (tabIndex == 0) {
+                    while (sourceList.size()>10) {
+                        sourceList.remove(10);
+                    }
                 }
                 simpleAdapter.notifyDataSetChanged();
                 refreshImage();

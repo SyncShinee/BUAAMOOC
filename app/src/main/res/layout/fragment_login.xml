@@ -48,7 +48,7 @@
                 android:hint="用户名"
                 android:singleLine="true"
                 android:layout_marginLeft="10dp"
-                android:text="dthomas@qq.com"/>
+                />
 
         </RelativeLayout>
     </FrameLayout>
@@ -96,7 +96,7 @@
                 android:singleLine="true"
                 android:layout_marginLeft="10dp"
                 android:inputType="textPassword"
-                android:text="1232123"/>
+                />
         </RelativeLayout>
     </FrameLayout>
 
