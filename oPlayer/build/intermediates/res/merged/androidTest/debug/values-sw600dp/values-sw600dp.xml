@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/D:/SE/BUAAMOOC/oPlayer/build/intermediates/bundles/debug/res/values-sw600dp/values-sw600dp.xml -->
+    <!-- From: file:/C:/Users/skyxuan/AndroidStudioProjects/BUAAMOOC/oPlayer/build/intermediates/bundles/debug/res/values-sw600dp/values-sw600dp.xml -->
     <eat-comment/>
     <dimen name="action_bar_default_height">56dp</dimen>
     <dimen name="mediacontroller_buttons_bottom_margin">2dp</dimen>

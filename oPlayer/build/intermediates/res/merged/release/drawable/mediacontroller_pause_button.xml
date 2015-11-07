@@ -6,4 +6,4 @@
     <item android:drawable="@drawable/mediacontroller_pause02" android:state_focused="false" android:state_pressed="true"/>
     <item android:drawable="@drawable/mediacontroller_pause01"/>
 
-</selector><!-- From: file:/D:/SE/BUAAMOOC/oPlayer/src/main/res/drawable/mediacontroller_pause_button.xml -->
+</selector><!-- From: file:/C:/Users/skyxuan/AndroidStudioProjects/BUAAMOOC/oPlayer/src/main/res/drawable/mediacontroller_pause_button.xml -->

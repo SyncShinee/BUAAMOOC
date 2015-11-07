@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/D:/SE/BUAAMOOC/oPlayer/src/main/res/values-xlarge/dimens.xml -->
+    <!-- From: file:/C:/Users/skyxuan/AndroidStudioProjects/BUAAMOOC/oPlayer/src/main/res/values-xlarge/dimens.xml -->
     <eat-comment/>
     <dimen name="ChuZhuangWH">64.0dip</dimen>
     <dimen name="action_bar_default_height">56dp</dimen>
