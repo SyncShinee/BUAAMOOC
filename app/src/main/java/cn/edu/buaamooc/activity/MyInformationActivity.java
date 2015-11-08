@@ -2,7 +2,6 @@ package cn.edu.buaamooc.activity;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -20,10 +19,6 @@ public class MyInformationActivity extends Activity {
 
         //initialize tab controls
 
-        TextView username_button = (TextView) findViewById(R.id.username_button);
-        final SharedPreferences loginInfo = getSharedPreferences("loginInfo", MODE_PRIVATE);
-        String username = loginInfo.getString("username", "");
-        username_button.setText(username);
         //initialize xml skip
 
         //back to the xml MoocMainActivity

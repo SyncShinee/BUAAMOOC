@@ -1,14 +1,12 @@
 package cn.edu.buaamooc.activity;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import cn.edu.buaamooc.R;
 
@@ -25,14 +23,6 @@ public class PassWordReset extends Activity {
             @Override
             public void onClick(View v) {
                 PassWordReset.this.finish();
-            }
-        });
-
-        TextView button_reset = (TextView) findViewById(R.id.button_reset);
-        button_reset.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new AlertDialog.Builder(PassWordReset.this).setMessage("此功能暂未开放。请去往网页版修改密码。\"因为我们的问题给您造成的困扰请见谅！\"").setPositiveButton("确定",null).show();
             }
         });
     }
