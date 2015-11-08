@@ -17,4 +17,4 @@
 		android:layout_width="fill_parent" android:layout_height="fill_parent">
 	</android.support.v4.view.ViewPager>
 </LinearLayout>
-<!-- From: file:/C:/Users/skyxuan/AndroidStudioProjects/BUAAMOOC/oPlayer/src/main/res/layout/fragment_pager.xml --><!-- From: file:/C:/Users/skyxuan/AndroidStudioProjects/BUAAMOOC/oPlayer/build/intermediates/bundles/debug/res/layout/fragment_pager.xml -->
+<!-- From: file:/D:/SE/BUAAMOOC/oPlayer/src/main/res/layout/fragment_pager.xml --><!-- From: file:/D:/SE/BUAAMOOC/oPlayer/build/intermediates/bundles/debug/res/layout/fragment_pager.xml -->

@@ -90,7 +90,7 @@ public class DirectoryFragment extends Fragment {
                         btn_quit_enroll.setText(getResources().getString(R.string.course_enroll));
                         break;
                 }
-                btn_quit_enroll.setBackground(getActivity().getDrawable(R.drawable.course_btn_bg));
+                btn_quit_enroll.setBackgroundResource(R.drawable.course_btn_bg);
                 btn_quit_enroll.setClickable(true);
             }
         };
