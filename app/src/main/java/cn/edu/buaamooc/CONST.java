@@ -21,4 +21,12 @@ public class CONST {
 
     public static final String COURSEPIC =
             Environment.getExternalStorageDirectory().toString() + File.separator + "MOOCAPP" + File.separator + "coursePic";
+
+    public static final int enrolled=1;
+    public static final int unenrolled=2;
+    public static final int enroll_succeed=1;
+    public static final int enroll_fail=2;
+    public static final int unenroll_succeed=3;
+    public static final int unenroll_fail=4;
+
 }

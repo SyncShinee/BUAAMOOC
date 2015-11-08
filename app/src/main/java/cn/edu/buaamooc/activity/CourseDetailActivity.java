@@ -208,8 +208,8 @@ public class CourseDetailActivity extends FragmentActivity {
         public MyFragmentPagerAdapter(FragmentManager fm) {
             super(fm);
             fragmentArrayList = new ArrayList<>();
-            fragmentArrayList.add(new IntroduceFragment());
             fragmentArrayList.add(new DirectoryFragment());
+            fragmentArrayList.add(new IntroduceFragment());
             fragmentArrayList.add(new DiscussionFragment());
         }
 
