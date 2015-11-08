@@ -36,6 +36,7 @@ public class CourseDetailActivity extends FragmentActivity {
     private int position_one;
     private int position_two;
     private ImageView ivBottomLine;
+    private MyFragmentPagerAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,7 +100,8 @@ public class CourseDetailActivity extends FragmentActivity {
         //获取布局中的viewpager控件
         viewPager = (ViewPager) findViewById(R.id.course_detail_page);
         //给ViewPager添加适配器
-        viewPager.setAdapter(new MyFragmentPagerAdapter(getSupportFragmentManager()));
+        adapter=new MyFragmentPagerAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(adapter);
         //设置默认的视图为第0个
         viewPager.setCurrentItem(0);
         //给Viewpager添加监听事件
@@ -203,13 +205,13 @@ public class CourseDetailActivity extends FragmentActivity {
     }
 
     public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
-        private ArrayList<Fragment> fragmentArrayList;
+        public ArrayList<Fragment> fragmentArrayList;
 
         public MyFragmentPagerAdapter(FragmentManager fm) {
             super(fm);
             fragmentArrayList = new ArrayList<>();
-            fragmentArrayList.add(new DirectoryFragment());
             fragmentArrayList.add(new IntroduceFragment());
+            fragmentArrayList.add(new DirectoryFragment());
             fragmentArrayList.add(new DiscussionFragment());
         }
 
@@ -239,6 +241,10 @@ public class CourseDetailActivity extends FragmentActivity {
             //设置ViewPager的当前view
             viewPager.setCurrentItem(index);
         }
+    }
+
+    public Fragment getFragment(int num) {
+       return adapter.fragmentArrayList.get(num);
     }
 
 }

@@ -34,10 +34,11 @@
     </LinearLayout>
 
     <TextView
+        android:maxLines="1"
         android:id="@+id/midle_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="3"
+        android:layout_weight="4"
         android:gravity="center"
         android:textColor="@android:color/white"
         android:textSize="18sp" />

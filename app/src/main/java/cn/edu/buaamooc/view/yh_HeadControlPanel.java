@@ -40,7 +40,7 @@ public class yh_HeadControlPanel extends LinearLayout {
     }
     public void setLeftTitle(){
         mLeftTitle.setVisibility(VISIBLE);
-        left_text.setText("返回");
+//        left_text.setText("返回");
         mLeftTitle.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
