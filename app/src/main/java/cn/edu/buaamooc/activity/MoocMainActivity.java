@@ -19,6 +19,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import cn.edu.buaamooc.R;
+import cn.edu.buaamooc.exception.Logger;
 import cn.edu.buaamooc.fragment.CourseListFragment;
 import cn.edu.buaamooc.fragment.LoginFragment;
 import cn.edu.buaamooc.tools.Login;

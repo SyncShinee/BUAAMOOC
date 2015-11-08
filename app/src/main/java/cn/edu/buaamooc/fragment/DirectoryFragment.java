@@ -69,11 +69,9 @@ public class DirectoryFragment extends Fragment {
                 } else if (msg.what == CONST.unenrolled) {
                     remind_enroll.setVisibility(View.VISIBLE);
                 }
-                ((IntroduceFragment)((CourseDetailActivity)getActivity()).getFragment(0)).setenrollbtn(msg.what);
             }
         };
         initData();
-        Logger.e("initdata");
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -101,6 +99,7 @@ public class DirectoryFragment extends Fragment {
     }
 
     public void updateview() {
+        remind_enroll.setVisibility(View.GONE);
         initData();
     }
 
@@ -108,21 +107,23 @@ public class DirectoryFragment extends Fragment {
         try {
             new Thread(new Runnable() {
                 public void run() {
-                    Logger.e("run");
                     if (course_id_right) {
-                        try {
-                            Thread.sleep(10);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
                         course_ware = new MOOCConnection().MOOCCourseware(course_id);
-                        Logger.i(course_ware.toString());
+                        if(course_ware==null)
+                        {
+                            Logger.e("null");
+                            try {
+                                Thread.sleep(10);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            getdatafromserver();
+                            return;
+                        }
                         try {
                             Message m = new Message();
-                            Message m_introduce =new Message();
                             if (course_ware.getBoolean("status")) {
                                 m.what = CONST.enrolled;
-                                m_introduce.what=CONST.enrolled;
                                 JSONArray sections = course_ware.getJSONArray("sections");
                                 JSONObject section;
                                 JSONArray subsections;
@@ -164,8 +165,8 @@ public class DirectoryFragment extends Fragment {
                                     mDataList.add(root1);
                                 }
                             } else {
+                                mDataList.clear();
                                 m.what = CONST.unenrolled;
-                                m_introduce.what=CONST.unenrolled;
                             }
                             mHandler.sendMessage(m);
 //                            IntroduceFragment.handler.sendMessage(m_introduce);
@@ -183,5 +184,8 @@ public class DirectoryFragment extends Fragment {
 
     public void onDestroy() {
         super.onDestroy();
+    }
+    public void onResume() {
+        super.onResume();
     }
 }

@@ -38,6 +38,7 @@ public class IntroduceFragment extends Fragment {
     private TextView btn_quit_enroll;
     private Resources resources;
     private String content;
+    private Boolean registered;
 
     public void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
@@ -50,30 +51,30 @@ public class IntroduceFragment extends Fragment {
             public void handleMessage(Message msg) {
                 switch (msg.what) {
                     case CONST.about_succeed:
-                        introduce.setText(content);
-                        break;
-                    case CONST.enrolled:
-
-                        break;
-                    case CONST.unenrolled:
-                        btn_quit_enroll.setText(resources.getString(R.string.course_enroll));
                         btn_quit_enroll.setVisibility(View.VISIBLE);
+                        introduce.setText(content);
+                        if(registered) {
+                            btn_quit_enroll.setText(resources.getString(R.string.course_quit));
+                        }
+                        else {
+                            btn_quit_enroll.setText(resources.getString(R.string.course_enroll));
+                        }
                         break;
                     case CONST.enroll_succeed:
                         Toast.makeText(getActivity(), "选课成功", Toast.LENGTH_LONG).show();
                         btn_quit_enroll.setText(getResources().getString(R.string.course_quit));
-                        ((DirectoryFragment)((CourseDetailActivity)getActivity()).getFragment(1)).updateview();
+                        ((DirectoryFragment) ((CourseDetailActivity) getActivity()).getFragment(1)).updateview();
                         break;
                     case CONST.enroll_fail:
-                        Toast.makeText(getActivity(),"选课失败",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), "选课失败", Toast.LENGTH_LONG).show();
                         break;
                     case CONST.unenroll_fail:
-                        Toast.makeText(getActivity(),"退课失败",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), "退课失败", Toast.LENGTH_LONG).show();
                         break;
                     case CONST.unenroll_succeed:
-                        Toast.makeText(getActivity(),"退课成功",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), "退课成功", Toast.LENGTH_LONG).show();
                         btn_quit_enroll.setText(getResources().getString(R.string.course_enroll));
-                        ((DirectoryFragment)((CourseDetailActivity)getActivity()).getFragment(1)).updateview();
+                        ((DirectoryFragment) ((CourseDetailActivity) getActivity()).getFragment(1)).updateview();
                         break;
                 }
                 setbtnClickable();
@@ -86,7 +87,7 @@ public class IntroduceFragment extends Fragment {
         View Layout = inflater.inflate(R.layout.fragment_course_introduce, container, false);
         introduce = (TextView) Layout.findViewById(R.id.course_introduce);
         btn_quit_enroll = (TextView) Layout.findViewById(R.id.course_enroll);
-        resources=getResources();
+        resources = getResources();
         dbUtil = new DBUtil(getActivity());
 
         initText();
@@ -98,7 +99,7 @@ public class IntroduceFragment extends Fragment {
         SQLiteDatabase cdb = dbUtil.getCDB();
         try {
             course_id = ((CourseDetailActivity) getActivity()).getCourseId();
-            Cursor c = cdb.rawQuery("select course_about from course where course_id = '"+course_id+"'",null);
+            Cursor c = cdb.rawQuery("select course_about from course where course_id = '" + course_id + "'", null);
             if (c.getCount() == 0) {
                 getCourseintroduce();
             } else {
@@ -148,11 +149,13 @@ public class IntroduceFragment extends Fragment {
         btn_quit_enroll.setBackgroundColor(resources.getColor(R.color.colorDefaultBg));
         btn_quit_enroll.setTextColor(resources.getColor(R.color.black));
     }
+
     private void setbtnClickable() {
         btn_quit_enroll.setClickable(true);
         btn_quit_enroll.setBackgroundResource(R.drawable.course_btn_bg);
         btn_quit_enroll.setTextColor(resources.getColor(R.color.white));
     }
+
     public void enroll() {
         try {
             new Thread(new Runnable() {
@@ -195,9 +198,13 @@ public class IntroduceFragment extends Fragment {
         new Thread(new Runnable() {
             public void run() {
                 try {
+                    try {
+                        Thread.sleep(1);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                     JSONObject JsonObject = new MOOCConnection().MOOCCourseAbout(course_id);
                     //获取保存课程信息的JSON
-
                     if (JsonObject == null) {
                         //没有获取到课程信息
                         Message m = new Message();
@@ -206,6 +213,7 @@ public class IntroduceFragment extends Fragment {
                     } else {
                         //发送信息，说明获取信息成功
                         String htmldata = JsonObject.getString("about");
+                        registered = JsonObject.getBoolean("registered");
                         Message m = new Message();
                         htmldata = htmldata.replace("\\/", "/");
                         String index[] = htmldata.split("<");
@@ -233,13 +241,13 @@ public class IntroduceFragment extends Fragment {
     }
 
     public void setenrollbtn(int status) {
-        if(status==CONST.enrolled) {
+        if (status == CONST.enrolled) {
             btn_quit_enroll.setText(resources.getString(R.string.course_quit));
             btn_quit_enroll.setVisibility(View.VISIBLE);
-        }
-        else {
+        } else {
             btn_quit_enroll.setText(resources.getString(R.string.course_enroll));
             btn_quit_enroll.setVisibility(View.VISIBLE);
         }
     }
+
 }

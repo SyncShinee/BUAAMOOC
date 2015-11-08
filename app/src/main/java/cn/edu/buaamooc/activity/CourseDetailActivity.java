@@ -29,7 +29,6 @@ import cn.edu.buaamooc.view.yh_HeadControlPanel;
 
 public class CourseDetailActivity extends FragmentActivity {
 
-    private Handler mHandler,mHandler1;
     private ViewPager viewPager;
     private String course_id;
     private int currIndex = 0;
@@ -42,6 +41,7 @@ public class CourseDetailActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coursedetail);
+        setResult(3);
         course_id=getIntent().getStringExtra("course_id");
         if(course_id.equals("")) {
             Toast.makeText(this,"不存在该课程",Toast.LENGTH_LONG).show();
@@ -245,6 +245,10 @@ public class CourseDetailActivity extends FragmentActivity {
 
     public Fragment getFragment(int num) {
        return adapter.fragmentArrayList.get(num);
+    }
+
+    public void onDestroy() {
+        super.onDestroy();
     }
 
 }
