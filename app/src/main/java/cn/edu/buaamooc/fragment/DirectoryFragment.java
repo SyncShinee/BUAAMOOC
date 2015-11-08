@@ -116,6 +116,7 @@ public class DirectoryFragment extends Fragment {
                             e.printStackTrace();
                         }
                         course_ware = new MOOCConnection().MOOCCourseware(course_id);
+                        Logger.i(course_ware.toString());
                         try {
                             Message m = new Message();
                             Message m_introduce =new Message();
@@ -144,12 +145,19 @@ public class DirectoryFragment extends Fragment {
                                             videos = unit.getJSONArray("verticals");
                                             for (int n = 0; n < videos.length(); n++) {
                                                 video = videos.getJSONObject(n);
-                                                String address = video.getString("video_sources");
-                                                address = address.substring(address.indexOf('\"') + 1, address.lastIndexOf('\"'));
-                                                address = address.replace("\\", "");
-                                                if (address.startsWith("/"))
-                                                    address = CONST.URL + address;
-                                                root3 = new Node(root2, unit.getString("name"), address);
+                                                if(video.isNull("video")) {
+                                                    try {
+                                                        String address = video.getString("video_sources");
+                                                        address = address.substring(address.indexOf('\"') + 1, address.lastIndexOf('\"'));
+                                                        address = address.replace("\\", "");
+                                                        if (address.startsWith("/"))
+                                                            address = CONST.URL + address;
+                                                        root3 = new Node(root2, unit.getString("name"), address);
+                                                    }catch (Exception e) {
+                                                        Logger.e(e.toString());
+                                                        e.printStackTrace();
+                                                    }
+                                                }
                                             }
                                         }
                                     }
