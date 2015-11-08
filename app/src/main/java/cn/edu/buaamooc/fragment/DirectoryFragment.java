@@ -92,6 +92,7 @@ public class DirectoryFragment extends Fragment {
                 }
                 btn_quit_enroll.setBackgroundResource(R.drawable.course_btn_bg);
                 btn_quit_enroll.setClickable(true);
+
             }
         };
         btn_quit_enroll.setOnClickListener(new View.OnClickListener() {
