@@ -122,7 +122,7 @@ public class CourseListFragment extends Fragment {
      * Get courses form server and update listView.
      */
     public void refreshList() {
-        final String name = tabIndex==2?"display_name":"course_title";
+        final String name = tabIndex==0?"display_name":"course_title";
 
 
         final Handler handler = new Handler(){
@@ -136,7 +136,7 @@ public class CourseListFragment extends Fragment {
                     Log.e("courseArray", "null");
                     return;
                 }
-                if (tabIndex == 2){
+                if (tabIndex == 0){
                     try {
                         boolean status = false;
                         if (myCourseObject != null) {
@@ -163,13 +163,13 @@ public class CourseListFragment extends Fragment {
                         json = courseArray.getJSONObject(i);
                         map = new HashMap<String, Object>();
                         map.put("title",json.isNull(name)?"无":json.getString(name));
-                        map.put("start",json.isNull("course_start")?"无":json.getString("course_start").substring(0, 10));
+                        map.put("start","开课时间：" + (json.isNull("course_start")?"无":json.getString("course_start").substring(0, 10)));
                         map.put("image",R.drawable.buaa_logo);
                         map.put("course_id",json.isNull("course_id")?"":json.getString("course_id"));
                         map.put("image_url", json.isNull("course_image_url") ? "" : json.getString("course_image_url"));
                         String display = json.isNull("display_number")?"":json.getString("display_number");
                         map.put("courseId", display);
-                        if (tabIndex == 0) {
+                        if (tabIndex == 1) {
                             if (display.equals("M_G06B2830")
                                     || display.equals("M_E06B2150")
                                     || display.equals("M_E06B3150")){
@@ -187,7 +187,7 @@ public class CourseListFragment extends Fragment {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                if (tabIndex == 0) {
+                if (tabIndex == 1) {
                     while (sourceList.size()>10) {
                         sourceList.remove(10);
                     }
@@ -203,11 +203,11 @@ public class CourseListFragment extends Fragment {
             public void run() {
                 MOOCConnection mooc = new MOOCConnection();
                 switch (tabIndex) {
-                    case 0:
                     case 1:
+                    case 2:
                         courseArray = mooc.MOOCCourses();
                         break;
-                    case 2:
+                    case 0:
                         myCourseObject = mooc.MOOCGetCourseEnrollment();
                         break;
                 }

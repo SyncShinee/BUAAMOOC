@@ -3,4 +3,4 @@
   xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_pressed="true" android:drawable="@drawable/contact_list_scroll_pressed" />
     <item android:drawable="@drawable/contact_list_scroll_normal" />
-</selector><!-- From: file:/D:/SE/BUAAMOOC/oPlayer/src/main/res/drawable/alphabet_scroller_bg.xml --><!-- From: file:/D:/SE/BUAAMOOC/oPlayer/build/intermediates/bundles/debug/res/drawable/alphabet_scroller_bg.xml -->
+</selector><!-- From: file:/D:/Android2/codes/BUAAMOOC/oPlayer/src/main/res/drawable/alphabet_scroller_bg.xml --><!-- From: file:/D:/Android2/codes/BUAAMOOC/oPlayer/build/intermediates/bundles/debug/res/drawable/alphabet_scroller_bg.xml -->

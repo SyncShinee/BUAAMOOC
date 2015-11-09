@@ -103,7 +103,7 @@
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="记住我的登陆状态"
+        android:text="记住我的登录状态"
         android:id="@+id/checkbox_login_rememberMe"
         android:layout_below="@+id/frame_login_password"
         android:layout_alignLeft="@+id/frame_login_password"
@@ -113,7 +113,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="登陆"
+        android:text="登录"
         android:id="@+id/button_fragment_login"
         android:layout_below="@+id/checkbox_login_rememberMe"
         android:layout_alignLeft="@+id/checkbox_login_rememberMe"

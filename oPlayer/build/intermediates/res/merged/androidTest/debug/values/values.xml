@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/D:/SE/BUAAMOOC/oPlayer/build/intermediates/bundles/debug/res/values/values.xml -->
+    <!-- From: file:/D:/Android2/codes/BUAAMOOC/oPlayer/build/intermediates/bundles/debug/res/values/values.xml -->
     <eat-comment/>
     <color name="background">#ffc3ddea</color>
     <color name="background_dark">#f4f4f4</color>
@@ -34,7 +34,7 @@
 		this device.</string>
     <string name="VideoView_error_text_unknown">对不起,这个视频不能播放。</string>
     <string name="VideoView_error_title">Cannot play video</string>
-    <string name="app_name">开播视频</string>
+    <string name="app_name">MOOC</string>
     <string name="closing_file">正在退出…</string>
     <string name="content_desc_lock">锁定</string>
     <string name="file_delete">删除</string>
@@ -48,7 +48,7 @@
     <string name="init_decoders">初始化播放器...</string>
     <string name="loadinfo">载入中，请稍后...</string>
     <string name="mediacontroller_play_pause">Play/Pause</string>
-    <!-- From: file:/D:/SE/BUAAMOOC/oPlayer/build/intermediates/exploded-aar/BUAAMOOC/VitamioBundle/unspecified/res/values/values.xml -->
+    <!-- From: file:/D:/Android2/codes/BUAAMOOC/oPlayer/build/intermediates/exploded-aar/BUAAMOOC/VitamioBundle/unspecified/res/values/values.xml -->
     <eat-comment/>
     <string name="permission_group_tools_description">Access Vitamio package and resources.</string>
     <string name="permission_group_tools_label">Vitamio tools</string>
@@ -57,7 +57,7 @@
     <string name="permission_write_providers_description">Delete, update or create new items in Vitamio providers.
     </string>
     <string name="permission_write_providers_label">Write Vitamio providers</string>
-    <!-- From: file:/D:/SE/BUAAMOOC/oPlayer/build/intermediates/bundles/debug/res/values/values.xml -->
+    <!-- From: file:/D:/Android2/codes/BUAAMOOC/oPlayer/build/intermediates/bundles/debug/res/values/values.xml -->
     <eat-comment/>
     <string name="title_file">本地视频</string>
     <string name="title_online">在线视频</string>
@@ -73,11 +73,11 @@
     <string name="video_screenshot_failed">截图失败</string>
     <string name="video_screenshot_save_in">截图存放在 %s.</string>
     <string name="video_stretch">拉伸</string>
-    <!-- From: file:/D:/SE/BUAAMOOC/oPlayer/build/intermediates/exploded-aar/BUAAMOOC/VitamioBundle/unspecified/res/values/values.xml -->
+    <!-- From: file:/D:/Android2/codes/BUAAMOOC/oPlayer/build/intermediates/exploded-aar/BUAAMOOC/VitamioBundle/unspecified/res/values/values.xml -->
     <eat-comment/>
     <string name="vitamio_init_decoders">Initializing decoders…</string>
     <string name="vitamio_library_app_name">VitamioLibrary</string>
-    <!-- From: file:/D:/SE/BUAAMOOC/oPlayer/build/intermediates/bundles/debug/res/values/values.xml -->
+    <!-- From: file:/D:/Android2/codes/BUAAMOOC/oPlayer/build/intermediates/bundles/debug/res/values/values.xml -->
     <eat-comment/>
     <string name="vitamio_theme_app_name">VPlayer codec</string>
     <style name="AppBaseTheme" parent="android:Theme.Light">

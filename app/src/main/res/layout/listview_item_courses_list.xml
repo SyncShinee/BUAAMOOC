@@ -36,7 +36,8 @@
             android:textSize="18sp"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
-            android:singleLine="true"/>
+            android:singleLine="true"
+            android:textColor="@color/course_black"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -46,7 +47,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2015-10-28"
+                android:text="开课时间：2015-10-28"
                 android:id="@+id/listview_item_course_date"
                 android:textSize="12sp"
                 android:textColor="@color/colorMainTextGray"

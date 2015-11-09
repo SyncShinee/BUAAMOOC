@@ -73,11 +73,11 @@
             <ImageView
                 android:id="@+id/iv_bottom_line"
                 android:layout_width="80dp"
-                android:layout_marginLeft="20dp"
                 android:layout_height="2dp"
                 android:scaleType="matrix"
                 android:src="@color/course_blue"
-                />
+                android:layout_marginRight="20dp"
+                android:layout_gravity="right"/>
         </LinearLayout>
 
         </LinearLayout>

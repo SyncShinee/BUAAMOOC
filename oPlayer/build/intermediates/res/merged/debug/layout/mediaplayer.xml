@@ -5,4 +5,4 @@
 	<SurfaceView android:id="@+id/surface"
 		android:layout_width="wrap_content" android:layout_height="wrap_content"
 		android:layout_centerHorizontal="true" android:layout_centerVertical="true" />
-</RelativeLayout><!-- From: file:/D:/SE/BUAAMOOC/oPlayer/src/main/res/layout/mediaplayer.xml -->
+</RelativeLayout><!-- From: file:/D:/Android2/codes/BUAAMOOC/oPlayer/src/main/res/layout/mediaplayer.xml -->

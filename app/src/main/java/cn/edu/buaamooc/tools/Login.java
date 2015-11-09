@@ -21,8 +21,8 @@ public class Login {
     private boolean rememberMe;
 
     private JSONObject resultJsonObject;
-    private Handler mHandler; //用于处理实现登陆函数的线程返回的数据
-    private Handler mHandler1; //用于处理登陆之后获取已选课程和全部课程的线程返回的数据
+    private Handler mHandler; //用于处理实现登录函数的线程返回的数据
+    private Handler mHandler1; //用于处理登录之后获取已选课程和全部课程的线程返回的数据
 
     private boolean autoLogin;
 
@@ -45,7 +45,7 @@ public class Login {
             @Override
             public void handleMessage(Message msg) {
                 if(msg.what==0x111){
-                    Toast.makeText(mContext, "登陆成功",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, "登录成功",Toast.LENGTH_SHORT).show();
                     //更新MoocMainActivity中的ViewPager中的第三个fragment，变为CourseListFragment
                     mHandler1=new Handler(){
                         @Override
@@ -157,7 +157,7 @@ public class Login {
                     resultJsonObject = mooc.MOOCLogin(username,password);
                     try {
                         if(resultJsonObject!= null && !resultJsonObject.isNull("success") && resultJsonObject.getBoolean("success")){
-                            //登陆成功
+                            //登录成功
                             Message m=new Message();
                             m.what=0x111;
                             mHandler.sendMessage(m);	//发送信息
@@ -171,7 +171,7 @@ public class Login {
                         }
                     } catch (JSONException e) {
                         // 自动生成的 catch 块
-                        //登陆出现异常，网络有问题
+                        //登录出现异常，网络有问题
                         Message m=new Message();
                         m.what=0x010;
                         mHandler.sendMessage(m);

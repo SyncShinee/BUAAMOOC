@@ -249,13 +249,13 @@
         <service
             android:name="com.nmbb.oplayer.ui.player.PlayerService"
             android:process=":vitamio" />
-        <service
-            android:name="io.vov.vitamio.VitamioService"
-            android:exported="false" >
-            <intent-filter>
-                <action android:name="io.vov.vitamio.IVitamioService" />
-            </intent-filter>
-        </service>
+        <!-- <service -->
+        <!-- android:name="io.vov.vitamio.VitamioService" -->
+        <!-- android:exported="false" > -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="io.vov.vitamio.IVitamioService" /> -->
+        <!-- </intent-filter> -->
+        <!-- </service> -->
         <service android:name="com.nmbb.oplayer.service.MediaScannerService" />
     </application>
 

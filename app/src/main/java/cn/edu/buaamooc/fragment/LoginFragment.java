@@ -23,6 +23,8 @@ public class LoginFragment extends Fragment {
     private View layout;
     private MoocMainActivity activity;
 
+    private TextView usernameText;
+    private TextView passwordText;
 
     public LoginFragment() {
         // Required empty public constructor
@@ -38,7 +40,9 @@ public class LoginFragment extends Fragment {
         activity = (MoocMainActivity) getActivity();
         int tabIndex = getArguments().getInt("tabIndex");
         String nameArgu = getArguments().getString("username");
-        ((TextView) layout.findViewById(R.id.usernameText)).setText(nameArgu);
+        usernameText = (TextView) layout.findViewById(R.id.usernameText);
+        passwordText = (TextView) layout.findViewById(R.id.passwordText);
+        usernameText.setText(nameArgu);
         TextView loginButton = (TextView) layout.findViewById(R.id.button_fragment_login);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,8 +63,8 @@ public class LoginFragment extends Fragment {
      * Get information from controls and call Login.login()
      */
     public void login(){
-        String username = ((TextView) layout.findViewById(R.id.usernameText)).getText().toString();
-        String password = ((TextView) layout.findViewById(R.id.passwordText)).getText().toString();
+        String username = usernameText.getText().toString();
+        String password = passwordText.getText().toString();
         Login login = new Login(username,password).setContext(activity).setAuto(false);
         CheckBox rememberMe = (CheckBox) layout.findViewById(R.id.checkbox_login_rememberMe);
         if (rememberMe.isChecked()) {

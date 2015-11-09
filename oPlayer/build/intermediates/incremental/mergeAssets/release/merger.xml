@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="D:\SE\BUAAMOOC\oPlayer\src\main\assets"><file name="online.xml" path="D:\SE\BUAAMOOC\oPlayer\src\main\assets\online.xml"/></source></dataSet><dataSet config="release"><source path="D:\SE\BUAAMOOC\oPlayer\src\release\assets"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="D:\Android2\codes\BUAAMOOC\oPlayer\src\main\assets"><file name="online.xml" path="D:\Android2\codes\BUAAMOOC\oPlayer\src\main\assets\online.xml"/></source></dataSet><dataSet config="release"><source path="D:\Android2\codes\BUAAMOOC\oPlayer\src\release\assets"/></dataSet></merger>
