@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorMainDivide">#20000000</color>
-    <color name="colorMainBuaaBlue">#ff005cac</color>
+    <color name="colorMainBuaaBlue">#FF005FAF</color>
     <color name="colorMainbgGolden">#FFFADC37</color>
     <color name="colorMainWhite">#ffffffff</color>
     <color name="colorMainTextGray">#a0000000</color>
