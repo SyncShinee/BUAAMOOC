@@ -51,6 +51,7 @@ public class DirectoryFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mDataList = new ArrayList<Node>();
+
         mHandler = new Handler() {
             @SuppressLint("HandlerLeak")
             @Override
