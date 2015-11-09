@@ -6,4 +6,4 @@
     <item android:drawable="@drawable/mediacontroller_play02" android:state_focused="false" android:state_pressed="true"/>
     <item android:drawable="@drawable/mediacontroller_play01"/>
 
-</selector><!-- From: file:/C:/Users/skyxuan/AndroidStudioProjects/BUAAMOOC/oPlayer/src/main/res/drawable/mediacontroller_play_button.xml --><!-- From: file:/C:/Users/skyxuan/AndroidStudioProjects/BUAAMOOC/oPlayer/build/intermediates/bundles/debug/res/drawable/mediacontroller_play_button.xml -->
+</selector><!-- From: file:/D:/SE/BUAAMOOC/oPlayer/src/main/res/drawable/mediacontroller_play_button.xml --><!-- From: file:/D:/SE/BUAAMOOC/oPlayer/build/intermediates/bundles/debug/res/drawable/mediacontroller_play_button.xml -->

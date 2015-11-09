@@ -1,5 +1,9 @@
 package cn.edu.buaamooc.fragment;
+
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -10,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -24,131 +29,147 @@ import cn.edu.buaamooc.exception.Logger;
 import cn.edu.buaamooc.tools.MOOCConnection;
 import cn.edu.buaamooc.view.Node;
 import cn.edu.buaamooc.view.TreeAdapter;
+import io.vov.vitamio.utils.Log;
 
 
 /**
  * Created by 昊 on 2015/10/29.
  */
-public class DirectoryFragment  extends Fragment {
+public class DirectoryFragment extends Fragment {
 
     private ListView mListView;
-    private boolean first=true;
+    private boolean first = true;
     private TreeAdapter adapter;
-    private static Handler mHandler;
-    private static List<Node> mDataList;
+    private Handler mHandler;
+    private TextView remind_enroll;
+    private List<Node> mDataList;
     private String course_id;
-    private boolean course_id_right=true;
-    private static JSONObject course_ware;
-    private TextView btn_quit_enroll;
+    private boolean course_id_right = true;
+    private JSONObject course_ware;
+    private Resources resources;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mDataList = new ArrayList<Node>();
+        mHandler = new Handler() {
+            @SuppressLint("HandlerLeak")
+            @Override
+            public void handleMessage(Message msg) {
+                if (msg.what == CONST.enrolled) {
+                    try {
+                        if (adapter != null) {
+                            remind_enroll.setVisibility(View.GONE);
+                            Logger.e("update tree structure");
+                            adapter.notifyDataSetChanged();
+                        }
+                    } catch (Exception e) {
+                        Logger.e("update tree structure :" + e.toString());
+                        e.printStackTrace();
+                    }
+                } else if (msg.what == CONST.unenrolled) {
+                    remind_enroll.setVisibility(View.VISIBLE);
+                }
+            }
+        };
         initData();
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View Layout= inflater.inflate(R.layout.fragemnt_course_directory, container, false);
-        btn_quit_enroll = (TextView) Layout.findViewById(R.id.course_enroll);
+        View Layout = inflater.inflate(R.layout.fragemnt_course_directory, container, false);
         try {
-            course_id=((CourseDetailActivity)getActivity()).getCourseId();
+            course_id = ((CourseDetailActivity) getActivity()).getCourseId();
         } catch (Exception e) {
-            course_id_right=false;
+            course_id_right = false;
         }
-        mListView = (ListView)Layout.findViewById(R.id.course_structure_list);
-        adapter=new TreeAdapter(getActivity(), mDataList);
-        mListView.setAdapter(adapter);
-        btn_quit_enroll.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String label = btn_quit_enroll.getText().toString();
-                if (label.equals(getResources().getString(R.string.course_enroll))) {
-                    btn_quit_enroll.setText(getResources().getString(R.string.course_quit));
-                } else {
-                    btn_quit_enroll.setText(getResources().getString(R.string.course_enroll));
-                }
-            }
-        });
+        resources=getResources();
+        mListView = (ListView) Layout.findViewById(R.id.course_structure_list);
+        remind_enroll=(TextView) Layout.findViewById(R.id.remind_enroll);
+        initListview();
         return Layout;
     }
-    private void initData() {
-        mHandler=new Handler() {
-            @SuppressLint("HandlerLeak")
-            @Override
-            public void handleMessage(Message msg) {
-                if(msg.what==0x111)
-                {
-                    try {
-                        if (adapter != null) {
-                            Logger.e("update tree structure");
-                            adapter.notifyDataSetChanged();
-                        }
-                    }
-                    catch (Exception e) {
-                        Logger.e("update tree structure :"+e.toString());
-                        e.printStackTrace();
-                    }
-                }
-            }
-        };
 
-        try{
+    private void initListview() {
+        adapter = new TreeAdapter(getActivity(), mDataList);
+        mListView.setAdapter(adapter);
+    }
+
+    private void initData() {
+        getdatafromserver();
+    }
+
+    public void updateview() {
+        remind_enroll.setVisibility(View.GONE);
+        initData();
+    }
+
+    private void getdatafromserver() {
+        try {
             new Thread(new Runnable() {
                 public void run() {
-                    Logger.e("run");
-                    if(course_id_right) {
-                        try {
-                            Thread.sleep(100);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
+                    if (course_id_right) {
                         course_ware = new MOOCConnection().MOOCCourseware(course_id);
+                        if(course_ware==null)
+                        {
+                            Logger.e("null");
+                            try {
+                                Thread.sleep(10);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            getdatafromserver();
+                            return;
+                        }
                         try {
-                            if(course_ware.getBoolean("status")){
-                                btn_quit_enroll.setVisibility(View.GONE);
-                                Message m=new Message();
-                                m.what=0x111;
-                                mHandler.sendMessage(m);
-                                    JSONArray sections = course_ware.getJSONArray("sections");
-                                    JSONObject section;
-                                    JSONArray subsections;
-                                    JSONObject subsection;
-                                    JSONArray units;
-                                    JSONObject unit;
-                                    JSONArray videos;
-                                    JSONObject video;
-                                    Node root1,root2,root3;
-                                    for(int i=0;i<sections.length();i++) {
-                                        section=sections.getJSONObject(i);
-                                        subsections=section.getJSONArray("sections");
-                                        root1=new Node(null,section.getString("display_name"));
-                                        for (int j=0;j<subsections.length();j++) {
-                                            subsection=subsections.getJSONObject(j);
-                                            units=subsection.getJSONArray("units");
-                                            root2=new Node(root1,subsection.getString("display_name"));
-                                            for(int k=0;k<units.length();k++) {
-                                                unit=units.getJSONObject(k);
-                                                videos=unit.getJSONArray("verticals");
-                                                for(int n=0;n<videos.length();n++) {
-                                                    video=videos.getJSONObject(n);
-                                                    String address = video.getString("video_sources");
-                                                    address=address.substring(address.indexOf('\"') + 1, address.lastIndexOf('\"'));
-                                                    address = address.replace("\\", "");
-                                                    if(address.startsWith("/"))
-                                                        address = CONST.URL+address ;
-                                                    root3=new Node(root2,unit.getString("name"),address);
+                            Message m = new Message();
+                            if (course_ware.getBoolean("status")) {
+                                m.what = CONST.enrolled;
+                                JSONArray sections = course_ware.getJSONArray("sections");
+                                JSONObject section;
+                                JSONArray subsections;
+                                JSONObject subsection;
+                                JSONArray units;
+                                JSONObject unit;
+                                JSONArray videos;
+                                JSONObject video;
+                                Node root1, root2, root3;
+                                for (int i = 0; i < sections.length(); i++) {
+                                    section = sections.getJSONObject(i);
+                                    subsections = section.getJSONArray("sections");
+                                    root1 = new Node(null, section.getString("display_name"));
+                                    for (int j = 0; j < subsections.length(); j++) {
+                                        subsection = subsections.getJSONObject(j);
+                                        units = subsection.getJSONArray("units");
+                                        root2 = new Node(root1, subsection.getString("display_name"));
+                                        for (int k = 0; k < units.length(); k++) {
+                                            unit = units.getJSONObject(k);
+                                            videos = unit.getJSONArray("verticals");
+                                            for (int n = 0; n < videos.length(); n++) {
+                                                video = videos.getJSONObject(n);
+                                                if(video.isNull("video")) {
+                                                    try {
+                                                        String address = video.getString("video_sources");
+                                                        address = address.substring(address.indexOf('\"') + 1, address.lastIndexOf('\"'));
+                                                        address = address.replace("\\", "");
+                                                        if (address.startsWith("/"))
+                                                            address = CONST.URL + address;
+                                                        root3 = new Node(root2, unit.getString("name"), address);
+                                                    }catch (Exception e) {
+                                                        Logger.e(e.toString());
+                                                        e.printStackTrace();
+                                                    }
                                                 }
                                             }
                                         }
-                                        mDataList.add(root1);
                                     }
+                                    mDataList.add(root1);
+                                }
+                            } else {
+                                mDataList.clear();
+                                m.what = CONST.unenrolled;
                             }
-                            else{
-                                Message m=new Message();
-                                m.what=0x110;
-                                mHandler.sendMessage(m);
-                            }
+                            mHandler.sendMessage(m);
+//                            IntroduceFragment.handler.sendMessage(m_introduce);
                         } catch (Exception e) {
                             e.printStackTrace();
                             Logger.e(e.toString());
@@ -156,14 +177,15 @@ public class DirectoryFragment  extends Fragment {
                     }
                 }
             }).start();
-        }
-        catch(Exception ee){
+        } catch (Exception ee) {
             Logger.e(ee.toString());
         }
     }
 
-    public void onDestroy(){
+    public void onDestroy() {
         super.onDestroy();
     }
-
+    public void onResume() {
+        super.onResume();
+    }
 }

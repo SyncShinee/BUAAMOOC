@@ -98,7 +98,7 @@ public class CourseListFragment extends Fragment {
                 Intent intent =new Intent(getActivity(), CourseDetailActivity.class);
                 intent.putExtra("course_id",courseId);
                 intent.putExtra("course_name",name);
-                startActivity(intent);
+                startActivityForResult(intent,0);
             }
         });
         list.setAdapter(simpleAdapter);

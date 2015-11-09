@@ -29,18 +29,19 @@ import cn.edu.buaamooc.view.yh_HeadControlPanel;
 
 public class CourseDetailActivity extends FragmentActivity {
 
-    private Handler mHandler,mHandler1;
     private ViewPager viewPager;
     private String course_id;
     private int currIndex = 0;
     private int position_one;
     private int position_two;
     private ImageView ivBottomLine;
+    private MyFragmentPagerAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coursedetail);
+        setResult(3);
         course_id=getIntent().getStringExtra("course_id");
         if(course_id.equals("")) {
             Toast.makeText(this,"不存在该课程",Toast.LENGTH_LONG).show();
@@ -99,7 +100,8 @@ public class CourseDetailActivity extends FragmentActivity {
         //获取布局中的viewpager控件
         viewPager = (ViewPager) findViewById(R.id.course_detail_page);
         //给ViewPager添加适配器
-        viewPager.setAdapter(new MyFragmentPagerAdapter(getSupportFragmentManager()));
+        adapter=new MyFragmentPagerAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(adapter);
         //设置默认的视图为第0个
         viewPager.setCurrentItem(0);
         //给Viewpager添加监听事件
@@ -203,7 +205,7 @@ public class CourseDetailActivity extends FragmentActivity {
     }
 
     public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
-        private ArrayList<Fragment> fragmentArrayList;
+        public ArrayList<Fragment> fragmentArrayList;
 
         public MyFragmentPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -239,6 +241,14 @@ public class CourseDetailActivity extends FragmentActivity {
             //设置ViewPager的当前view
             viewPager.setCurrentItem(index);
         }
+    }
+
+    public Fragment getFragment(int num) {
+       return adapter.fragmentArrayList.get(num);
+    }
+
+    public void onDestroy() {
+        super.onDestroy();
     }
 
 }

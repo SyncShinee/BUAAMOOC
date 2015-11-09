@@ -5,7 +5,7 @@ import android.util.Log;
 public class Logger {
 
 	private static boolean isLog = true;
-	private static final String TAG = "test";
+	private static final String TAG = "mooc";
 
 	public static void setLog(boolean isLog) {
 		Logger.isLog = isLog;
