@@ -38,7 +38,7 @@
 		this device.</string>
     <string name="VideoView_error_text_unknown">对不起,这个视频不能播放。</string>
     <string name="VideoView_error_title">Cannot play video</string>
-    <string name="app_name">开播视频</string>
+    <string name="app_name">MOOC</string>
     <string name="closing_file">正在退出…</string>
     <string name="content_desc_lock">锁定</string>
     <string name="file_delete">删除</string>

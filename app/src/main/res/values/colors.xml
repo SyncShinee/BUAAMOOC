@@ -17,8 +17,8 @@
     <color name="course_transparent">#00000000</color>
     <color name="course_black">#000000</color>
     <color name="course_gray">#929292</color>
-    <color name="course_blue">#3F51B5</color>
-    <color name="colorPrimary">#3F51B5</color>
+    <color name="course_blue">#005FAF</color>
+    <color name="colorPrimary">#005FAF</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="black">#000000</color>

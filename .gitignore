@@ -5,5 +5,7 @@
 /.idea/workspace.xml
 /.idea/libraries
 .DS_Store
+/oPlayer/build
+/VitamioBundle/build
 /build
 /captures
