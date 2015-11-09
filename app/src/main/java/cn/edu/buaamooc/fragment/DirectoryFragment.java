@@ -51,8 +51,6 @@ public class DirectoryFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mDataList = new ArrayList<Node>();
-
-
         mHandler = new Handler() {
             @SuppressLint("HandlerLeak")
             @Override
@@ -157,6 +155,7 @@ public class DirectoryFragment extends Fragment {
                                                             address = CONST.URL + address;
                                                         root3 = new Node(root2, unit.getString("name"), address);
                                                     }catch (Exception e) {
+                                                        root3 = new Node(root2, unit.getString("name"), CONST.URL);
                                                         Logger.e(e.toString());
                                                         e.printStackTrace();
                                                     }

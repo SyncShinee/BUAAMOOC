@@ -3,6 +3,8 @@ package cn.edu.buaamooc.view;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.edu.buaamooc.CONST;
+
 public class Node {
 
 	/** 当前节点层级 */
@@ -54,7 +56,7 @@ public class Node {
 	}
 
 	public Node(Node parent, String label,String url) {
-		this.url=url;
+		this.url=url.equals(CONST.URL)?null:url;
 		this.parentNode = parent;
 		this.label = label;
 		if (parent != null) {

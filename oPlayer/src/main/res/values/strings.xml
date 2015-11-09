@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">开播视频</string>
+    <string name="app_name">MOOC</string>
     <string name="version_name">1.0</string>
     <string name="title_file">本地视频</string>
     <string name="title_online">在线视频</string>

@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.nmbb.oplayer.ui.player.VideoActivity;
@@ -89,12 +90,19 @@ public class TreeAdapter extends BaseAdapter {
 				TreeUtils.filterNodeList(mDataList, node);
 			} else {
 				Intent intent = new Intent(context, VideoActivity.class);
-				intent.setData(Uri.parse(node.getUrl()));
-				// intent.putExtra("path", f.path);
-				intent.putExtra("displayName", node.getLabel());
-				context.startActivity(intent);
+				String url_t=node.getUrl();
+				if(url_t!=null&&!url_t.equals("")) {
+					intent.setData(Uri.parse(node.getUrl()));
+//					intent.setData(Uri.parse("http://www.baidu.com"));
+					// intent.putExtra("path", f.path);
+					intent.putExtra("displayName", node.getLabel());
+					context.startActivity(intent);
 //				Toast.makeText(context, "点击了:" + node.getLabel(),
 //						Toast.LENGTH_SHORT).show();
+				}
+				else {
+					Toast.makeText(context,"对不起，此视频不存在。",Toast.LENGTH_SHORT).show();
+				}
 				return;
 			}
 			notifyDataSetChanged();
