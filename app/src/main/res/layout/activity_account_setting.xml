@@ -37,7 +37,7 @@
             android:layout_centerInParent="true"
             android:maxWidth="50dp"
             android:textColor="#ffffff"
-            android:textSize="25sp"/>
+            android:textSize="18sp"/>
 
     </RelativeLayout>
 
@@ -61,7 +61,8 @@
             android:layout_marginRight="20dp"
             android:layout_gravity="center"
             android:text="账户信息（必填）"
-            android:textSize="20sp"/>
+            android:textColor="@color/colorBlack"
+            android:textSize="17sp"/>
 
         <View
             android:layout_width="fill_parent"
@@ -84,15 +85,17 @@
                 android:layout_width="100dp"
                 android:layout_height="40dp"
                 android:text="用户名"
-                android:textSize="18sp"
+                android:textColor="@color/colorBlack"
+                android:textSize="17sp"
                 android:id="@+id/UserName"
                 />
 
-            <EditText
+            <TextView
                 android:layout_width="250dp"
                 android:layout_height="40dp"
-                android:hint="username"
+                android:gravity="center"
                 android:id="@+id/UserNameEdit"
+                android:textColor="@color/colorBlack"
                 android:layout_toRightOf="@+id/UserName"
                 android:singleLine="true"/>
 
@@ -111,15 +114,17 @@
                 android:layout_width="100dp"
                 android:layout_height="40dp"
                 android:text="真实姓名"
-                android:textSize="18sp"
+                android:textColor="@color/colorBlack"
+                android:textSize="17sp"
                 android:id="@+id/RealName"/>
 
-            <EditText
+            <TextView
                 android:layout_width="250dp"
                 android:layout_height="40dp"
-                android:hint="YuFisherman"
                 android:id="@+id/RealNameEdit"
+                android:textColor="@color/colorBlack"
                 android:layout_toRightOf="@+id/RealName"
+                android:gravity="center"
                 android:singleLine="true"/>
 
         </RelativeLayout>
@@ -137,14 +142,16 @@
                 android:layout_width="100dp"
                 android:layout_height="40dp"
                 android:text="电子邮箱"
-                android:textSize="18sp"
+                android:textColor="@color/colorBlack"
+                android:textSize="17sp"
                 android:id="@+id/Email"/>
 
-            <EditText
+            <TextView
                 android:layout_width="250dp"
                 android:layout_height="40dp"
-                android:hint="mooocapp@sina.com"
                 android:id="@+id/EmailEdit"
+                android:gravity="center"
+                android:textColor="@color/colorBlack"
                 android:layout_toRightOf="@+id/Email"
                 android:singleLine="true"/>
 
@@ -163,13 +170,14 @@
                 android:layout_width="100dp"
                 android:layout_height="30dp"
                 android:text="密码"
-                android:textSize="18sp"
+                android:textColor="@color/colorBlack"
+                android:textSize="17sp"
                 android:id="@+id/Password"/>
 
             <TextView
                 android:layout_width="250dp"
                 android:layout_height="30dp"
-                android:textSize="18sp"
+                android:textSize="17sp"
                 android:text="重设密码"
                 android:textColor="@color/colorMainBuaaBlue"
                 android:id="@+id/PasswordEdit"
@@ -190,15 +198,18 @@
                 android:layout_width="100dp"
                 android:layout_height="40dp"
                 android:text="语言"
-                android:textSize="18sp"
+                android:textColor="@color/colorBlack"
+                android:textSize="17sp"
                 android:id="@+id/language"/>
 
-            <Spinner
+            <TextView
                 android:layout_width="250dp"
                 android:layout_height="30dp"
                 android:id="@+id/languageEdit"
                 android:layout_toRightOf="@+id/language"
-                android:scrollbarSize="20sp"></Spinner>
+                android:text="中文"
+                android:textColor="@color/colorBlack"
+                android:textSize="17sp" />
 
         </RelativeLayout>
 
@@ -219,12 +230,12 @@
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_gravity="center"
             android:text="其他信息（可选）"
-            android:textSize="20sp"/>
+            android:textColor="@color/colorBlack"
+            android:textSize="17sp"/>
 
         <View
             android:layout_width="fill_parent"
@@ -247,15 +258,25 @@
                 android:layout_width="100dp"
                 android:layout_height="30dp"
                 android:text="教育程度"
-                android:textSize="18sp"
+                android:textColor="@color/colorBlack"
+                android:textSize="17sp"
                 android:id="@+id/Education"/>
 
-            <Spinner
-                android:layout_width="250dp"
+            <TextView
+                android:layout_width="200dp"
                 android:layout_height="30dp"
-                android:hint="username"
                 android:id="@+id/EducationEdit"
+                android:textSize="17sp"
+                android:textColor="@color/colorBlack"
                 android:layout_toRightOf="@+id/Education"/>
+
+            <Button
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:id="@+id/changeEdu"
+                android:background="@color/colorMainBuaaBlue"
+                android:gravity="center"
+                android:layout_toRightOf="@+id/EducationEdit"/>
 
         </RelativeLayout>
 
@@ -272,15 +293,25 @@
                 android:layout_width="100dp"
                 android:layout_height="30dp"
                 android:text="性别"
-                android:textSize="18sp"
+                android:textColor="@color/colorBlack"
+                android:textSize="17sp"
                 android:id="@+id/Sex"/>
 
-            <Spinner
-                android:layout_width="250dp"
+            <TextView
+                android:layout_width="200dp"
                 android:layout_height="30dp"
-                android:hint="username"
+                android:textColor="@color/colorBlack"
                 android:id="@+id/SexEdit"
+                android:textSize="18sp"
                 android:layout_toRightOf="@+id/Sex"/>
+
+            <Button
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:id="@+id/changeSex"
+                android:background="@color/colorMainBuaaBlue"
+                android:gravity="center"
+                android:layout_toRightOf="@+id/SexEdit"/>
 
         </RelativeLayout>
 
@@ -296,19 +327,32 @@
             <TextView
                 android:layout_width="100dp"
                 android:layout_height="30dp"
-                android:text="出生年份"
-                android:textSize="18sp"
+                android:text="出生日期"
+                android:textColor="@color/colorBlack"
+                android:textSize="17sp"
                 android:id="@+id/Year"/>
 
-            <Spinner
-                android:layout_width="250dp"
+            <TextView
+                android:layout_width="200dp"
                 android:layout_height="30dp"
-                android:hint="username"
                 android:id="@+id/YearEdit"
+                android:textColor="@color/colorBlack"
+                android:textSize="18sp"
                 android:layout_toRightOf="@+id/Year"/>
+
+            <Button
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:id="@+id/changeData"
+                android:background="@color/colorMainBuaaBlue"
+                android:gravity="center"
+                android:layout_toRightOf="@+id/YearEdit"/>
+
+
 
         </RelativeLayout>
 
     </LinearLayout>
 
 </RelativeLayout>
+

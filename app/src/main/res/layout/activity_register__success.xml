@@ -38,7 +38,7 @@
             android:layout_centerInParent="true"
             android:maxWidth="50dp"
             android:textColor="#ffffff"
-            android:textSize="25sp" />
+            android:textSize="18sp" />
 
     </RelativeLayout>
 
@@ -70,9 +70,11 @@
                 android:layout_height="50dp"
                 android:id="@+id/success"
                 android:layout_toRightOf="@+id/success_Image"
-                android:text="注册成功"
-                android:textSize="30sp"
-                android:gravity="center"/>
+                android:textSize="18sp"
+                android:gravity="center"
+                android:textIsSelectable="false"
+                android:textColor="@color/colorBlack"
+                android:text="注册成功" />
         </RelativeLayout>
 
         <LinearLayout
@@ -92,7 +94,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:text="用户信息"
-                android:textSize="25sp"
+                android:textColor="@color/colorBlack"
+                android:textSize="17sp"
                 android:gravity="center"/>
 
             <View
@@ -110,15 +113,17 @@
                     android:layout_width="110dp"
                     android:id="@+id/Email"
                     android:layout_height="30dp"
-                    android:text="Email"
-                    android:textSize="20sp"/>
+                    android:text="电子邮箱"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="17sp"/>
 
                 <TextView
                     android:layout_width="250dp"
                     android:layout_height="30dp"
                     android:id="@+id/EmailEdit"
                     android:layout_toRightOf="@+id/Email"
-                    android:textSize="20sp"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="17sp"
                     android:singleLine="true"
                     android:text="username@domain.com"/>
             </RelativeLayout>
@@ -132,16 +137,18 @@
                     android:layout_width="110dp"
                     android:id="@+id/RealName"
                     android:layout_height="30dp"
-                    android:text="Real Name"
-                    android:textSize="20sp"/>
+                    android:text="真实姓名"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="17sp"/>
 
                 <TextView
                     android:layout_width="250dp"
                     android:layout_height="30dp"
                     android:id="@+id/RealNameEdit"
                     android:layout_toRightOf="@+id/RealName"
-                    android:textSize="20sp"
+                    android:textSize="17sp"
                     android:singleLine="true"
+                    android:textColor="@color/colorBlack"
                     android:text="Jane Doe"/>
             </RelativeLayout>
 
@@ -154,15 +161,17 @@
                     android:layout_width="110dp"
                     android:id="@+id/UserName"
                     android:layout_height="30dp"
-                    android:text="E-mail"
-                    android:textSize="20sp"/>
+                    android:text="用户名"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="17sp"/>
 
                 <TextView
                     android:layout_width="250dp"
                     android:layout_height="30dp"
                     android:id="@+id/UserNameEdit"
                     android:layout_toRightOf="@+id/UserName"
-                    android:textSize="20sp"
+                    android:textSize="17sp"
+                    android:textColor="@color/colorBlack"
                     android:singleLine="true"
                     android:text="Jane Doe"/>
             </RelativeLayout>
@@ -179,3 +188,4 @@
     </LinearLayout>
 
 </RelativeLayout>
+

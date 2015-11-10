@@ -37,90 +37,103 @@
             android:layout_centerInParent="true"
             android:maxWidth="50dp"
             android:textColor="#ffffff"
-            android:textSize="25sp"/>
+            android:textSize="18sp"/>
 
     </RelativeLayout>
 
     <LinearLayout
-        android:id="@+id/AboutUsInformation"
-        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:layout_below="@+id/AboutUs"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginEnd="10dp"
-        >
+        android:orientation="vertical">
 
-        <TextView
+        <LinearLayout
+            android:id="@+id/AboutUsInformation"
+            android:orientation="vertical"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_gravity="center"
-            android:text="关于我们"
-            android:textSize="20sp"/>
-
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:background="@color/colorMainDivide"/>
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="150dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:text="歪果仁带你灰"
-            android:textSize="20sp"
-            android:gravity="center"/>
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp"
+            >
 
-    </LinearLayout>
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_gravity="center"
+                android:text="关于我们"
+                android:textSize="17sp"
+                android:textColor="@color/colorBlack"/>
 
-    <LinearLayout
-        android:id="@+id/ContactUsInformation"
-        android:orientation="vertical"
-        android:layout_below="@+id/AboutUsInformation"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginEnd="10dp"
-        >
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@color/colorMainDivide"/>
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:text="歪果仁带你灰"
+                android:textSize="17sp"
+                android:textColor="@color/colorBlack"
+                android:gravity="center"/>
 
-        <TextView
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ContactUsInformation"
+            android:orientation="vertical"
+            android:layout_below="@+id/AboutUsInformation"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_gravity="center"
-            android:text="联系我们"
-            android:textSize="20sp"/>
-
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:background="@color/colorMainDivide"/>
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="150dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:text="moocapp@sina.com"
-            android:textSize="20sp"
-            android:gravity="center"/>
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp"
+            >
 
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_gravity="center"
+                android:text="联系我们"
+                android:textSize="17sp"
+                android:textColor="@color/colorBlack"/>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@color/colorMainDivide"/>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:text="moocapp@sina.com"
+                android:textSize="17sp"
+                android:textColor="@color/colorBlack"
+                android:gravity="center"/>
+
+        </LinearLayout>
     </LinearLayout>
 
 </RelativeLayout>

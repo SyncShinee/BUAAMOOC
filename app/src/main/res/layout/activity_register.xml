@@ -37,7 +37,7 @@
             android:layout_centerInParent="true"
             android:maxWidth="50dp"
             android:textColor="#ffffff"
-            android:textSize="25sp"/>
+            android:textSize="18sp"/>
 
     </RelativeLayout>
 
@@ -92,7 +92,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="E-mail*"
+                android:text="电子邮箱："
+                android:textColor="@color/colorBlack"
                 android:textSize="15sp"
                 />
 
@@ -115,7 +116,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="RealName*"
+                android:text="真实姓名："
+                android:textColor="@color/colorBlack"
                 android:textSize="15sp"
                 />
 
@@ -138,7 +140,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="UserName*"
+                android:text="用户名："
+                android:textColor="@color/colorBlack"
                 android:textSize="15sp"
                 />
 
@@ -161,7 +164,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Password*"
+                android:text="密码："
+                android:textColor="@color/colorBlack"
                 android:textSize="15sp"
                 />
 
@@ -193,7 +197,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@+id/CheckBox1"
                 android:gravity="center"
-                android:text="I agree to the "/>
+                android:text="我已同意"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -201,7 +205,7 @@
                 android:id="@+id/Service"
                 android:layout_toRightOf="@+id/agree1"
                 android:gravity="center"
-                android:text="Terms of Service"
+                android:text="BUAAMOOC服务条款"
                 android:textColor="@color/colorMainBuaaBlue"/>
         </RelativeLayout>
 
@@ -223,7 +227,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@+id/CheckBox2"
                 android:gravity="center"
-                android:text="I agree to the "/>
+                android:text="我已同意"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -231,7 +235,7 @@
                 android:id="@+id/Code"
                 android:layout_toRightOf="@+id/agree2"
                 android:gravity="center"
-                android:text="Honor Code"
+                android:text="BUAAMOOC诚信守则公约"
                 android:textColor="@color/colorMainBuaaBlue"/>
         </RelativeLayout>
 
@@ -240,11 +244,11 @@
             android:layout_width="fill_parent"
             android:layout_height="50dp"
             android:layout_marginTop="20dp"
-            android:background="@color/colorSkybule"
-            android:text="Create"
+            android:background="@color/colorBgLightBlue"
+            android:text="注册"
             android:layout_gravity="center"
             android:gravity="center"
-            android:textSize="30sp"/>
+            android:textSize="18sp"/>
     </LinearLayout>
 
 </RelativeLayout>

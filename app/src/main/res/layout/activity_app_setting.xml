@@ -37,7 +37,7 @@
             android:layout_centerInParent="true"
             android:maxWidth="50dp"
             android:textColor="#ffffff"
-            android:textSize="25sp" />
+            android:textSize="18sp" />
 
     </RelativeLayout>
 
@@ -63,7 +63,8 @@
                 android:layout_width="100dp"
                 android:layout_height="40dp"
                 android:id="@+id/wifiDownload"
-                android:textSize="20sp"
+                android:textSize="17sp"
+                android:textColor="@color/colorBlack"
                 android:text="仅WiFi下载"
                 android:gravity="center"
 
@@ -90,7 +91,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:text="下载路径"
-                android:textSize="20sp"
+                android:textSize="17sp"
+                android:textColor="@color/colorBlack"
                 android:gravity="center"/>
 
             <View
@@ -110,6 +112,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:text="选择其他路径"
+                android:textSize="12sp"
                 android:textColor="#717171"
                 />
 

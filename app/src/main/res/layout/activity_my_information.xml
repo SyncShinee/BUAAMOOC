@@ -37,205 +37,236 @@
             android:layout_centerInParent="true"
             android:maxWidth="50dp"
             android:textColor="#ffffff"
-            android:textSize="25sp" />
+            android:textSize="18sp" />
 
     </RelativeLayout>
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:id="@+id/MyInformationEdit"
+        android:layout_height="fill_parent"
+        android:id="@+id/someMy"
         android:layout_below="@+id/MyInformation"
-        android:gravity="center"
-        >
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:id="@+id/Userphoto"
-            android:gravity="center">
-
-            <ImageView
-                android:layout_width="170dp"
-                android:layout_height="170dp"
-                android:src="@drawable/user"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:id="@+id/MyInformationEdit"
             android:gravity="center"
-            android:layout_marginTop="20dp"
-            android:id="@+id/UserName"
             >
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="username"
-                android:textSize="25sp"/>
+                android:layout_marginTop="20dp"
+                android:id="@+id/Userphoto"
+                android:gravity="center">
 
-        </LinearLayout>
-    </LinearLayout>
+                <ImageView
+                    android:layout_width="170dp"
+                    android:layout_height="170dp"
+                    android:src="@drawable/user"/>
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical"
-        android:id="@+id/MyInformationEdit2"
-        android:layout_below="@+id/MyInformationEdit"
-        android:gravity="center">
+            </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
-            android:layout_marginTop="20dp"
-            android:id="@+id/MyCourse"
-            android:orientation="vertical"
-            android:background="@color/colorLightblue">
-
-            <View
+            <LinearLayout
                 android:layout_width="fill_parent"
-                android:layout_height="1dp"
-                android:background="@color/colorMainDivide"/>
-
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="30dp"
-                android:text="我的课程"
-                android:textSize="23sp"
-                android:layout_marginTop="4dp"
+                android:layout_height="wrap_content"
                 android:gravity="center"
-                android:id="@+id/button_mycourse" />
+                android:layout_marginTop="20dp"
+                android:id="@+id/UserName"
+                >
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="username"
+                    android:textSize="17sp"
+                    android:textColor="@color/colorBlack"
+                    android:id="@+id/username_button" />
+
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="0dp"
-            android:layout_weight="2"
-            android:id="@+id/MyDownloads"
+            android:layout_weight="1"
             android:orientation="vertical"
-            android:background="@color/colorLightblue">
+            android:id="@+id/MyInformationEdit2"
+            android:layout_below="@+id/MyInformationEdit"
+            android:gravity="center">
 
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="1dp"
-                android:background="@color/colorMainDivide"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:id="@+id/MyCourse"
+                android:orientation="vertical"
+                android:background="@color/colorBgLightBlue">
 
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="30dp"
-                android:text="我的下载"
-                android:textSize="23sp"
-                android:layout_marginTop="4dp"
-                android:gravity="center"
-                android:id="@+id/button_mydownloads" />
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorMainDivide"/>
 
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="我的课程"
+                    android:textSize="17sp"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
+                    android:textColor="@color/colorBlack"
+                    android:id="@+id/button_mycourse" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:id="@+id/MyDownloads"
+                android:orientation="vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/colorBgLightBlue">
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorMainDivide"/>
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="我的下载"
+                    android:textSize="17sp"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
+                    android:textColor="@color/colorBlack"
+                    android:id="@+id/button_mydownloads" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:id="@+id/AccountSetting"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:orientation="vertical"
+                android:background="@color/colorBgLightBlue">
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorMainDivide"/>
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="账户设置"
+                    android:textSize="17sp"
+                    android:layout_marginTop="4dp"
+                    android:textColor="@color/colorBlack"
+                    android:gravity="center"
+                    android:id="@+id/button_accountsetting" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:id="@+id/Appsetting"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:orientation="vertical"
+                android:background="@color/colorBgLightBlue">
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorMainDivide"/>
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="应用设置"
+                    android:textSize="17sp"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
+                    android:textColor="@color/colorBlack"
+                    android:id="@+id/button_appsetting" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:id="@+id/AboutUs"
+                android:orientation="vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/colorBgLightBlue">
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorMainDivide"/>
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="关于我们"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="17sp"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
+                    android:id="@+id/button_aboutus" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:id="@+id/logout"
+                android:orientation="vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/colorLightblue">
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorMainDivide"/>
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="注销"
+                    android:textSize="18sp"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
+                    android:textColor="@color/colorBlack"
+                    android:id="@+id/button_logout" />
+
+            </LinearLayout>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
-            android:id="@+id/AccountSetting"
-            android:orientation="vertical"
-            android:background="@color/colorLightblue">
-
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="1dp"
-                android:background="@color/colorMainDivide"/>
-
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="30dp"
-                android:text="账户设置"
-                android:textSize="23sp"
-                android:layout_marginTop="4dp"
-                android:gravity="center"
-                android:id="@+id/button_accountsetting" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
-            android:id="@+id/Appsetting"
-            android:orientation="vertical"
-            android:background="@color/colorLightblue">
-
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="1dp"
-                android:background="@color/colorMainDivide"/>
-
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="30dp"
-                android:text="应用设置"
-                android:textSize="23sp"
-                android:layout_marginTop="4dp"
-                android:gravity="center"
-                android:id="@+id/button_appsetting" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
-            android:id="@+id/AboutUs"
-            android:orientation="vertical"
-            android:background="@color/colorLightblue">
-
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="1dp"
-                android:background="@color/colorMainDivide"/>
-
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="30dp"
-                android:text="关于我们"
-                android:textSize="23sp"
-                android:layout_marginTop="4dp"
-                android:gravity="center"
-                android:id="@+id/button_aboutus" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="3"
-            android:id="@+id/logout"
-            android:orientation="vertical"
-            android:background="@color/colorSkybule">
-
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="1dp"
-                android:background="@color/colorMainDivide"/>
-
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="40dp"
-                android:text="注销"
-                android:textSize="28sp"
-                android:layout_marginTop="4dp"
-                android:gravity="center"
-                android:id="@+id/button_logout" />
-
-        </LinearLayout>
     </LinearLayout>
 
 
 
 
 </RelativeLayout>
+

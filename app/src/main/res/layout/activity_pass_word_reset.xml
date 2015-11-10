@@ -37,7 +37,7 @@
             android:layout_centerInParent="true"
             android:maxWidth="50dp"
             android:textColor="#ffffff"
-            android:textSize="25sp" />
+            android:textSize="18sp" />
 
     </RelativeLayout>
 
@@ -55,13 +55,15 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:text="PASSWORD RESET"
-            android:textSize="25sp"
+            android:text="密码初始化"
+            android:textColor="@color/colorBlack"
+            android:textSize="17sp"
             android:gravity="center"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/colorBlack"
             android:text="Please enter your e-mail address below, and we will e-mail instructions for setting a new password."
             />
 
@@ -75,13 +77,16 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:text="Your E-mail Address *"
+                android:text="你的邮箱地址："
+                android:textColor="@color/colorBlack"
+                android:textSize="17sp"
                 android:gravity="center"
                 />
 
             <EditText
                 android:layout_width="fill_parent"
                 android:layout_height="50dp"
+                android:textColor="@color/colorBlack"
                 android:hint="Example:username@domain.com"
                 android:singleLine="true"/>
 
@@ -91,18 +96,19 @@
             android:layout_marginTop="10dp"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="This is the e-mail address you used to register with 北航学堂."
+            android:text="请使用你注册北航学堂时的邮箱。"
             android:textColor="@color/colorMainDivide"/>
 
         <TextView
             android:layout_marginTop="20dp"
             android:layout_width="fill_parent"
             android:layout_height="50dp"
-            android:background="@color/colorSkybule"
-            android:text="Reset My Password"
+            android:background="@color/colorBgLightBlue"
+            android:text="重置密码"
             android:gravity="center"
             android:textColor="@color/colorMainWhite"
-            android:textSize="25sp"/>
+            android:textSize="18sp"
+            android:id="@+id/button_reset" />
     </LinearLayout>
 
 </RelativeLayout>
