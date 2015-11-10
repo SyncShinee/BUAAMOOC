@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/D:/Android2/codes/BUAAMOOC/oPlayer/src/main/res/values/colors.xml -->
+    <!-- From: file:/C:/Users/skyxuan/AndroidStudioProjects/BUAAMOOC/oPlayer/src/main/res/values/colors.xml -->
     <eat-comment/>
     <color name="background">#ffc3ddea</color>
     <color name="background_dark">#f4f4f4</color>
@@ -17,7 +17,7 @@
     <color name="transparent">#00000000</color>
     <color name="white">#ffffffff</color>
     <color name="yellow">#ffffcc00</color>
-    <!-- From: file:/D:/Android2/codes/BUAAMOOC/oPlayer/src/main/res/values/dimens.xml -->
+    <!-- From: file:/C:/Users/skyxuan/AndroidStudioProjects/BUAAMOOC/oPlayer/src/main/res/values/dimens.xml -->
     <eat-comment/>
     <dimen name="BasicTextSize">15.0dip</dimen>
     <dimen name="ChattingContentMinHeight">49.0dip</dimen>
@@ -31,7 +31,7 @@
     <dimen name="mediacontroller_button_space">32dp</dimen>
     <dimen name="mediacontroller_buttons_bottom_margin">0dp</dimen>
     <dimen name="mediacontroller_buttons_top_margin">2dp</dimen>
-    <!-- From: file:/D:/Android2/codes/BUAAMOOC/oPlayer/src/main/res/values/strings.xml -->
+    <!-- From: file:/C:/Users/skyxuan/AndroidStudioProjects/BUAAMOOC/oPlayer/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="VideoView_error_button">OK</string>
     <string name="VideoView_error_text_invalid_progressive_playback">Sorry, this video is not valid for streaming to
@@ -52,7 +52,7 @@
     <string name="init_decoders">初始化播放器...</string>
     <string name="loadinfo">载入中，请稍后...</string>
     <string name="mediacontroller_play_pause">Play/Pause</string>
-    <!-- From: file:/D:/Android2/codes/BUAAMOOC/oPlayer/build/intermediates/exploded-aar/BUAAMOOC/VitamioBundle/unspecified/res/values/values.xml -->
+    <!-- From: file:/C:/Users/skyxuan/AndroidStudioProjects/BUAAMOOC/oPlayer/build/intermediates/exploded-aar/BUAAMOOC/VitamioBundle/unspecified/res/values/values.xml -->
     <eat-comment/>
     <string name="permission_group_tools_description">Access Vitamio package and resources.</string>
     <string name="permission_group_tools_label">Vitamio tools</string>
@@ -61,7 +61,7 @@
     <string name="permission_write_providers_description">Delete, update or create new items in Vitamio providers.
     </string>
     <string name="permission_write_providers_label">Write Vitamio providers</string>
-    <!-- From: file:/D:/Android2/codes/BUAAMOOC/oPlayer/src/main/res/values/strings.xml -->
+    <!-- From: file:/C:/Users/skyxuan/AndroidStudioProjects/BUAAMOOC/oPlayer/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="title_file">本地视频</string>
     <string name="title_online">在线视频</string>
@@ -77,14 +77,14 @@
     <string name="video_screenshot_failed">截图失败</string>
     <string name="video_screenshot_save_in">截图存放在 %s.</string>
     <string name="video_stretch">拉伸</string>
-    <!-- From: file:/D:/Android2/codes/BUAAMOOC/oPlayer/build/intermediates/exploded-aar/BUAAMOOC/VitamioBundle/unspecified/res/values/values.xml -->
+    <!-- From: file:/C:/Users/skyxuan/AndroidStudioProjects/BUAAMOOC/oPlayer/build/intermediates/exploded-aar/BUAAMOOC/VitamioBundle/unspecified/res/values/values.xml -->
     <eat-comment/>
     <string name="vitamio_init_decoders">Initializing decoders…</string>
     <string name="vitamio_library_app_name">VitamioLibrary</string>
-    <!-- From: file:/D:/Android2/codes/BUAAMOOC/oPlayer/src/main/res/values/strings.xml -->
+    <!-- From: file:/C:/Users/skyxuan/AndroidStudioProjects/BUAAMOOC/oPlayer/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="vitamio_theme_app_name">VPlayer codec</string>
-    <!-- From: file:/D:/Android2/codes/BUAAMOOC/oPlayer/src/main/res/values/styles.xml -->
+    <!-- From: file:/C:/Users/skyxuan/AndroidStudioProjects/BUAAMOOC/oPlayer/src/main/res/values/styles.xml -->
     <eat-comment/>
     <style name="AppBaseTheme" parent="android:Theme.Light">
         <!--

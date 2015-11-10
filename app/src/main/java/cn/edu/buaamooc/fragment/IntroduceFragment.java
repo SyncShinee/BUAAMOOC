@@ -16,6 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.umeng.analytics.MobclickAgent;
+
 import org.json.JSONObject;
 
 import cn.edu.buaamooc.CONST;
@@ -250,4 +252,15 @@ public class IntroduceFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart("MainScreen");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd("MainScreen");
+    }
 }

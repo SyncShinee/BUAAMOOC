@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.umeng.analytics.MobclickAgent;
+
 import cn.edu.buaamooc.R;
 
 public class PassWordReset extends Activity {
@@ -35,6 +37,18 @@ public class PassWordReset extends Activity {
                 new AlertDialog.Builder(PassWordReset.this).setMessage("此功能暂未开放。请去往网页版修改密码。\"因为我们的问题给您造成的困扰请见谅！\"").setPositiveButton("确定",null).show();
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 
     @Override

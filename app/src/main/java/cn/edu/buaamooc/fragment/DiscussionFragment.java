@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.umeng.analytics.MobclickAgent;
+
 import cn.edu.buaamooc.R;
 
 /**
@@ -16,5 +18,17 @@ public class DiscussionFragment extends Fragment {
                              Bundle savedInstanceState) {
         View Layout= inflater.inflate(R.layout.fragment_course_discussion, container, false);
         return Layout;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart("MainScreen");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd("MainScreen");
     }
 }

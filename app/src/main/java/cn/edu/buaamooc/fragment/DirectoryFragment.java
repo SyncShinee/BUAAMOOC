@@ -16,6 +16,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.umeng.analytics.MobclickAgent;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -88,6 +90,7 @@ public class DirectoryFragment extends Fragment {
         initListview();
         return Layout;
     }
+
 
     private void initListview() {
         adapter = new TreeAdapter(getActivity(), mDataList);
@@ -188,5 +191,12 @@ public class DirectoryFragment extends Fragment {
     }
     public void onResume() {
         super.onResume();
+        MobclickAgent.onPageStart("MainScreen");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd("MainScreen");
     }
 }

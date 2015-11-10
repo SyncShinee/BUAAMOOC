@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
+import com.umeng.analytics.MobclickAgent;
+
 import cn.edu.buaamooc.R;
 import cn.edu.buaamooc.activity.MoocMainActivity;
 import cn.edu.buaamooc.tools.Login;
@@ -72,5 +74,17 @@ public class LoginFragment extends Fragment {
         }
         activity.setUsername(username);
         login.login();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart("MainScreen");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd("MainScreen");
     }
 }
