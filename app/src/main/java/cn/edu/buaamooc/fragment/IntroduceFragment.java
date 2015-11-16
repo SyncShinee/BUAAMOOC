@@ -155,7 +155,7 @@ public class IntroduceFragment extends Fragment {
     private void setbtnClickable() {
         btn_quit_enroll.setClickable(true);
         btn_quit_enroll.setBackgroundResource(R.drawable.course_btn_bg);
-        btn_quit_enroll.setTextColor(resources.getColor(R.color.white));
+        btn_quit_enroll.setTextColor(resources.getColor(R.color.black));
     }
 
     public void enroll() {

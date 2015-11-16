@@ -10,6 +10,7 @@ import java.util.MissingResourceException;
  */
 public class CONST {
     public static final String URL = "http://10.2.13.251";
+//    public static final String URL="http://mooc.buaa.edu.cn/";
     public static final String MURL = URL + "/mobile_api";
     public static final String LOGINURL = MURL + "/login";
     public static final String INITURL = MURL + "/init";
