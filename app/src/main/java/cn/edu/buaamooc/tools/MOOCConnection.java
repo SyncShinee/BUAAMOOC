@@ -3,7 +3,6 @@ package cn.edu.buaamooc.tools;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
-import android.widget.ImageButton;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -15,15 +14,14 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.cookie.Cookie;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -35,7 +33,10 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 import cn.edu.buaamooc.CONST;
 
@@ -43,8 +44,21 @@ import cn.edu.buaamooc.CONST;
 public class MOOCConnection {
     private static String token = ""; //保存初始化获取的csrftoken，供之后的访问使用
     private static List<Cookie> cookies; //保存初始化和登陆界面返回的所有cookie，供之后的访问使用
-    private JSONObject resultJsonObject = null; //服务器返回的数据转换成的JSON数据
-    private JSONArray Jsonarray = null; //服务器返回的数据转换成的JSON数组
+    private JSONObject resultJsonObject; //服务器返回的数据转换成的JSON数据
+    private JSONArray Jsonarray; //服务器返回的数据转换成的JSON数组
+    private static BasicHttpParams httpParams;
+
+    static {
+        cookies = new ArrayList<>();
+        httpParams = new BasicHttpParams();
+        HttpConnectionParams.setConnectionTimeout(httpParams, CONST.REQUEST_TIMEOUT);
+        HttpConnectionParams.setSoTimeout(httpParams, CONST.WAIT_TIMEOUT);
+    }
+
+    public MOOCConnection(){
+        resultJsonObject = null;
+        Jsonarray = null;
+    }
 
     public MOOCConnection refreshDataAndReInit() {
         token = "";
@@ -77,7 +91,7 @@ public class MOOCConnection {
             e.printStackTrace();
             return false; //Todo
         } finally {
-            //Todo         
+            //Todo
         }
         return true;
     }
@@ -396,7 +410,7 @@ public class MOOCConnection {
 
 //            new Thread(new ImageDownloader(input).setPath(path)).start();
 
-            String fpath = CONST.COURSEPIC + path;
+            String fpath = CONST.COURSEPIC + path + "0";
             int index = fpath.lastIndexOf(File.separatorChar);
             File dir = new File(fpath.substring(0, index));
             if(!dir.exists()){

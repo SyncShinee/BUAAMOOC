@@ -1,0 +1,20 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context="cn.edu.buaamooc.fragment.MainLoadingFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text
+            ="正在初始化网络，请稍后......\n\n如果长时间未初始化完成或网络连接失败，请检查是否处在校园网环境中"
+        android:layout_gravity="center"
+        android:textSize="18dp"
+        android:textColor="@color/course_gray"
+        android:layout_marginBottom="100dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"/>
+
+</FrameLayout>

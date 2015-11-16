@@ -1,5 +1,6 @@
 package cn.edu.buaamooc.activity;
 
+import android.support.v4.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -31,6 +32,7 @@ import cn.edu.buaamooc.R;
 import cn.edu.buaamooc.exception.Logger;
 import cn.edu.buaamooc.fragment.CourseListFragment;
 import cn.edu.buaamooc.fragment.LoginFragment;
+import cn.edu.buaamooc.fragment.MainLoadingFragment;
 import cn.edu.buaamooc.tools.Login;
 import cn.edu.buaamooc.tools.MOOCConnection;
 
@@ -52,6 +54,8 @@ public class MoocMainActivity extends FragmentActivity {
     private int position_one;
     private int position_two;
 
+    private boolean connected;
+
     private String username;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +72,12 @@ public class MoocMainActivity extends FragmentActivity {
         myTab = (TextView) findViewById(R.id.tab_title_my);
         ivBottomLine = (ImageView) findViewById(R.id.iv_bottom_line);
 
+        final MainLoadingFragment mainLoadingFragment = new MainLoadingFragment();
+        fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.main_content, mainLoadingFragment, "loading");
+        ft.commit();
+
         InitWidth();
 
         final SharedPreferences loginInfo = getSharedPreferences("loginInfo", MODE_PRIVATE);
@@ -80,8 +90,10 @@ public class MoocMainActivity extends FragmentActivity {
             //用来处理初始化函数的返回信息
             @Override
             public void handleMessage(Message msg) {
+                fm.beginTransaction().remove(mainLoadingFragment).commit();
                 if (msg.what == 0x111) {
                     //页面跳转到登录界面
+                    connected = true;
                     if(loadLoginFragment) {
                         new Login(username,password).setContext(MoocMainActivity.this).setAuto(true).login();
                     }
@@ -90,6 +102,8 @@ public class MoocMainActivity extends FragmentActivity {
                     }
                 }
                 else {
+                    connected = false;
+                    initializeViewPager();
                     Toast.makeText(MoocMainActivity.this, "无网络连接，请重试", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -113,10 +127,14 @@ public class MoocMainActivity extends FragmentActivity {
         }).start();    //开启一个线程
 
 
-        fm = getSupportFragmentManager();
         //initialize fragmentList
         fragmentList = new ArrayList<>(3);
 
+
+
+    }
+
+    private void initializeButtons(){
         //set onclickListener event
         hotTab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,12 +142,6 @@ public class MoocMainActivity extends FragmentActivity {
                 MoocMainActivity.this.setHotCourse();
             }
         });
-//        hotTabLayout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                MoocMainActivity.this.setHotCourse();
-//            }
-//        });
         allTab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -143,10 +155,6 @@ public class MoocMainActivity extends FragmentActivity {
             }
         });
 
-//        initializeViewPager();
-//        setMyCourse();
-
-
         ImageButton userInfo = (ImageButton) findViewById(R.id.button_user_info);
         userInfo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -155,8 +163,6 @@ public class MoocMainActivity extends FragmentActivity {
                 startActivityForResult(intent,0);
             }
         });
-
-
     }
 
     @Override
@@ -184,6 +190,7 @@ public class MoocMainActivity extends FragmentActivity {
      * Initialize ViewPager.
      */
     public void initializeViewPager() {
+        initializeButtons();
         fragmentList.clear();
         addFragments();
 
@@ -201,6 +208,7 @@ public class MoocMainActivity extends FragmentActivity {
 
 
         viewPager = (ViewPager) findViewById(R.id.viewpager_course_list);
+//        viewPager.setVisibility(View.VISIBLE);
         viewPager.setAdapter(fpAdapter);
         viewPager.addOnPageChangeListener(new MyOnPageChangeListener());
 //        setHotCourse();
@@ -307,13 +315,13 @@ public class MoocMainActivity extends FragmentActivity {
 
         bundle = new Bundle();
         courseListFragment = new CourseListFragment();
-        bundle.putInt("tabIndex", 1);
+        bundle.putInt("tabIndex", connected?1:-1);
         courseListFragment.setArguments(bundle);
         fragmentList.add(courseListFragment);
 
         bundle = new Bundle();
         courseListFragment = new CourseListFragment();
-        bundle.putInt("tabIndex", 2);
+        bundle.putInt("tabIndex", connected?2:-1);
         courseListFragment.setArguments(bundle);
         fragmentList.add(courseListFragment);
 
@@ -325,7 +333,7 @@ public class MoocMainActivity extends FragmentActivity {
      */
     private void addMyCourseFragment() {
         Bundle bundle = new Bundle();
-        bundle.putInt("tabIndex", 0);
+        bundle.putInt("tabIndex", connected?0:-1);
         if (loadLoginFragment) {
             CourseListFragment courseListFragment = new CourseListFragment();
             courseListFragment.setArguments(bundle);

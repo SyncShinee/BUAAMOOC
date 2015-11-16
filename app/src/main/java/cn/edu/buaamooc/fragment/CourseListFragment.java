@@ -68,6 +68,8 @@ public class CourseListFragment extends Fragment {
 
         Bundle bundle = getArguments();
         tabIndex = bundle.getInt("tabIndex");
+        if (tabIndex == -1)
+            return layout;
         //test git
         ListView list = (ListView) layout.findViewById(R.id.listview_course);
 
@@ -139,7 +141,7 @@ public class CourseListFragment extends Fragment {
         final String name = tabIndex==0?"display_name":"course_title";
 
 
-        final Handler handler = new Handler(){
+        final Handler courseHandler = new Handler(){
             @Override
             @SuppressLint("HandlerLeak")
             public void handleMessage(Message msg){
@@ -230,7 +232,7 @@ public class CourseListFragment extends Fragment {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                handler.sendMessage(new Message());
+                courseHandler.sendMessage(new Message());
             }
         }).start();
 
@@ -241,7 +243,7 @@ public class CourseListFragment extends Fragment {
      */
     public void refreshImage(){
 
-        final Handler mHandler = new Handler(){
+        final Handler imageHandler = new Handler(){
             @Override
             @SuppressLint("HandlerLeak")
             public void handleMessage(Message msg) {
@@ -271,7 +273,7 @@ public class CourseListFragment extends Fragment {
                         String path = sourceList.get(i).get("image_url").toString(); //获取课程图片的存储路径
                         Log.e("image_url", path);
                         Bitmap bitmap;
-                        String filedir = CONST.COURSEPIC+ File.separator + path;
+                        String filedir = CONST.COURSEPIC+ File.separator + path + "0";
                         File file = new File(filedir);
                         if (file.exists()){
                             //从本地缓存读取图片，保存在bitmap中
@@ -291,7 +293,7 @@ public class CourseListFragment extends Fragment {
                         Message m=new Message();
                         m.what=i;
                         m.setData(bundle);
-                        mHandler.sendMessage(m);
+                        imageHandler.sendMessage(m);
                         //给mHandler发送消息，消息内容是要刷新图片的位置
                     }
 
@@ -299,7 +301,7 @@ public class CourseListFragment extends Fragment {
                 catch(Exception e){
                     Message m=new Message();
                     m.what=-1;
-                    mHandler.sendMessage(m);
+                    imageHandler.sendMessage(m);
                     //捕获到异常，则不刷新页面
                 }
 

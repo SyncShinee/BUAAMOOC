@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/C:/Users/skyxuan/AndroidStudioProjects/BUAAMOOC/oPlayer/src/main/res/values-small/dimens.xml -->
+    <!-- From: file:/D:/Android2/codes/BUAAMOOC/oPlayer/src/main/res/values-small/dimens.xml -->
     <eat-comment/>
     <dimen name="ChuZhuangWH">32.0dip</dimen>
 </resources>

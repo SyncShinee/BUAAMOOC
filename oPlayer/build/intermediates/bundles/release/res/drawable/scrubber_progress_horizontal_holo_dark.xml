@@ -16,4 +16,4 @@
 		<scale android:scaleWidth="100%" android:drawable="@drawable/scrubber_primary_holo" />
 	</item>
 </layer-list>
-<!-- From: file:/C:/Users/skyxuan/AndroidStudioProjects/BUAAMOOC/oPlayer/src/main/res/drawable/scrubber_progress_horizontal_holo_dark.xml -->
+<!-- From: file:/D:/Android2/codes/BUAAMOOC/oPlayer/src/main/res/drawable/scrubber_progress_horizontal_holo_dark.xml -->
