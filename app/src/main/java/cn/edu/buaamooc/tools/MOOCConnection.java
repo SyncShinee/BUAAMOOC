@@ -8,6 +8,7 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.NameValuePair;
+import org.apache.http.client.CookieStore;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
@@ -110,7 +111,7 @@ public class MOOCConnection {
             httppost.addHeader("X-CSRFToken", token);
             //将X-CSRFToken加入httppost
             DefaultHttpClient httpclient = new DefaultHttpClient();
-            org.apache.http.client.CookieStore store = httpclient.getCookieStore();
+            CookieStore store = httpclient.getCookieStore();
             for (int i = 0; i < cookies.size(); i++) {
                 store.addCookie(cookies.get(i));
             }
@@ -154,7 +155,7 @@ public class MOOCConnection {
         try {
             DefaultHttpClient httpclient = new DefaultHttpClient();
             HttpGet httpget = new HttpGet(CONST.COURSEURL);
-            org.apache.http.client.CookieStore store = httpclient.getCookieStore();
+            CookieStore store = httpclient.getCookieStore();
             for (int i = 0; i < cookies.size(); i++) {
                 store.addCookie(cookies.get(i));
             }

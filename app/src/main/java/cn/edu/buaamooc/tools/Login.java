@@ -21,8 +21,8 @@ public class Login {
     private boolean rememberMe;
 
     private JSONObject resultJsonObject;
-    private Handler mHandler; //用于处理实现登录函数的线程返回的数据
-    private Handler mHandler1; //用于处理登录之后获取已选课程和全部课程的线程返回的数据
+    private static LoginHandler loginHandler; //用于处理实现登录函数的线程返回的数据
+    private static LoginJumpHandler loginJumpHandler; //用于处理登录之后获取已选课程和全部课程的线程返回的数据
 
     private boolean autoLogin;
 
@@ -33,6 +33,123 @@ public class Login {
 
     }
 
+    public static class LoginHandler extends Handler{
+        private Context mContext;
+        private String username;
+        private String password;
+        private boolean rememberMe;
+
+        LoginHandler(Context mContext){
+            this.mContext = mContext;
+        }
+
+        public LoginHandler setUserInfo(String username, String password){
+            this.username = username;
+            this.password = password;
+            return this;
+        }
+
+        public LoginHandler setRememberMe(boolean rememberMe){
+            this.rememberMe = rememberMe;
+            return this;
+        }
+
+        @Override
+        public void handleMessage(Message msg){
+            if(msg.what==0x111){
+                Toast.makeText(mContext, "登录成功",Toast.LENGTH_SHORT).show();
+                //更新MoocMainActivity中的ViewPager中的第三个fragment，变为CourseListFragment
+//                mHandler1=new Handler(){
+//                    @Override
+//                    public void handleMessage(Message msg) {
+//                        if(msg.what==0x111){
+//                            if (autoLogin) {
+//                                ((MoocMainActivity) mContext).initializeViewPager();
+//                            }
+//                            else {
+//                                ((MoocMainActivity) mContext).refreshLoginInfo(true, autoLogin);
+//                            }
+////                                ((MoocMainActivity) mContext).setLogCondition(true).initializeViewPager();
+//                            //获取已选课程
+//                        }
+//                        else if(msg.what==0x010){
+//                            Toast.makeText(mContext, "网络连接失败，请重试。",Toast.LENGTH_SHORT).show();
+//                        }
+//
+//                        else{
+//                            //用户名密码错误，弹出对话框
+//                            Toast.makeText(mContext, "用户名或者密码错误，请重新输入。",Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//
+//                };
+
+                try{
+                    new Thread(new Runnable() {
+                        @SuppressLint("HandlerLeak")
+                        public void run() {
+                            if (rememberMe){
+                                SharedPreferences loginInfo = mContext.getSharedPreferences("loginInfo",Context.MODE_PRIVATE);
+                                SharedPreferences.Editor loginEditor = loginInfo.edit();
+                                loginEditor.putString("username", username);
+                                loginEditor.putString("password", password);
+                                loginEditor.apply();
+                            }
+
+                            Message m=new Message();
+                            m.what=0x111;
+                            loginJumpHandler.sendMessage(m);   //发送成功信息
+                        }
+                    }).start();
+
+                    //JSONObject resultJsonObject = mooc.MOOCLogin();
+
+                }
+                catch(Exception ee){
+
+                }
+
+            }else{
+                Toast.makeText(mContext, "用户名或者密码错误，请重新输入。",Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    public static class LoginJumpHandler extends Handler{
+        private Context mContext;
+        private boolean autoLogin;
+
+        LoginJumpHandler(Context mContext){
+            this.mContext = mContext;
+        }
+
+        public LoginJumpHandler setAutoLogin(boolean autoLogin) {
+            this.autoLogin = autoLogin;
+            return this;
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            if (msg.what == 0x111) {
+                if (autoLogin) {
+                    ((MoocMainActivity) mContext).initializeViewPager();
+                }
+                else {
+                    ((MoocMainActivity) mContext).refreshLoginInfo(true, autoLogin);
+                }
+//              ((MoocMainActivity) mContext).setLogCondition(true).initializeViewPager();
+                //获取已选课程
+            }
+            else if (msg.what == 0x010) {
+                Toast.makeText(mContext, "网络连接失败，请重试。", Toast.LENGTH_SHORT).show();
+            }
+
+            else {
+                //用户名密码错误，弹出对话框
+                Toast.makeText(mContext, "用户名或者密码错误，请重新输入。", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 
     public Login(final String username, final String password) {
         this.username = username;
@@ -40,69 +157,72 @@ public class Login {
         rememberMe = false;
         resultJsonObject = new JSONObject();
 
-        mHandler=new Handler(){
-            @SuppressLint("HandlerLeak")
-            @Override
-            public void handleMessage(Message msg) {
-                if(msg.what==0x111){
-                    Toast.makeText(mContext, "登录成功",Toast.LENGTH_SHORT).show();
-                    //更新MoocMainActivity中的ViewPager中的第三个fragment，变为CourseListFragment
-                    mHandler1=new Handler(){
-                        @Override
-                        public void handleMessage(Message msg) {
-                            if(msg.what==0x111){
-                                if (autoLogin) {
-                                    ((MoocMainActivity) mContext).initializeViewPager();
-                                }
-                                else {
-                                    ((MoocMainActivity) mContext).refreshLoginInfo(true, autoLogin);
-                                }
-//                                ((MoocMainActivity) mContext).setLogCondition(true).initializeViewPager();
-                                //获取已选课程
-                            }
-                            else if(msg.what==0x010){
-                                Toast.makeText(mContext, "网络连接失败，请重试。",Toast.LENGTH_SHORT).show();
-                            }
+        loginHandler = new LoginHandler(mContext);
+        loginHandler.setUserInfo(username, password).setRememberMe(rememberMe);
+        loginJumpHandler = new LoginJumpHandler(mContext).setAutoLogin(autoLogin);
 
-                            else{
-                                //用户名密码错误，弹出对话框
-                                Toast.makeText(mContext, "用户名或者密码错误，请重新输入。",Toast.LENGTH_SHORT).show();
-                            }
-                        }
+//        loginHandler= new Handler(){
+//            @Override
+//            public void handleMessage(Message msg) {
+////                if(msg.what==0x111){
+////                    Toast.makeText(mContext, "登录成功",Toast.LENGTH_SHORT).show();
+////                    //更新MoocMainActivity中的ViewPager中的第三个fragment，变为CourseListFragment
+////                    mHandler1=new Handler(){
+////                        @Override
+////                        public void handleMessage(Message msg) {
+////                            if(msg.what==0x111){
+////                                if (autoLogin) {
+////                                    ((MoocMainActivity) mContext).initializeViewPager();
+////                                }
+////                                else {
+////                                    ((MoocMainActivity) mContext).refreshLoginInfo(true, autoLogin);
+////                                }
+//////                                ((MoocMainActivity) mContext).setLogCondition(true).initializeViewPager();
+////                                //获取已选课程
+////                            }
+////                            else if(msg.what==0x010){
+////                                Toast.makeText(mContext, "网络连接失败，请重试。",Toast.LENGTH_SHORT).show();
+////                            }
+////
+////                            else{
+////                                //用户名密码错误，弹出对话框
+////                                Toast.makeText(mContext, "用户名或者密码错误，请重新输入。",Toast.LENGTH_SHORT).show();
+////                            }
+////                        }
+////
+////                    };
+////
+////                    try{
+////                        new Thread(new Runnable() {
+////                            @SuppressLint("HandlerLeak")
+////                            public void run() {
+////                                if (rememberMe){
+////                                    SharedPreferences loginInfo = mContext.getSharedPreferences("loginInfo",Context.MODE_PRIVATE);
+////                                    SharedPreferences.Editor loginEditor = loginInfo.edit();
+////                                    loginEditor.putString("username", username);
+////                                    loginEditor.putString("password", password);
+////                                    loginEditor.apply();
+////                                }
+////
+////                                Message m=new Message();
+////                                m.what=0x111;
+////                                mHandler1.sendMessage(m);   //发送成功信息
+////                            }
+////                        }).start();
+////
+////                        //JSONObject resultJsonObject = mooc.MOOCLogin();
+////
+////                    }
+////                    catch(Exception ee){
+////
+////                    }
+////
+////                }else{
+////                    Toast.makeText(mContext, "用户名或者密码错误，请重新输入。",Toast.LENGTH_SHORT).show();
+////                }
+//            }
 
-                    };
-
-                    try{
-                        new Thread(new Runnable() {
-                            @SuppressLint("HandlerLeak")
-                            public void run() {
-                                if (rememberMe){
-                                    SharedPreferences loginInfo = mContext.getSharedPreferences("loginInfo",Context.MODE_PRIVATE);
-                                    SharedPreferences.Editor loginEditor = loginInfo.edit();
-                                    loginEditor.putString("username", username);
-                                    loginEditor.putString("password", password);
-                                    loginEditor.apply();
-                                }
-
-                                Message m=new Message();
-                                m.what=0x111;
-                                mHandler1.sendMessage(m);   //发送成功信息
-                            }
-                        }).start();
-
-                        //JSONObject resultJsonObject = mooc.MOOCLogin();
-
-                    }
-                    catch(Exception ee){
-
-                    }
-
-                }else{
-                    Toast.makeText(mContext, "用户名或者密码错误，请重新输入。",Toast.LENGTH_SHORT).show();
-                }
-            }
-
-        };
+//        };
     }
 
     /**
@@ -160,21 +280,21 @@ public class Login {
                             //登录成功
                             Message m=new Message();
                             m.what=0x111;
-                            mHandler.sendMessage(m);	//发送信息
+                            loginHandler.sendMessage(m);	//发送信息
 
                         }
                         else{
                             //登录失败
                             Message m=new Message();
                             m.what=0x110;
-                            mHandler.sendMessage(m);	//发送信息
+                            loginHandler.sendMessage(m);	//发送信息
                         }
                     } catch (JSONException e) {
                         // 自动生成的 catch 块
                         //登录出现异常，网络有问题
                         Message m=new Message();
                         m.what=0x010;
-                        mHandler.sendMessage(m);
+                        loginHandler.sendMessage(m);
                     }
                 }
             }).start();
