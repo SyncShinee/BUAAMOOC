@@ -162,6 +162,7 @@ public class MyInformationActivity extends Activity {
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(intent, UPLOAD_LOCAL_IMAGE);
+        onActivityResult(UPLOAD_LOCAL_IMAGE, RESULT_OK, intent);
     }
 
     /*
@@ -173,6 +174,7 @@ public class MyInformationActivity extends Activity {
         mImageTmpPath = getImageFullPath();
         intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(mImageTmpPath)));
         startActivityForResult(intent, UPLOAD_CAMERA_IMAGE);
+        onActivityResult(UPLOAD_CAMERA_IMAGE, RESULT_OK, intent);
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -246,6 +248,7 @@ public class MyInformationActivity extends Activity {
               Uri capturedImage = Uri.parse(android.provider.MediaStore.Images.Media.insertImage(getContentResolver(), f.getAbsolutePath(), null, null));
               Bitmap bmp = BitmapFactory.decodeStream(resolver.openInputStream(Uri.parse(capturedImage.toString())));
               mImageView.setImageBitmap(bmp);
+              storeBitmap(bmp,getImageFullPath());
           } catch (FileNotFoundException e) {
               e.printStackTrace();
           }
@@ -254,40 +257,44 @@ public class MyInformationActivity extends Activity {
           //      mImageView.setImageBitmap(bmp);
           //      storeBitmap(bmp,"ImageUploadTest");
           //
+
       }
       /*
        *  * 存储图片到本地
         *  */
       protected void storeBitmap(Bitmap bmp, String storePath){
-          StringBuilder sb = new StringBuilder();
-          sb.delete(0, sb.length());
-          sb.append(SD_CARD_ROOT);
-          sb.append("/");
-          sb.append(storePath);
-          FileOutputStream fos = null;
+          if(sdCardAvailable()){
+              StringBuilder sb = new StringBuilder();
+              sb.delete(0, sb.length());
+              sb.append(SD_CARD_ROOT);
+              sb.append("/");
+              sb.append(storePath);
+              FileOutputStream fos = null;
 
-          File file = new File(sb.toString());
-          file.mkdir();
-          sb.append("/");
-          sb.append(getUploadImageName());
-          sb.append(".png");
-          try {
-              fos = new FileOutputStream(sb.toString());
-              bmp.compress(Bitmap.CompressFormat.PNG, 100, fos);
-          } catch (FileNotFoundException e) {
-          // TODO Auto-generated catch block
-                e.printStackTrace();
-          } finally{
+              File file = new File(sb.toString());
+              file.mkdir();
+              sb.append("/");
+              sb.append(getUploadImageName());
+              sb.append(".png");
               try {
-                  fos.flush();
-                  fos.close();
-              } catch (IOException e) {
-
-              // TODO Auto-generated catch block
-              //
+                  fos = new FileOutputStream(sb.toString());
+                  bmp.compress(Bitmap.CompressFormat.PNG, 100, fos);
+              } catch (FileNotFoundException e) {
+                  // TODO Auto-generated catch block
                   e.printStackTrace();
+              } finally{
+                  try {
+                      fos.flush();
+                      fos.close();
+                  } catch (IOException e) {
+
+                      // TODO Auto-generated catch block
+                      //
+                      e.printStackTrace();
+                  }
               }
           }
+
       }
        /*
        * * SD是否可用
