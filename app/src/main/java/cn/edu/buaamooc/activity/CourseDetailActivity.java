@@ -1,8 +1,10 @@
 package cn.edu.buaamooc.activity;
 
 
+import android.app.DownloadManager;
 import android.content.res.Resources;
 import android.graphics.Matrix;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -38,6 +40,7 @@ public class CourseDetailActivity extends FragmentActivity {
     private int position_two;
     private ImageView ivBottomLine;
     private MyFragmentPagerAdapter adapter;
+    private DownloadManager manager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +59,9 @@ public class CourseDetailActivity extends FragmentActivity {
         InitWidth();
         InitViewPager();
         InitTab();
+
+        //下载service获取
+        manager = (DownloadManager)getSystemService(DOWNLOAD_SERVICE);
     }
 
     @Override
@@ -265,4 +271,15 @@ public class CourseDetailActivity extends FragmentActivity {
         super.onDestroy();
     }
 
+    private void newDownloadTask(String url) {
+        Uri uri = Uri.parse(url);
+        DownloadManager.Request request = new DownloadManager.Request(uri);
+        // 是否为仅wifi状态下下载
+        if (true) {
+            request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI);
+        }
+        // todo 设置下载路径
+        long refer = manager.enqueue(request);
+        //refer为该下载service的唯一ID
+    }
 }
