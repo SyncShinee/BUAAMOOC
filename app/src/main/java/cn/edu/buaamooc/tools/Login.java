@@ -33,10 +33,11 @@ public class Login {
 
     }
 
-    public static class LoginHandler extends Handler{
+    static class LoginHandler extends Handler{
         private Context mContext;
         private String username;
         private String password;
+        private String name;
         private boolean rememberMe;
 
         LoginHandler(Context mContext){
@@ -54,36 +55,19 @@ public class Login {
             return this;
         }
 
+        public LoginHandler setName(String name){
+            this.name = name;
+            return this;
+        }
+
         @Override
         public void handleMessage(Message msg){
             if(msg.what==0x111){
                 Toast.makeText(mContext, "登录成功",Toast.LENGTH_SHORT).show();
-                //更新MoocMainActivity中的ViewPager中的第三个fragment，变为CourseListFragment
-//                mHandler1=new Handler(){
-//                    @Override
-//                    public void handleMessage(Message msg) {
-//                        if(msg.what==0x111){
-//                            if (autoLogin) {
-//                                ((MoocMainActivity) mContext).initializeViewPager();
-//                            }
-//                            else {
-//                                ((MoocMainActivity) mContext).refreshLoginInfo(true, autoLogin);
-//                            }
-////                                ((MoocMainActivity) mContext).setLogCondition(true).initializeViewPager();
-//                            //获取已选课程
-//                        }
-//                        else if(msg.what==0x010){
-//                            Toast.makeText(mContext, "网络连接失败，请重试。",Toast.LENGTH_SHORT).show();
-//                        }
-//
-//                        else{
-//                            //用户名密码错误，弹出对话框
-//                            Toast.makeText(mContext, "用户名或者密码错误，请重新输入。",Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//
-//                };
-
+                SharedPreferences loginInfo = mContext.getSharedPreferences("loginInfo",Context.MODE_PRIVATE);
+                SharedPreferences.Editor loginEditor = loginInfo.edit();
+                loginEditor.putString("user_name", name);
+                loginEditor.apply();
                 try{
                     new Thread(new Runnable() {
                         @SuppressLint("HandlerLeak")
@@ -91,7 +75,7 @@ public class Login {
                             if (rememberMe){
                                 SharedPreferences loginInfo = mContext.getSharedPreferences("loginInfo",Context.MODE_PRIVATE);
                                 SharedPreferences.Editor loginEditor = loginInfo.edit();
-                                loginEditor.putString("username", username);
+                                loginEditor.putString("loginname", username);
                                 loginEditor.putString("password", password);
                                 loginEditor.apply();
                             }
@@ -110,12 +94,15 @@ public class Login {
                 }
 
             }else{
-                Toast.makeText(mContext, "用户名或者密码错误，请重新输入。",Toast.LENGTH_SHORT).show();
+                Message m = new Message();
+                m.what = msg.what;
+                loginJumpHandler.sendMessage(m);
+//                Toast.makeText(mContext, "用户名或者密码错误，请重新输入。",Toast.LENGTH_SHORT).show();
             }
         }
     }
 
-    public static class LoginJumpHandler extends Handler{
+    static class LoginJumpHandler extends Handler{
         private Context mContext;
         private boolean autoLogin;
 
@@ -130,6 +117,7 @@ public class Login {
 
         @Override
         public void handleMessage(Message msg) {
+            //更新MoocMainActivity中的ViewPager中的第三个fragment，变为CourseListFragment
             if (msg.what == 0x111) {
                 if (autoLogin) {
                     ((MoocMainActivity) mContext).initializeViewPager();
@@ -142,11 +130,13 @@ public class Login {
             }
             else if (msg.what == 0x010) {
                 Toast.makeText(mContext, "网络连接失败，请重试。", Toast.LENGTH_SHORT).show();
+                ((MoocMainActivity) mContext).failedLogin().initializeViewPager();
             }
 
             else {
                 //用户名密码错误，弹出对话框
                 Toast.makeText(mContext, "用户名或者密码错误，请重新输入。", Toast.LENGTH_SHORT).show();
+                ((MoocMainActivity) mContext).failedLogin().initializeViewPager();
             }
         }
     }
@@ -156,73 +146,6 @@ public class Login {
         this.password = password;
         rememberMe = false;
         resultJsonObject = new JSONObject();
-
-        loginHandler = new LoginHandler(mContext);
-        loginHandler.setUserInfo(username, password).setRememberMe(rememberMe);
-        loginJumpHandler = new LoginJumpHandler(mContext).setAutoLogin(autoLogin);
-
-//        loginHandler= new Handler(){
-//            @Override
-//            public void handleMessage(Message msg) {
-////                if(msg.what==0x111){
-////                    Toast.makeText(mContext, "登录成功",Toast.LENGTH_SHORT).show();
-////                    //更新MoocMainActivity中的ViewPager中的第三个fragment，变为CourseListFragment
-////                    mHandler1=new Handler(){
-////                        @Override
-////                        public void handleMessage(Message msg) {
-////                            if(msg.what==0x111){
-////                                if (autoLogin) {
-////                                    ((MoocMainActivity) mContext).initializeViewPager();
-////                                }
-////                                else {
-////                                    ((MoocMainActivity) mContext).refreshLoginInfo(true, autoLogin);
-////                                }
-//////                                ((MoocMainActivity) mContext).setLogCondition(true).initializeViewPager();
-////                                //获取已选课程
-////                            }
-////                            else if(msg.what==0x010){
-////                                Toast.makeText(mContext, "网络连接失败，请重试。",Toast.LENGTH_SHORT).show();
-////                            }
-////
-////                            else{
-////                                //用户名密码错误，弹出对话框
-////                                Toast.makeText(mContext, "用户名或者密码错误，请重新输入。",Toast.LENGTH_SHORT).show();
-////                            }
-////                        }
-////
-////                    };
-////
-////                    try{
-////                        new Thread(new Runnable() {
-////                            @SuppressLint("HandlerLeak")
-////                            public void run() {
-////                                if (rememberMe){
-////                                    SharedPreferences loginInfo = mContext.getSharedPreferences("loginInfo",Context.MODE_PRIVATE);
-////                                    SharedPreferences.Editor loginEditor = loginInfo.edit();
-////                                    loginEditor.putString("username", username);
-////                                    loginEditor.putString("password", password);
-////                                    loginEditor.apply();
-////                                }
-////
-////                                Message m=new Message();
-////                                m.what=0x111;
-////                                mHandler1.sendMessage(m);   //发送成功信息
-////                            }
-////                        }).start();
-////
-////                        //JSONObject resultJsonObject = mooc.MOOCLogin();
-////
-////                    }
-////                    catch(Exception ee){
-////
-////                    }
-////
-////                }else{
-////                    Toast.makeText(mContext, "用户名或者密码错误，请重新输入。",Toast.LENGTH_SHORT).show();
-////                }
-//            }
-
-//        };
     }
 
     /**
@@ -270,6 +193,9 @@ public class Login {
      * Log in...
      */
     public void login(){
+        loginHandler = new LoginHandler(mContext);
+        loginHandler.setUserInfo(username, password).setRememberMe(rememberMe);
+        loginJumpHandler = new LoginJumpHandler(mContext).setAutoLogin(autoLogin);
         try{
             new Thread(new Runnable() {
                 public void run() {
@@ -278,6 +204,8 @@ public class Login {
                     try {
                         if(resultJsonObject!= null && !resultJsonObject.isNull("success") && resultJsonObject.getBoolean("success")){
                             //登录成功
+                            String name = resultJsonObject.isNull("user_name")?"":resultJsonObject.getString("user_name");
+                            loginHandler.setName(name);
                             Message m=new Message();
                             m.what=0x111;
                             loginHandler.sendMessage(m);	//发送信息

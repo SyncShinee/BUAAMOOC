@@ -53,14 +53,14 @@
         >
 
         <RelativeLayout
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:id="@+id/wifi"
             >
 
             <TextView
-                android:layout_width="100dp"
+                android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:id="@+id/wifiDownload"
                 android:textSize="17sp"
@@ -68,14 +68,15 @@
                 android:text="仅WiFi下载"
                 android:gravity="center"
 
-                />
+                android:layout_marginLeft="10dp"/>
 
             <Switch
-                android:layout_width="250dp"
+                android:layout_width="100dp"
                 android:layout_height="40dp"
-                android:id="@+id/wifiYN"
+                android:id="@+id/wifi_switch"
                 android:gravity="center"
-                android:layout_toRightOf="@+id/wifiDownload"/>
+                android:layout_alignParentRight="true"
+                android:checked="false"/>
 
         </RelativeLayout>
 
@@ -87,33 +88,44 @@
             android:orientation="vertical"
             >
 
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="选择下载路径"
+                    android:textSize="17sp"
+                    android:textColor="@color/colorBlack"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="left"
+                    android:id="@+id/text_choosedir"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:layout_toLeftOf="@+id/image_choosedir"/>
+                <ImageButton
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentRight="true"
+                    android:id="@+id/image_choosedir"
+                    android:src="@drawable/enter"
+                    android:background="@null"/>
+            </RelativeLayout>
+
+
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:text="下载路径"
-                android:textSize="17sp"
-                android:textColor="@color/colorBlack"
-                android:gravity="center"/>
-
+                android:layout_height="wrap_content"
+                android:text="路径"
+                android:textSize="12sp"
+                android:textColor="#717171"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:id="@+id/textview_dir"/>
             <View
                 android:layout_width="fill_parent"
                 android:layout_height="1dp"
-                android:layout_marginTop="10dp"
                 android:background="@color/colorMainDivide"
-                />
-
-            <EditText
-                android:layout_width="fill_parent"
-                android:layout_height="40dp"
-                android:id="@+id/downloadpath"/>
-
-            <TextView
-                android:layout_marginTop="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:text="选择其他路径"
-                android:textSize="12sp"
-                android:textColor="#717171"
                 />
 
         </LinearLayout>

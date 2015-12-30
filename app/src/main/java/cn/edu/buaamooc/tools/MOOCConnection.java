@@ -8,6 +8,7 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.CookieStore;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
@@ -18,6 +19,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
@@ -409,8 +411,6 @@ public class MOOCConnection {
             options.inSampleSize = 5;
             bitmap = BitmapFactory.decodeStream(input,null,options);
 
-//            new Thread(new ImageDownloader(input).setPath(path)).start();
-
             String fpath = CONST.COURSEPIC + path + "0";
             int index = fpath.lastIndexOf(File.separatorChar);
             File dir = new File(fpath.substring(0, index));
@@ -421,11 +421,6 @@ public class MOOCConnection {
             File file = new File(fpath);
             output = new FileOutputStream(file);
             bitmap.compress(Bitmap.CompressFormat.PNG,100,output);
-//            output.write(byteStream.toByteArray());
-//            int b;
-//            while ((b = input.read()) != -1) {
-//                output.write(b);
-//            }
             Log.e("download file", path);
 
             in.close();
@@ -445,5 +440,43 @@ public class MOOCConnection {
 
         return bitmap;
     }
-    
+
+
+    public JSONObject MOOCGetForumDiscussionData(String course_id){
+        try {
+            HttpPost httpPost = new HttpPost(CONST.FORUMDATAURL);
+            List<NameValuePair> params = new ArrayList<>();
+            params.add(new BasicNameValuePair("course_id", course_id));
+            httpPost.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
+            httpPost.addHeader("X-CSRFToken", token);
+            //将X-CSRFToken加入httppost
+            DefaultHttpClient httpclient = new DefaultHttpClient();
+            CookieStore store = httpclient.getCookieStore();
+            for (int i = 0; i < cookies.size(); i++) {
+                store.addCookie(cookies.get(i));
+            }
+            //将保存的全部cookie加入httpClient
+            HttpResponse response = httpclient.execute(httpPost);
+            int statusCode = response.getStatusLine().getStatusCode();
+            HttpEntity entity = response.getEntity();
+            StringBuilder entityStringBuilder = new StringBuilder();
+            if(statusCode == HttpStatus.SC_OK){
+                //访问服务器成功，获取服务器数据
+                if(entity!= null){
+                    BufferedReader bufferedReader = new BufferedReader
+                            (new InputStreamReader(entity.getContent(), "UTF-8"), 8 * 1024);
+                    String line;
+                    while((line = bufferedReader.readLine()) != null) {
+                        entityStringBuilder.append(line);
+                    }
+                    resultJsonObject = new JSONObject(entityStringBuilder.toString());
+//                    status = resultJsonObject.getBoolean("status");
+                }
+            }
+
+        } catch (IOException | JSONException e) {
+            e.printStackTrace();
+        }
+        return resultJsonObject;
+    }
 }

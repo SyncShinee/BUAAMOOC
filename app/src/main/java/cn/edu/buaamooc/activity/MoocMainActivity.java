@@ -14,6 +14,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
@@ -25,6 +26,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.umeng.analytics.MobclickAgent;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -81,7 +84,7 @@ public class MoocMainActivity extends FragmentActivity {
         InitWidth();
 
         final SharedPreferences loginInfo = getSharedPreferences("loginInfo", MODE_PRIVATE);
-        username = loginInfo.getString("username", "");
+        username = loginInfo.getString("loginname", "");
         final String password = loginInfo.getString("password","");
         if(!password.equals("")) {
             loadLoginFragment = true;
@@ -92,12 +95,14 @@ public class MoocMainActivity extends FragmentActivity {
             public void handleMessage(Message msg) {
                 fm.beginTransaction().remove(mainLoadingFragment).commit();
                 if (msg.what == 0x111) {
-                    //页面跳转到登录界面
+                    //初始化网络成功，准备登录
                     connected = true;
                     if(loadLoginFragment) {
+                        //自动登录
                         new Login(username,password).setContext(MoocMainActivity.this).setAuto(true).login();
                     }
                     else {
+                        //初始化ViewPager,手动登录
                         initializeViewPager();
                     }
                 }
@@ -161,6 +166,12 @@ public class MoocMainActivity extends FragmentActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MoocMainActivity.this, MyInformationActivity.class);
                 startActivityForResult(intent,0);
+//                new Thread(new Runnable(){
+//                    @Override
+//                    public void run(){
+//                        JSONObject json = new MOOCConnection().MOOCGetForumDiscussionData("BUAA/M_E06B2150/2015_T1");
+//                    }
+//                }).start();
             }
         });
     }
@@ -422,5 +433,10 @@ public class MoocMainActivity extends FragmentActivity {
                 imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
             }
         }
+    }
+
+    public MoocMainActivity failedLogin(){
+        loadLoginFragment = false;
+        return this;
     }
 }

@@ -65,8 +65,8 @@
                 android:gravity="center">
 
                 <ImageView
-                    android:layout_width="170dp"
-                    android:layout_height="170dp"
+                    android:layout_width="300dp"
+                    android:layout_height="180dp"
                     android:src="@drawable/user"
                     android:id="@+id/userphoto" />
 
@@ -76,7 +76,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:id="@+id/UserName"
                 >
 
@@ -84,7 +84,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="username"
-                    android:textSize="17sp"
+                    android:textSize="18sp"
                     android:textColor="@color/colorBlack"
                     android:id="@+id/username_button" />
 

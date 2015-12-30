@@ -1,8 +1,12 @@
 package cn.edu.buaamooc;
 
+import android.content.Context;
 import android.os.Environment;
+import android.os.storage.StorageManager;
+import android.util.Log;
 
 import java.io.File;
+import java.lang.reflect.InvocationTargetException;
 import java.util.MissingResourceException;
 
 /**
@@ -19,10 +23,14 @@ public class CONST {
     public static final String COURSEWAREURL = MURL + "/course_courseware";
     public static final String ENROLLURL = MURL + "/course_enroll";
     public static final String GETENROLLURL = MURL + "/get_course_enrollment";
+    public static final String FORUMDATAURL = MURL + "/discussion_forum";
 
     public static final String COURSEPIC =
             Environment.getExternalStorageDirectory().toString() + File.separator + "MOOCAPP" + File.separator + "coursePic";
-
+    public static final String USERIMAGEPIC =
+            Environment.getExternalStorageDirectory().toString() + File.separator + "MOOCAPP" + File.separator + "userImage";
+//    public static String[] DIRs;
+    public static final String DEFAULTVIDEO = Environment.getExternalStorageDirectory().toString() + File.separator + "MOOCAPP"+ File.separator + "VIDEO";
     public static final int REQUEST_TIMEOUT = 2*1000;
     public static final int WAIT_TIMEOUT = 2*1000;
 
@@ -34,5 +42,9 @@ public class CONST {
     public static final int unenrolled=6;
     public static final int about_succeed=7;
     public static final int about_fail=8;
+
+    static{
+
+    }
 
 }

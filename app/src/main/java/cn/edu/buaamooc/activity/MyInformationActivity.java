@@ -6,6 +6,7 @@ import android.content.ContentResolver;
 import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -13,6 +14,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -27,6 +29,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Calendar;
 
+import cn.edu.buaamooc.CONST;
 import cn.edu.buaamooc.R;
 import cn.edu.buaamooc.fragment.LoginFragment;
 
@@ -39,6 +42,7 @@ public class MyInformationActivity extends Activity {
     private final boolean RESPONSE_PATH = true;
     private ImageView mImageView = null;
     private String mImageTmpPath = "";
+    private String name;
 
 
     @Override
@@ -59,8 +63,27 @@ public class MyInformationActivity extends Activity {
                 MyInformationActivity.this.finish();
             }
         });
-        //选择用户头像
+        //用户名
+        TextView username = (TextView) findViewById(R.id.username_button);
+        SharedPreferences userInfo = getSharedPreferences("loginInfo", MODE_PRIVATE);
+        name = userInfo.getString("user_name", "");
+        if(name.equals("")){
+            username.setText("请登录");
+        }
+        else {
+            username.setText(name);
+        }
+        //头像
         ImageView mImageView = (ImageView)findViewById(R.id.userphoto);
+        //设置用户头像
+        if (!name.equals("")){
+            File imageFile = new File(CONST.USERIMAGEPIC + File.separator + name);
+            if (imageFile.exists()){
+                Bitmap bitmap = BitmapFactory.decodeFile(CONST.USERIMAGEPIC + File.separator + name);
+                mImageView.setImageBitmap(bitmap);
+            }
+        }
+        //选择用户头像
         mImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,6 +96,7 @@ public class MyInformationActivity extends Activity {
             }
 
         });
+
 
         //skip to the xml MoocMainActivity
         TextView mycourse = (TextView) findViewById(R.id.button_mycourse);
@@ -133,6 +157,10 @@ public class MyInformationActivity extends Activity {
 
 
     protected void uploadImageMethod(){
+        if(name.equals("")){
+            Toast.makeText(this, "请先登录", Toast.LENGTH_SHORT);
+            return;
+        }
         String[] items = {"本地图片","手机拍照"};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("请选择头像");
@@ -145,7 +173,8 @@ public class MyInformationActivity extends Activity {
                         uploadLocalImage();
                         break;
                     case 1:
-                        uploadFromCamera();
+//                        uploadFromCamera();
+                        Toast.makeText(MyInformationActivity.this,"该功能正在开发中...",Toast.LENGTH_SHORT).show();
                         break;
                 }
             }
@@ -161,8 +190,9 @@ public class MyInformationActivity extends Activity {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(intent, UPLOAD_LOCAL_IMAGE);
-        onActivityResult(UPLOAD_LOCAL_IMAGE, RESULT_OK, intent);
+//        startActivityForResult(intent, UPLOAD_LOCAL_IMAGE);
+//        onActivityResult(UPLOAD_LOCAL_IMAGE, RESULT_OK, intent);
+        startActivityForResult(intent, 1);
     }
 
     /*
@@ -181,17 +211,8 @@ public class MyInformationActivity extends Activity {
     // TODO Auto-generated method stub
     // super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == RESULT_OK){
-            switch(requestCode){
-                case UPLOAD_LOCAL_IMAGE:
-                    uploadLocalImageResponse(data);
-
-                    break;
-                case UPLOAD_CAMERA_IMAGE:
-                    uploadCameraImageResponse(data);
-                    break;
-            }
+            uploadLocalImageResponse(data);
         }
-
     }
 
     /*
@@ -201,10 +222,23 @@ public class MyInformationActivity extends Activity {
 
     protected void uploadLocalImageResponse(Intent data){
         Uri uri = data.getData();
-        if(RESPONSE_PATH){
-            getLocalImageFromPath(uri);
-        }else{
-            getLocalImageFromStream(uri);
+
+        ContentResolver cr = this.getContentResolver();
+        try {
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inSampleSize = 2;
+            Bitmap bitmap = BitmapFactory.decodeStream(cr.openInputStream(uri),null,options);
+            File file = new File(CONST.USERIMAGEPIC + File.separator + name);
+            File dir = new File(CONST.USERIMAGEPIC);
+            if (!dir.exists())
+                dir.mkdirs();
+            bitmap.compress(Bitmap.CompressFormat.JPEG,100,new FileOutputStream(file));
+            ImageView imageView = (ImageView) findViewById(R.id.userphoto);
+            imageView.setVisibility(View.VISIBLE);
+                /* 将Bitmap设定到ImageView */
+            imageView.setImageBitmap(bitmap);
+        } catch (FileNotFoundException e) {
+            Log.e("Exception", e.getMessage(), e);
         }
     }
 
