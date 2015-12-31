@@ -142,6 +142,7 @@
     <string name="cancel">取消</string>
     <string name="remind">提醒</string>
     <string name="remind_enroll">请先选课</string>
+    <string name="course_progress">学习进度：</string>
     <drawable name="clr_background">#D1E3F3</drawable>
     <drawable name="clr_pressed">#01baa4</drawable>
 

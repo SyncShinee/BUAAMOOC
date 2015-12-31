@@ -36,6 +36,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.res.Configuration;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.media.AudioManager;
 import android.net.Uri;
@@ -394,8 +396,10 @@ public class VideoActivity extends Activity implements
 		Intent i = getIntent();
 		if (mMediaController != null)
 			i.putExtra("lockScreen", mMediaController.isLocked());
-		i.putExtra("startPosition", PreferenceUtils.getFloat(mUri
-				+ VP.SESSION_LAST_POSITION_SUFIX, 7.7f));
+		//读取进度
+
+			i.putExtra("startPosition", PreferenceUtils.getFloat(mUri
+					+ VP.SESSION_LAST_POSITION_SUFIX, 7.7f));
 		i.putExtra("fromStart", fromStart);
 		i.putExtra("displayName", name);
 		i.setData(path);
@@ -778,6 +782,9 @@ public class VideoActivity extends Activity implements
 	}
 
 	private void savePosition() {
+
+		//ToDo
+        //保存进度到数据库
 		if (vPlayer != null && mUri != null) {
 			PreferenceUtils.put(
 					mUri.toString(),
@@ -793,6 +800,10 @@ public class VideoActivity extends Activity implements
 						.put(mUri + VP.SESSION_LAST_POSITION_SUFIX,
 								(float) (vPlayer.getCurrentPosition() / (double) vPlayer
 										.getDuration()));
+
+			SQLiteDatabase db=openOrCreateDatabase("cdb",0, null);
+			db.execSQL("update course_structure set percent=? where path=? or url=?",new String []{
+					""+(int)(vPlayer.getCurrentPosition()*100 / vPlayer.getDuration()),mUri.toString(),mUri.toString()});
 		}
 	}
 
@@ -800,8 +811,10 @@ public class VideoActivity extends Activity implements
 		if (mFromStart)
 			return 1.1f;
 		if (mStartPos <= 0.0f || mStartPos >= 1.0f)
-			return PreferenceUtils.getFloat(mUri
+		{
+			 return PreferenceUtils.getFloat(mUri
 					+ VP.SESSION_LAST_POSITION_SUFIX, 7.7f);
+		}
 		return mStartPos;
 	}
 

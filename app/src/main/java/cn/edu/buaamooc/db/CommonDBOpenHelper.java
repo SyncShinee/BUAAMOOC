@@ -51,8 +51,8 @@ public class CommonDBOpenHelper extends SQLiteOpenHelper {
                 "child text,"+                                  //以空格为间隔的数组
                 "url text,"+                                    //在线视频地址
                 "path text,"+                                   //本地地址
-                "percent text,"+
-                "label text)";
+                "percent integer,"+                                //进度
+                "label text)";                                  //视频名字
         db.execSQL(sql);
     }
 

@@ -33,7 +33,7 @@ import cn.edu.buaamooc.tools.MOOCConnection;
  */
 public class IntroduceFragment extends Fragment {
 
-    public Handler handler;
+    public static Handler handler;
     private TextView introduce;
     private String course_id;
     private DBUtil dbUtil;
@@ -41,6 +41,7 @@ public class IntroduceFragment extends Fragment {
     private Resources resources;
     private String content;
     private Boolean registered;
+    private Thread net;
 
     public void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
@@ -197,7 +198,7 @@ public class IntroduceFragment extends Fragment {
     }
 
     public void getCourseintroduce() {
-        new Thread(new Runnable() {
+        net= new Thread(new Runnable() {
             public void run() {
                 try {
                     try {
@@ -239,7 +240,8 @@ public class IntroduceFragment extends Fragment {
                 }
 
             }
-        }).start(); //
+        });
+        net.start(); //
     }
 
     public void setenrollbtn(int status) {
@@ -250,6 +252,12 @@ public class IntroduceFragment extends Fragment {
             btn_quit_enroll.setText(resources.getString(R.string.course_enroll));
             btn_quit_enroll.setVisibility(View.VISIBLE);
         }
+    }
+
+    public void onDestroy()
+    {
+        handler.removeCallbacks(net);
+        super.onDestroy();
     }
 
     @Override

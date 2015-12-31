@@ -27,7 +27,8 @@ public class UserDBOpenHelper extends SQLiteOpenHelper {
         //课程进度
         //保存用户学习进度
         sql="CREATE TABLE IF NOT EXISTS course_structure(" +
-                "_id integer primary key autoincrement," +
+                "_id integer primary key," +
+                "percent text,"+
                 "finished text)";
         db.execSQL(sql);
 

@@ -41,7 +41,9 @@ public class CONST {
     public static final int enrolled=5;
     public static final int unenrolled=6;
     public static final int about_succeed=7;
-    public static final int about_fail=8;
+    public static final int about_fail= 8;
+
+//    public static final String
 
     static{
 

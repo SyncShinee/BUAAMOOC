@@ -14,6 +14,7 @@ public class Node {
 	private String label;
 	private String url="";
 
+
 	/** 父节点 */
 	private Node parentNode;
 
@@ -69,6 +70,11 @@ public class Node {
 	}
 
 	public String getUrl(){return url;}
+
+	public void  setUrl(String url)
+	{
+		this.url=url;
+	}
 
 	public int getDeepLevel() {
 		return deepLevel;

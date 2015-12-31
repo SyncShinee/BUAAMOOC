@@ -40,14 +40,13 @@ public class CourseDetailActivity extends FragmentActivity {
     private int position_two;
     private ImageView ivBottomLine;
     private MyFragmentPagerAdapter adapter;
-    private DownloadManager manager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        course_id=getIntent().getStringExtra("course_id");
         setContentView(R.layout.activity_coursedetail);
         setResult(3);
-        course_id=getIntent().getStringExtra("course_id");
         if(course_id.equals("")) {
             Toast.makeText(this,"不存在该课程",Toast.LENGTH_LONG).show();
             finish();
@@ -60,8 +59,7 @@ public class CourseDetailActivity extends FragmentActivity {
         InitViewPager();
         InitTab();
 
-        //下载service获取
-        manager = (DownloadManager)getSystemService(DOWNLOAD_SERVICE);
+
     }
 
     @Override
@@ -269,17 +267,5 @@ public class CourseDetailActivity extends FragmentActivity {
 
     public void onDestroy() {
         super.onDestroy();
-    }
-
-    private void newDownloadTask(String url) {
-        Uri uri = Uri.parse(url);
-        DownloadManager.Request request = new DownloadManager.Request(uri);
-        // 是否为仅wifi状态下下载
-        if (true) {
-            request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI);
-        }
-        // todo 设置下载路径
-        long refer = manager.enqueue(request);
-        //refer为该下载service的唯一ID
     }
 }

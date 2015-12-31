@@ -66,6 +66,12 @@
             android:label="@string/title_activity_buaa_mooc__service" >
         </activity>
         <activity android:name=".activity.CourseDetailActivity"/>
+        <receiver android:name=".BroadcastReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
+                <action android:name="android.intent.action.DOWNLOAD_NOTIFICATION_CLICKED"/>
+            </intent-filter>
+        </receiver>
         <meta-data android:value="564214eae0f55acdff000cca" android:name="UMENG_APPKEY"/>
         <meta-data android:value="Wandoujia" android:name="UMENG_CHANNEL"/>
     </application>
