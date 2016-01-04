@@ -241,33 +241,36 @@ public class DirectoryFragment extends Fragment {
         for(c.moveToFirst();!c.isAfterLast();c.moveToNext())//第一级目录
         {
             root1 = new Node(null, c.getString(c.getColumnIndex("label")));
-            String[] childs=c.getString(c.getColumnIndex("child")).split(",");
-            for (String child : childs) {//第二级目录
-                if (child != null && !child.equals("")) {
-                    sql1 = String.format("select * from course_structure where _id= %s", child);
-                    c1 = db.rawQuery(sql1, null);
-                    c1.moveToFirst();
-                    root2 = new Node(root1, c1.getString(c1.getColumnIndex("label")));
-                    String childs_a=c1.getString(c1.getColumnIndex("child"));
-                    if(childs_a!=null) {
-                        String[] childs1 =childs_a.split(",");
-                        for (String aChilds1 : childs1) {//第三级目录
-                            if (aChilds1 != null && !aChilds1.equals("")) {
-                                sql2 = String.format("select * from course_structure where _id= %s", aChilds1);
-                                c2 = db.rawQuery(sql2, null);
-                                c2.moveToFirst();
-                                String url, path;
-                                url = c2.getString(c.getColumnIndex("url"));
-                                path = c2.getString(c2.getColumnIndex("path"));
-                                if (path != null)
-                                    root3 = new Node(root2, c2.getString(c2.getColumnIndex("label")), path);
-                                else
-                                    root3 = new Node(root2, c2.getString(c2.getColumnIndex("label")), url);
-                                c2.close();
+            String child_s11=c.getString(c.getColumnIndex("child"));
+            if(child_s11!=null) {
+                String[] childs =child_s11.split(",");
+                for (String child : childs) {//第二级目录
+                    if (child != null && !child.equals("")) {
+                        sql1 = String.format("select * from course_structure where _id= %s", child);
+                        c1 = db.rawQuery(sql1, null);
+                        c1.moveToFirst();
+                        root2 = new Node(root1, c1.getString(c1.getColumnIndex("label")));
+                        String childs_a = c1.getString(c1.getColumnIndex("child"));
+                        if (childs_a != null) {
+                            String[] childs1 = childs_a.split(",");
+                            for (String aChilds1 : childs1) {//第三级目录
+                                if (aChilds1 != null && !aChilds1.equals("")) {
+                                    sql2 = String.format("select * from course_structure where _id= %s", aChilds1);
+                                    c2 = db.rawQuery(sql2, null);
+                                    c2.moveToFirst();
+                                    String url, path;
+                                    url = c2.getString(c.getColumnIndex("url"));
+                                    path = c2.getString(c2.getColumnIndex("path"));
+                                    if (path != null)
+                                        root3 = new Node(root2, c2.getString(c2.getColumnIndex("label")), path);
+                                    else
+                                        root3 = new Node(root2, c2.getString(c2.getColumnIndex("label")), url);
+                                    c2.close();
+                                }
                             }
                         }
+                        c1.close();
                     }
-                    c1.close();
                 }
             }
             mDataList.add(root1);
