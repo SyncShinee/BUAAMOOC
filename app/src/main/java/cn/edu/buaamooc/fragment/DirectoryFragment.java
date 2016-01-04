@@ -248,20 +248,23 @@ public class DirectoryFragment extends Fragment {
                     c1 = db.rawQuery(sql1, null);
                     c1.moveToFirst();
                     root2 = new Node(root1, c1.getString(c1.getColumnIndex("label")));
-                    String[] childs1 = c1.getString(c1.getColumnIndex("child")).split(",");
-                    for (String aChilds1 : childs1) {//第三级目录
-                        if (aChilds1 != null && !aChilds1.equals("")) {
-                            sql2 = String.format("select * from course_structure where _id= %s", aChilds1);
-                            c2=db.rawQuery(sql2, null);
-                            c2.moveToFirst();
-                            String url,path;
-                            url=c2.getString(c.getColumnIndex("url"));
-                            path=c2.getString(c2.getColumnIndex("path"));
-                            if(path!=null)
-                                root3=new Node(root2,c2.getString(c2.getColumnIndex("label")),path);
-                            else
-                                root3=new  Node(root2,c2.getString(c2.getColumnIndex("label")),url);
-                            c2.close();
+                    String childs_a=c1.getString(c1.getColumnIndex("child"));
+                    if(childs_a!=null) {
+                        String[] childs1 =childs_a.split(",");
+                        for (String aChilds1 : childs1) {//第三级目录
+                            if (aChilds1 != null && !aChilds1.equals("")) {
+                                sql2 = String.format("select * from course_structure where _id= %s", aChilds1);
+                                c2 = db.rawQuery(sql2, null);
+                                c2.moveToFirst();
+                                String url, path;
+                                url = c2.getString(c.getColumnIndex("url"));
+                                path = c2.getString(c2.getColumnIndex("path"));
+                                if (path != null)
+                                    root3 = new Node(root2, c2.getString(c2.getColumnIndex("label")), path);
+                                else
+                                    root3 = new Node(root2, c2.getString(c2.getColumnIndex("label")), url);
+                                c2.close();
+                            }
                         }
                     }
                     c1.close();
