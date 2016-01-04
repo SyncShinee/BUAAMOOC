@@ -238,6 +238,8 @@ public class DirectoryFragment extends Fragment {
         Cursor c=db.rawQuery(sql, null);
         Cursor c1,c2;
         Node root1, root2, root3;
+        if(c.getCount()==0)
+            return;
         for(c.moveToFirst();!c.isAfterLast();c.moveToNext())//第一级目录
         {
             root1 = new Node(null, c.getString(c.getColumnIndex("label")));
