@@ -54,6 +54,9 @@ public class Node {
 			parent.childList.add(this);
 			this.deepLevel = parent.deepLevel + 1;
 		}
+		else {
+			this.deepLevel = 0;
+		}
 	}
 
 	public Node(Node parent, String label,String url) {
@@ -66,6 +69,9 @@ public class Node {
 			}
 			parent.childList.add(this);
 			this.deepLevel = parent.deepLevel + 1;
+		}
+		else {
+			this.deepLevel = 0;
 		}
 	}
 
